@@ -1,18 +1,74 @@
 {
   "name": "soft-assistance",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "description": "Project of automated assistance through qr code",
+  "author": "Andres Carrillo <andresjoe24@gmail.com>",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node build/dev-server.js",
+    "start": "node build/dev-server.js",
+    "build": "node build/build.js",
+    "lint": "eslint --ext .js,.vue src"
   },
-  "main": "index.js",
   "dependencies": {
-    "register-service-worker": "^1.7.1"
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.5"
   },
   "devDependencies": {
-    "@vue/cli-plugin-pwa": "^4.5.6"
+    "autoprefixer": "^10.0.1",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chalk": "^4.1.0",
+    "connect-history-api-fallback": "^1.6.0",
+    "copy-webpack-plugin": "^6.2.0",
+    "css-loader": "^4.3.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^7.10.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^6.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^6.1.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^4.5.0",
+    "http-proxy-middleware": "^1.0.5",
+    "opn": "^5.5.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "ora": "^5.1.0",
+    "rimraf": "^3.0.2",
+    "semver": "^7.3.2",
+    "shelljs": "^0.8.4",
+    "sw-precache-webpack-plugin": "^1.0.0",
+    "uglify-es": "^3.3.9",
+    "url-loader": "^4.1.0",
+    "vue-loader": "^15.9.3",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.2",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^5.1.4"
   },
-  "keywords": [],
-  "license": "ISC"
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
