@@ -1,5 +1,4 @@
 "use strict";
-
 $(".nav-search .input-group > input").focus(function(e){
 	$(this).parent().addClass("focus");
 }).blur(function(e){
