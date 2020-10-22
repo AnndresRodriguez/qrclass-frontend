@@ -1,6 +1,6 @@
 <template>
   <div class="main-header">
-    <div class="logo-header" data-background-color="blue">
+    <div class="logo-header" style="background-color:#bc0016">
       <a href="index.html" class="logo">
         <img src="/img/logo.svg" alt="navbar brand" class="navbar-brand" />
       </a>
@@ -27,7 +27,7 @@
     </div>
     <nav
       class="navbar navbar-header navbar-expand-lg"
-      data-background-color="blue2"
+      style="background-color:#bc0016"
     >
       <div class="container-fluid">
         <div class="collapse" id="search-nav">

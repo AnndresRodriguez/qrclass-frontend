@@ -2,15 +2,16 @@
   <div>
     <Navbar />
     <Sidebar />
-    <Main />
+    <div class="main-panel">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>
 import Navbar from "../components/dashboard/Navbar";
 import Sidebar from "../components/dashboard/Sidebar";
-import Main from "../components/dashboard/Main";
 
 export default {
-  components: { Navbar, Sidebar, Main }
+  components: { Navbar, Sidebar }
 };
 </script>

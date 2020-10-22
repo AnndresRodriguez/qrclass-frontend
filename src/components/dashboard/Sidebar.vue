@@ -46,7 +46,7 @@
               </div>
             </div>
           </div>
-          <ul class="nav nav-primary">
+          <ul class="nav nav-danger">
             <li class="nav-item active">
               <a
                 data-toggle="collapse"
@@ -54,20 +54,21 @@
                 class="collapsed"
                 aria-expanded="false"
               >
-                <i class="fas fa-home"></i>
-                <p>Dashboard</p>
+                <!-- <i class="fas fa-home"></i> -->
+                <p>Gestor de Administrador</p>
                 <span class="caret"></span>
               </a>
               <div class="collapse" id="dashboard">
                 <ul class="nav nav-collapse">
                   <li>
                     <a href="#">
-                      <span class="sub-item">Dashboard 1</span>
+                      <!-- <i class="fas fa-home"></i> -->
+                      <span class="sub-item">Registrar Admin</span>
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <span class="sub-item">Dashboard 2</span>
+                      <span class="sub-item">Consultar Admin</span>
                     </a>
                   </li>
                 </ul>
@@ -88,19 +89,19 @@
               <div class="collapse" id="base">
                 <ul class="nav nav-collapse">
                   <li>
-                    <a href="#">
-                      <span class="sub-item">Avatars</span>
-                    </a>
+                    <router-link :to="{ name: 'horario' }">
+                      <span class="sub-item">Horario</span>
+                    </router-link>
                   </li>
                   <li>
-                    <a href="#">
-                      <span class="sub-item">Buttons</span>
-                    </a>
+                    <router-link :to="{ name: 'configuraciones' }">
+                      <span class="sub-item">Confirguraciones</span>
+                    </router-link>
                   </li>
                   <li>
-                    <a href="#">
-                      <span class="sub-item">Grid System</span>
-                    </a>
+                    <router-link :to="{ name: 'notificaciones' }">
+                      <span class="sub-item">Notificaciones</span>
+                    </router-link>
                   </li>
                   <li>
                     <a href="#">
