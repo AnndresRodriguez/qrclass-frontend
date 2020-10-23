@@ -3,10 +3,20 @@
     background-color: red;
 }
 
-li{
-    list-style: none;
+.wrapper{
+	font-family: Trebuchet MS;
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 70px;
+}
+.wrapper .btn-secondary {
+	font-family: Trebuchet MS;
 }
 
-.bg-ufps{
-    background-color:#bc0016
+#lologin{
+	height: 300px;
 }
