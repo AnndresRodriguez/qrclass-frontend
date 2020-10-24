@@ -1,6 +1,12 @@
 <template>
   <div class="margin-brand">
-    <h2>Horario Docente</h2>
+    <h2>Horario Docente {{ nombre }}</h2>
+    <ul>
+      <li v-for="(objeto, index) in datosApi" :key="index">
+        <h4>{{ objeto.name }}</h4>
+        <b>{{ objeto.status }}</b>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -13,19 +19,11 @@ mounted(){
 },
 
 methods: {
-
    abriApi() {
     axios.get("https://removal-api.herokuapp.com/service")
     .then(respuesta => {console.log(respuesta.data)})
   },
-
-
-
-
-
 }
-
-  
 }
 </script>
 <style scoped>
