@@ -60,9 +60,9 @@
               <div class="collapse" id="dashboard-docentes">
                 <ul class="nav nav-collapse">
                   <li>
-                    <a href="#">
+                    <router-link to="/horario">
                       <span class="sub-item">Registrar Admin</span>
-                    </a>
+                    </router-link>
                   </li>
                   <li>
                     <a href="#">

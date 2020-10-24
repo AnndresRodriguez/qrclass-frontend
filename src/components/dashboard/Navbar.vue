@@ -330,7 +330,9 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Account Setting</a>
                   <div class="dropdown-divider"></div> -->
-                  <router-link to="/" active-class="dropdown-item">Cerrar Sesión</router-link>
+                  <router-link to="/" active-class="dropdown-item"
+                    >Cerrar Sesión</router-link
+                  >
                   <!-- <router-link to="/" active-class="">Cerrar Sesión</router-link> -->
                   <!-- <a class="dropdown-item" href="#"></a> -->
                 </li>
