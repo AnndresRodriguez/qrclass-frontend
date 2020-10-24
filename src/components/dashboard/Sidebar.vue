@@ -18,7 +18,7 @@
                 aria-expanded="true"
               >
                 <span>
-                  Hizrian
+                  Ing. Encargado
                   <span class="user-level">Administrator</span>
                   <span class="caret"></span>
                 </span>
@@ -50,19 +50,17 @@
             <li class="nav-item active">
               <a
                 data-toggle="collapse"
-                href="#dashboard"
+                href="#dashboard-docentes"
                 class="collapsed"
                 aria-expanded="false"
               >
-                <!-- <i class="fas fa-home"></i> -->
-                <p>Gestor de Administrador</p>
+                <p>Gestor de Docentes</p>
                 <span class="caret"></span>
               </a>
-              <div class="collapse" id="dashboard">
+              <div class="collapse" id="dashboard-docentes">
                 <ul class="nav nav-collapse">
                   <li>
                     <a href="#">
-                      <!-- <i class="fas fa-home"></i> -->
                       <span class="sub-item">Registrar Admin</span>
                     </a>
                   </li>
@@ -74,7 +72,33 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-section">
+
+            <li class="nav-item active">
+              <a
+                data-toggle="collapse"
+                href="#dashboard"
+                class="collapsed"
+                aria-expanded="false"
+              >
+                <p>Gestor de Administrador</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="dashboard">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="#">
+                      <span class="sub-item">Registrar Admin</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span class="sub-item">Consultar Admin</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- <li class="nav-section">
               <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
               </span>
@@ -315,7 +339,7 @@
                   <i class="fa fa-heart"></i> </span
                 >Buy Pro</a
               >
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>

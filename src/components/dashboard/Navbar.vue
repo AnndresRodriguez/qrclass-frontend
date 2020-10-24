@@ -2,7 +2,11 @@
   <div class="main-header">
     <div class="logo-header" style="background-color:#bc0016">
       <a href="index.html" class="logo">
-        <img src="/img/logo.svg" alt="navbar brand" class="navbar-brand" />
+        <img
+          src="/img/logo-ufps-100.png"
+          alt="navbar brand"
+          class="navbar-brand"
+        />
       </a>
       <button
         class="navbar-toggler sidenav-toggler ml-auto"
@@ -40,7 +44,7 @@
               </div>
               <input
                 type="text"
-                placeholder="Search ..."
+                placeholder="Buscar ..."
                 class="form-control"
               />
             </div>
@@ -60,7 +64,7 @@
             </a>
           </li>
           <li class="nav-item dropdown hidden-caret">
-            <a
+            <!-- <a
               class="nav-link dropdown-toggle"
               href="#"
               id="messageDropdown"
@@ -70,8 +74,8 @@
               aria-expanded="false"
             >
               <i class="fa fa-envelope"></i>
-            </a>
-            <ul
+            </a> -->
+            <!-- <ul
               class="dropdown-menu messages-notif-box animated fadeIn"
               aria-labelledby="messageDropdown"
             >
@@ -142,9 +146,9 @@
                   >See all messages<i class="fa fa-angle-right"></i>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           </li>
-          <li class="nav-item dropdown hidden-caret">
+          <!-- <li class="nav-item dropdown hidden-caret">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -280,7 +284,7 @@
                 </div>
               </div>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item dropdown hidden-caret">
             <a
               class="dropdown-toggle profile-pic"
@@ -298,7 +302,7 @@
             </a>
             <ul class="dropdown-menu dropdown-user animated fadeIn">
               <div class="dropdown-user-scroll scrollbar-outer">
-                <li>
+                <!-- <li>
                   <div class="user-box">
                     <div class="avatar-lg">
                       <img
@@ -317,16 +321,18 @@
                       >
                     </div>
                   </div>
-                </li>
+                </li> -->
                 <li>
-                  <div class="dropdown-divider"></div>
+                  <!-- <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">My Profile</a>
                   <a class="dropdown-item" href="#">My Balance</a>
                   <a class="dropdown-item" href="#">Inbox</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Account Setting</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Logout</a>
+                  <div class="dropdown-divider"></div> -->
+                  <router-link to="/" active-class="dropdown-item">Cerrar Sesión</router-link>
+                  <!-- <router-link to="/" active-class="">Cerrar Sesión</router-link> -->
+                  <!-- <a class="dropdown-item" href="#"></a> -->
                 </li>
               </div>
             </ul>
