@@ -3,7 +3,7 @@
     background-color: red;
 }
 
-.wrapper{
+.wrapper-2{
 	font-family: Trebuchet MS;
 	display: flex;
     align-items: center;
@@ -13,7 +13,7 @@
     min-height: 100%;
     padding: 70px;
 }
-.wrapper .btn-secondary {
+.wrapper-2 .btn-secondary {
 	font-family: Trebuchet MS;
 }
 
