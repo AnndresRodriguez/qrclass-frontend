@@ -1,27 +1,15 @@
 let optionsDocente = [
   {
-    text: "Horario",
-    name: "horario"
+    text: "Registrar Admin",
+    name: "registrar-admin"
   },
   {
-    text: "Materias",
-    name: "materias"
+    text: "Consultar Admin",
+    name: "consultar-admin"
   },
   {
-    text: "Estudiantes",
-    name: "estudiantes"
-  },
-  {
-    text: "Configuraciones",
-    name: "configuraciones"
-  },
-  {
-    text: "Notificaciones",
-    name: "notificaciones"
-  },
-  {
-    text: "Reportes",
-    name: "reportes"
+    text: "Listar Admin",
+    name: "listar-admin"
   }
 ];
 

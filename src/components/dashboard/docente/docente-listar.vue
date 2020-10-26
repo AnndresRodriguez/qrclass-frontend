@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="margin-brand">
     <div class="col-md-10 cssRegistro">
-      <h2>Lista de Administradores</h2>
+      <h2>Lista de Docentes</h2>
       <hr />
       <table class="table table-hover">
         <thead>
@@ -9,6 +9,7 @@
             <th scope="col">Documento</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
+            <th scope="col">Departamento</th>
             <th scope="col">Telefono</th>
             <th scope="col">Funcion</th>
           </tr>
@@ -18,6 +19,7 @@
             <th scope="row">0147852</th>
             <td>Juan Andres Rodriguez</td>
             <td>juanandresr@ufps.edu.co</td>
+            <td>Departamento de Sistemas</td>
             <td>3216457896</td>
             <td><i class="icono fas fa-user-edit"></i></td>
           </tr>
@@ -25,6 +27,7 @@
             <th scope="row">0147852</th>
             <td>Juan Andres Rodriguez</td>
             <td>juanandresr@ufps.edu.co</td>
+            <td>Departamento de Sistemas</td>
             <td>3216457896</td>
             <td><i class="icono fas fa-user-edit"></i></td>
           </tr>
@@ -32,6 +35,7 @@
             <th scope="row">0147852</th>
             <td>Juan Andres Rodriguez</td>
             <td>juanandresr@ufps.edu.co</td>
+            <td>Departamento de Sistemas</td>
             <td>3216457896</td>
             <td>
               <a href="" data-toggle="modal" data-target="#EditarDocente"
@@ -54,7 +58,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">
-                Actualizar Datos del Administrador
+                Actualizar Datos del Docente
               </h4>
               <button
                 type="button"
@@ -78,7 +82,7 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Documento:</label>
+                  <label class="control-label">Codigo:</label>
                   <input
                     name="name"
                     type="text"
@@ -87,6 +91,24 @@
                     required
                   />
                 </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Selecciona el departamento</label
+                  >
+                  <div class="input-group">
+                    <select name="departamento" class="form-control">
+                      <option value="dptoMa"
+                        >Departamento de Matematicas</option
+                      >
+                      <option value="dptoFi">Departamento de Fisica</option>
+                      <option value="dptoEl"
+                        >Departamento de Electronica</option
+                      >
+                      <option value="dptoDi">Departamento de Diseño</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <label class="control-label">Correo Electronico</label>
                   <input

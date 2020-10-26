@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="margin-brand">
     <div class="col-md-10 cssRegistro">
-      <h2>Registrar Administrador</h2>
+      <h2>Registrar Docente</h2>
       <hr />
       <form>
         <div class="form-group">
@@ -14,13 +14,13 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el nombre completo del adminitrador a registrar"
+              placeholder="Escriba el nombre completo del docente a registrar"
               required
             />
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">Documento de Identidad:</label>
+          <label class="control-label">Codigo:</label>
           <div class="input-group">
             <div class="input-group-addon">
               <i class="icono fas fa-id-card"></i>
@@ -29,11 +29,26 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el numero de documento de identidad"
+              placeholder="Escriba el numero de codigo del docente"
               required
             />
           </div>
         </div>
+        <div class="form-group">
+          <label class="control-label">Selecciona el departamento</label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="icono fas fa-check-square"></i>
+            </div>
+            <select name="departamento" class="form-control">
+              <option value="dptoMa">Departamento de Matematicas</option>
+              <option value="dptoFi">Departamento de Fisica</option>
+              <option value="dptoEl">Departamento de Electronica</option>
+              <option value="dptoDi">Departamento de Diseño</option>
+            </select>
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="control-label">Correo Electronico</label>
           <div class="input-group">
@@ -86,5 +101,8 @@
 .boton {
   justify-content: center;
   display: flex;
+}
+.cssRegistro .form-group {
+  margin-bottom: 0rem;
 }
 </style>

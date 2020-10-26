@@ -1,19 +1,20 @@
 export default [
   {
-    path: "/horario",
-    component: () => import("../../components/dashboard/docente/horario.vue"),
-    name: "horario"
+    path: "/consultar-docente",
+    component: () =>
+      import("../../components/dashboard/docente/docente-consulta.vue"),
+    name: "consultar-docente"
   },
   {
-    path: "/materias",
+    path: "/listar-docentes",
     component: () =>
-      import("../../components/dashboard/docente/vista-registro.vue"),
-    name: "materias"
+      import("../../components/dashboard/docente/docente-listar.vue"),
+    name: "listar-docentes"
   },
   {
-    path: "/estudiantes",
+    path: "/registrar-docente",
     component: () =>
-      import("../../components/dashboard/docente/vista-listar.vue"),
-    name: "estudiantes"
+      import("../../components/dashboard/docente/docente-registro.vue"),
+    name: "registrar-docente"
   }
 ];
