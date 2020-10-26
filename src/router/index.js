@@ -3,9 +3,14 @@ import VueRouter from "vue-router";
 // import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
-import Horario from "../components/docente/horario.vue";
-import Configuracion from "../components/docente/configuracion.vue";
-import Notificaciones from "../components/docente/notificaciones.vue";
+
+import RegistrarAdmin from "../components/dashboard/Admin/RAdmin.vue";
+import ConsultarAdmin from "../components/dashboard/Admin/CAdmin.vue";
+import ListarAdmin from "../components/dashboard/Admin/LAdmin.vue";
+
+import RegistrarDocente from "../components/dashboard/docente/RDocente.vue";
+import ConsultarDocente from "../components/dashboard/docente/CDocente.vue";
+import ListarDocente from "../components/dashboard/docente/LDocente.vue";
 
 Vue.use(VueRouter);
 
@@ -21,19 +26,34 @@ const routes = [
     component: Dashboard,
     children: [
       {
-        path: "/horario",
-        name: "horario",
-        component: Horario
+        path: "/registrar-admi",
+        name: "registrar-admin",
+        component: RegistrarAdmin
       },
       {
-        path: "/configuraciones",
-        name: "configuraciones",
-        component: Configuracion
+        path: "/consultar-admi",
+        name: "consultar-admin",
+        component: ConsultarAdmin
       },
       {
-        path: "/notificaciones",
-        name: "notificaciones",
-        component: Notificaciones
+        path: "/listar-admi",
+        name: "listar-admin",
+        component: ListarAdmin
+      },
+      {
+        path: "/registrar-docete",
+        name: "registrar-docete",
+        component: RegistrarDocente
+      },
+      {
+        path: "/consultar-docete",
+        name: "consultar-docete",
+        component: ConsultarDocente
+      },
+      {
+        path: "/listar-docete",
+        name: "Listar-docete",
+        component: ListarDocente
       }
     ]
   }

@@ -1,5 +1,5 @@
 <template>
   <div class="margin-brand">
-    <h2>Notificaciones</h2>
+    <h2>Consulta de Estudiantes</h2>
   </div>
 </template>

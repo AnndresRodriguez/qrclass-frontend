@@ -50,24 +50,30 @@
             <li class="nav-item active">
               <a
                 data-toggle="collapse"
-                href="#dashboard-docentes"
+                href="#dashboard-Administrador"
                 class="collapsed"
                 aria-expanded="false"
               >
-                <p>Gestor de Docentes</p>
+                <p>Gestor de Adminsitradores</p>
+
                 <span class="caret"></span>
               </a>
-              <div class="collapse" id="dashboard-docentes">
+              <div class="collapse" id="dashboard-Administrador">
                 <ul class="nav nav-collapse">
                   <li>
-                    <router-link to="/horario">
-                      <span class="sub-item">Registrar Admin</span>
+                    <router-link to="/registrar-admi">
+                      <span class="sub-item">Registrar Administrador</span>
                     </router-link>
                   </li>
                   <li>
-                    <a href="#">
-                      <span class="sub-item">Consultar Admin</span>
-                    </a>
+                    <router-link to="/consultar-admi">
+                      <span class="sub-item">Consultar Administrador</span>
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/listar-admi">
+                      <span class="sub-item">Listar Administrador</span>
+                    </router-link>
                   </li>
                 </ul>
               </div>
@@ -76,270 +82,96 @@
             <li class="nav-item active">
               <a
                 data-toggle="collapse"
-                href="#dashboard"
+                href="#dashboard-docente"
                 class="collapsed"
                 aria-expanded="false"
               >
-                <p>Gestor de Administrador</p>
+                <p>Gestor de Docentes</p>
+
                 <span class="caret"></span>
               </a>
-              <div class="collapse" id="dashboard">
+              <div class="collapse" id="dashboard-docente">
                 <ul class="nav nav-collapse">
                   <li>
-                    <a href="#">
-                      <span class="sub-item">Registrar Admin</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Consultar Admin</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <!-- <li class="nav-section">
-              <span class="sidebar-mini-icon">
-                <i class="fa fa-ellipsis-h"></i>
-              </span>
-              <h4 class="text-section">Components</h4>
-            </li>
-            <li class="nav-item">
-              <a data-toggle="collapse" href="#base">
-                <i class="fas fa-layer-group"></i>
-                <p>Base</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="base">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <router-link :to="{ name: 'horario' }">
-                      <span class="sub-item">Horario</span>
+                    <router-link to="/registrar-docete">
+                      <span class="sub-item">Registrar Docente</span>
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'configuraciones' }">
-                      <span class="sub-item">Confirguraciones</span>
+                    <router-link to="/consultar-docete">
+                      <span class="sub-item">Consultar Docente</span>
                     </router-link>
                   </li>
                   <li>
-                    <router-link :to="{ name: 'notificaciones' }">
-                      <span class="sub-item">Notificaciones</span>
+                    <router-link to="/listar-docete">
+                      <span class="sub-item">Listar Docentes</span>
                     </router-link>
                   </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Panels</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Notifications</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Sweet Alert</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Font Awesome Icons</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Simple Line Icons</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Flaticons</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Typography</span>
-                    </a>
-                  </li>
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
-              <a data-toggle="collapse" href="#sidebarLayouts">
-                <i class="fas fa-th-list"></i>
-                <p>Sidebar Layouts</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="sidebarLayouts">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Sidebar Style 1</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Overlay Sidebar</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Compact Sidebar</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Static Sidebar</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Icon Menu</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a data-toggle="collapse" href="#forms">
-                <i class="fas fa-pen-square"></i>
-                <p>Forms</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="forms">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Basic Form</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a data-toggle="collapse" href="#tables">
-                <i class="fas fa-table"></i>
-                <p>Tables</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="tables">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Basic Table</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Datatables</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a data-toggle="collapse" href="#maps">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>Maps</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="maps">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">JQVMap</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a data-toggle="collapse" href="#charts">
-                <i class="far fa-chart-bar"></i>
-                <p>Charts</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="charts">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Chart Js</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Sparkline</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a href="#">
-                <i class="fas fa-desktop"></i>
-                <p>Widgets</p>
-                <span class="badge badge-success">4</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a data-toggle="collapse" href="#submenu">
-                <i class="fas fa-bars"></i>
-                <p>Menu Levels</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="submenu">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <a data-toggle="collapse" href="#subnav1">
-                      <span class="sub-item">Level 1</span>
-                      <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="subnav1">
-                      <ul class="nav nav-collapse subnav">
-                        <li>
-                          <a href="#">
-                            <span class="sub-item">Level 2</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <span class="sub-item">Level 2</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <a data-toggle="collapse" href="#subnav2">
-                      <span class="sub-item">Level 1</span>
-                      <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="subnav2">
-                      <ul class="nav nav-collapse subnav">
-                        <li>
-                          <a href="#">
-                            <span class="sub-item">Level 2</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Level 1</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="mx-4 mt-2">
-              <a href="#" class="btn btn-primary btn-block"
-                ><span class="btn-label mr-2">
-                  <i class="fa fa-heart"></i> </span
-                >Buy Pro</a
+
+            <li class="nav-item active">
+              <a
+                data-toggle="collapse"
+                href="#dashboard-estudiante"
+                class="collapsed"
+                aria-expanded="false"
               >
-            </li> -->
+                <p>Gestor de Estudiantes</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="dashboard-estudiante">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <router-link to="/registrar-">
+                      <span class="sub-item">Registrar Estudiante</span>
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/consultar-">
+                      <span class="sub-item">Consultar Estudiate</span>
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="/listar-">
+                      <span class="sub-item">Listar Estudiantes</span>
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item active">
+              <a
+                data-toggle="collapse"
+                href="#dashboard-materia"
+                class="collapsed"
+                aria-expanded="false"
+              >
+                <p>Gestor de Materias</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="dashboard-materia">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <router-link to="RMateria">
+                      <span class="sub-item">Registrar Materia</span>
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="CMateria">
+                      <span class="sub-item">Consultar Materia</span>
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link to="LMateria">
+                      <span class="sub-item">Listar Materias</span>
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
       </div>

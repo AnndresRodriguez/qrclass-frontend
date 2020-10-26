@@ -1,5 +1,6 @@
 .margin-brand{
     margin-top: 100px;
+    font-family: Trebuchet MS;
     /* background-color: red; */
 }
 
@@ -16,7 +17,16 @@
 .wrapper-2 .btn-secondary {
 	font-family: Trebuchet MS;
 }
+#General{
+    font-family: Trebuchet MS;
+}
 
 #lologin{
 	height: 300px;
 }
+#logoHorizontal{
+    margin-left: -10px;
+    height: 2.5em;
+}
+
+
