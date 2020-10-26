@@ -56,7 +56,7 @@
 
             <item
               title="Gestor de Docentes"
-              :items="itemsDocentes"
+              :items="itemsDocente"
               href="dashboard-docentes"
             >
             </item>

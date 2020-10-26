@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
       <h2>Registrar Administrador</h2>
       <hr />

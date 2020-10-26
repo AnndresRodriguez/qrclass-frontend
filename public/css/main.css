@@ -24,6 +24,12 @@
 #lologin{
     height: 300px;
 }
+
+#logoHorizontal{
+    margin-left: -10px;
+    height: 2.5em;
+}
+
 /*----Transition Router Animation----*/
 .fade-enter-active,
 .fade-leave-active {
