@@ -3,7 +3,11 @@
     <Navbar />
     <Sidebar />
     <div class="main-panel">
-      <router-view></router-view>
+      <div class="margin-brand">
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </div>
     </div>
   </div>
 </template>

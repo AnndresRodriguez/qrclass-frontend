@@ -47,33 +47,14 @@
             </div>
           </div>
           <ul class="nav nav-danger">
-            <li class="nav-item active">
-              <a
-                data-toggle="collapse"
-                href="#dashboard-docentes"
-                class="collapsed"
-                aria-expanded="false"
-              >
-                <p>Gestor de Docentes</p>
-                <span class="caret"></span>
-              </a>
-              <div class="collapse" id="dashboard-docentes">
-                <ul class="nav nav-collapse">
-                  <li>
-                    <router-link to="/horario">
-                      <span class="sub-item">Registrar Admin</span>
-                    </router-link>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="sub-item">Consultar Admin</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
+            <item
+              title="Gestor de Administrador"
+              :items="itemsAdmin"
+              href="dashboard-admin"
+            >
+            </item>
 
-            <li class="nav-item active">
+            <!-- <li class="nav-item active">
               <a
                 data-toggle="collapse"
                 href="#dashboard"
@@ -97,7 +78,7 @@
                   </li>
                 </ul>
               </div>
-            </li>
+            </li> -->
             <!-- <li class="nav-section">
               <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
@@ -346,3 +327,17 @@
     </div>
   </div>
 </template>
+<script>
+import item from "../dashboard/sidebar/item";
+import optionesAdmin from "../dashboard/options/admin";
+import optionesDocente from "../dashboard/options/admin";
+export default {
+  components: { item },
+  data() {
+    return {
+      itemsAdmin: optionesAdmin,
+      itemsDocente: optionesDocente
+    };
+  }
+};
+</script>
