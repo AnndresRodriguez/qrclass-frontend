@@ -10,11 +10,5 @@ export default [
     component: () =>
       import("../../components/dashboard/admin/vista-consulta.vue"),
     name: "consultar-admin"
-  },
-  {
-    path: "/listar-admin",
-    component: () =>
-      import("../../components/dashboard/admin/vista-listar.vue"),
-    name: "listar-admin"
   }
 ];

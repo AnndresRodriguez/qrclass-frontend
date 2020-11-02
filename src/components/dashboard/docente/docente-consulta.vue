@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
       <h2>Consultar Docente</h2>
       <hr />
@@ -22,6 +22,9 @@
           </form>
         </div>
       </div>
+      <br />
+      <br />
+      <h5 class="h5L">Lista de Docentes</h5>
       <hr />
       <table class="table table-hover">
         <thead>
@@ -92,7 +95,7 @@
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label class="control-label">Nombre Completo</label>
+                  <label class="control-label labD">Nombre Completo</label>
                   <input
                     name="name"
                     type="text"
@@ -171,21 +174,9 @@
 </template>
 
 <style scoped>
-.icono {
-  font-size: 30px;
-  color: rgb(188, 0, 22);
-  margin-right: 0.5em;
-}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);
-}
-.cssRegistro h2 {
-  text-align: center;
-  color: rgb(188, 0, 22);
-}
-.cssRegistro hr {
-  border-top: 1px solid rgb(188, 0, 22);
 }
 .cssRegistro .form-group {
   margin-bottom: 0rem;

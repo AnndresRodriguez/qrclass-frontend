@@ -1,15 +1,11 @@
 let optionsDocente = [
   {
-    text: "Registrar Admin",
-    name: "registrar-admin"
+    text: "Registrar Docente",
+    name: "registrar-docente"
   },
   {
-    text: "Consultar Admin",
-    name: "consultar-admin"
-  },
-  {
-    text: "Listar Admin",
-    name: "listar-admin"
+    text: "Consultar Docente",
+    name: "consultar-docente"
   }
 ];
 

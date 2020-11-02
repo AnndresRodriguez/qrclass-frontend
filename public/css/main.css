@@ -1,6 +1,6 @@
 .margin-brand{
-    padding-top: 8%;
-    padding-left: 3%;
+    padding-top: 10%;
+    
 }
 
 .wrapper-2{
@@ -43,5 +43,24 @@
 
 .nav{
     list-style: none !important;
-
 }
+.icono {
+    font-size: 30px;
+    color: rgb(188, 0, 22);
+    margin-right: 0.5em;
+  }
+  .cssRegistro h2, h4{
+    text-align: center;
+    color: rgb(188, 0, 22);
+  }
+  .h5L{
+      color:  rgb(188, 0, 22);
+  }
+
+  .cssRegistro hr {
+    border-top: 1px solid rgb(188, 0, 22);
+  }
+  .boton {
+    justify-content: center;
+    display: flex;
+  }

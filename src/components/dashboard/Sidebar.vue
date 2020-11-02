@@ -60,6 +60,24 @@
               href="dashboard-docentes"
             >
             </item>
+            <item
+              title="Gestor de Estudiantes"
+              :items="itemsEstudiantes"
+              href="dashboard-estudiante"
+            >
+            </item>
+            <item
+              title="Gestor de Programas Academicos"
+              :items="itemsProgramaAcademico"
+              href="dashboard-programaacademico"
+            >
+            </item>
+            <item
+              title="Gestor de Director de Programa"
+              :items="itemsDirPrograma"
+              href="dashboard-dirprograma"
+            >
+            </item>
           </ul>
         </div>
       </div>
@@ -70,12 +88,19 @@
 import item from "../dashboard/sidebar/item";
 import opcionesAdmin from "../dashboard/options/admin";
 import opcionesDocente from "../dashboard/options/docente";
+import optionsEstudiante from "../dashboard/options/estudiante";
+import optionsProgramaAcademico from "../dashboard/options/programaacademico";
+import optionsDirprograma from "../dashboard/options/dirprograma";
+
 export default {
   components: { item },
   data() {
     return {
       itemsAdmin: opcionesAdmin,
-      itemsDocente: opcionesDocente
+      itemsDocente: opcionesDocente,
+      itemsEstudiantes: optionsEstudiante,
+      itemsDirPrograma: optionsDirprograma,
+      itemsProgramaAcademico: optionsProgramaAcademico
     };
   }
 };

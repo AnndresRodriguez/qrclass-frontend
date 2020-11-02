@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Registrar Administrador</h2>
+      <h2>Registrar Estudiante</h2>
       <hr />
       <form>
         <div class="form-group">
@@ -14,13 +14,13 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el nombre completo del adminitrador a registrar"
+              placeholder="Escriba el nombre completo del estudiante a registrar"
               required
             />
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">Documento de Identidad:</label>
+          <label class="control-label">Codigo:</label>
           <div class="input-group">
             <div class="input-group-addon">
               <i class="icono fas fa-id-card"></i>
@@ -29,7 +29,7 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el numero de documento de identidad"
+              placeholder="Escriba el codigo del estudiante"
               required
             />
           </div>

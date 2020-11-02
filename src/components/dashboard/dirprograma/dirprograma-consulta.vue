@@ -1,15 +1,38 @@
 <template>
-  <div class="margin-brand">
+  <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Lista de Docentes</h2>
+      <h2>Consultar Director de Programa</h2>
+      <hr />
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Correo Electrico: </label>
+        <div class="col-sm-10">
+          <form class="navbar-form navbar-left" action="/action_page.php">
+            <div class="input-group">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="example@ufps.edu.co"
+              />
+              <div class="input-group-btn">
+                <button class="btn btn-info" type="submit">
+                  <i class="iconob fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <br />
+      <h5 class="h5L">Lista de Directores Academicos</h5>
       <hr />
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Documento</th>
+            <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Programa Academico</th>
             <th scope="col">Correo</th>
-            <th scope="col">Departamento</th>
             <th scope="col">Telefono</th>
             <th scope="col">Funcion</th>
           </tr>
@@ -18,24 +41,24 @@
           <tr>
             <th scope="row">0147852</th>
             <td>Juan Andres Rodriguez</td>
+            <td>Ing. Sistemas</td>
             <td>juanandresr@ufps.edu.co</td>
-            <td>Departamento de Sistemas</td>
             <td>3216457896</td>
             <td><i class="icono fas fa-user-edit"></i></td>
           </tr>
           <tr>
             <th scope="row">0147852</th>
             <td>Juan Andres Rodriguez</td>
+            <td>Ing. Civil</td>
             <td>juanandresr@ufps.edu.co</td>
-            <td>Departamento de Sistemas</td>
             <td>3216457896</td>
             <td><i class="icono fas fa-user-edit"></i></td>
           </tr>
           <tr>
             <th scope="row">0147852</th>
             <td>Juan Andres Rodriguez</td>
+            <td>Ing. Industrial</td>
             <td>juanandresr@ufps.edu.co</td>
-            <td>Departamento de Sistemas</td>
             <td>3216457896</td>
             <td>
               <a href="" data-toggle="modal" data-target="#EditarDocente"
@@ -58,7 +81,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">
-                Actualizar Datos del Docente
+                Actualizar Datos del Director de Programa
               </h4>
               <button
                 type="button"
@@ -72,12 +95,12 @@
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label class="control-label">Nombre Completo</label>
+                  <label class="control-label labD">Nombre Completo</label>
                   <input
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el nombre completo del docente a registrar"
+                    placeholder="Escriba el nombre completo del director a registrar"
                     required
                   />
                 </div>
@@ -87,24 +110,20 @@
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el numero de codigo del docente"
+                    placeholder="Escriba el numero de codigo del directos"
                     required
                   />
                 </div>
                 <div class="form-group">
                   <label class="control-label"
-                    >Selecciona el departamento</label
+                    >Selecciona el Programa Academico</label
                   >
                   <div class="input-group">
                     <select name="departamento" class="form-control">
-                      <option value="dptoMa"
-                        >Departamento de Matematicas</option
-                      >
-                      <option value="dptoFi">Departamento de Fisica</option>
-                      <option value="dptoEl"
-                        >Departamento de Electronica</option
-                      >
-                      <option value="dptoDi">Departamento de Diseño</option>
+                      <option value="dptoMa">Ing. Sistemas</option>
+                      <option value="dptoFi">Ing. Civil</option>
+                      <option value="dptoEl">Ing. Industrial</option>
+                      <option value="dptoDi">Ing. Mecanica</option>
                     </select>
                   </div>
                 </div>
@@ -151,21 +170,9 @@
 </template>
 
 <style scoped>
-.icono {
-  font-size: 30px;
-  color: rgb(188, 0, 22);
-  margin-right: 0.5em;
-}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);
-}
-.cssRegistro h2 {
-  text-align: center;
-  color: rgb(188, 0, 22);
-}
-.cssRegistro hr {
-  border-top: 1px solid rgb(188, 0, 22);
 }
 .cssRegistro .form-group {
   margin-bottom: 0rem;

@@ -6,12 +6,6 @@ export default [
     name: "consultar-docente"
   },
   {
-    path: "/listar-docentes",
-    component: () =>
-      import("../../components/dashboard/docente/docente-listar.vue"),
-    name: "listar-docentes"
-  },
-  {
     path: "/registrar-docente",
     component: () =>
       import("../../components/dashboard/docente/docente-registro.vue"),

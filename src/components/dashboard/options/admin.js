@@ -6,10 +6,6 @@ let optionsAdmin = [
   {
     text: "Consultar Admin",
     name: "consultar-admin"
-  },
-  {
-    text: "Listar Admin",
-    name: "listar-admin"
   }
 ];
 

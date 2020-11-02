@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Consultar Administrador</h2>
+      <h2>Consultar Estudiante</h2>
       <hr />
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Correo Electrico: </label>
@@ -24,12 +24,12 @@
       </div>
       <br />
       <br />
-      <h5 class="h5L">Lista de Administradores</h5>
+      <h5 class="h5L">Lista de Estudiantes</h5>
       <hr />
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Documento</th>
+            <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
             <th scope="col">Telefono</th>
@@ -77,7 +77,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">
-                Actualizar Datos del Administrador
+                Actualizar Datos del Estudiante
               </h4>
               <button
                 type="button"
@@ -91,22 +91,22 @@
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label class="control-label">Nombre Completo</label>
+                  <label class="control-label labD">Nombre Completo</label>
                   <input
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el nombre completo del docente a registrar"
+                    placeholder="Escriba el nombre completo"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Documento:</label>
+                  <label class="control-label">Codigo:</label>
                   <input
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el numero de codigo del docente"
+                    placeholder="Escriba el numero de codigo"
                     required
                   />
                 </div>
@@ -152,8 +152,9 @@
 </template>
 
 <style scoped>
-.cssRegistro .modal-title h4 {
+.cssRegistro .modal-title {
   text-align: center;
+  color: rgb(188, 0, 22);
 }
 .cssRegistro .form-group {
   margin-bottom: 0rem;

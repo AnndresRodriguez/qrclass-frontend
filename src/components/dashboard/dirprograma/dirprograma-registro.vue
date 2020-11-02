@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Registrar Administrador</h2>
+      <h2>Registrar Director de Programa Academico</h2>
       <hr />
       <form>
         <div class="form-group">
@@ -14,13 +14,13 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el nombre completo del adminitrador a registrar"
+              placeholder="Escriba el nombre completo del director a registrar"
               required
             />
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">Documento de Identidad:</label>
+          <label class="control-label">Codigo:</label>
           <div class="input-group">
             <div class="input-group-addon">
               <i class="icono fas fa-id-card"></i>
@@ -29,11 +29,25 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el numero de documento de identidad"
+              placeholder="Escriba el numero de codigo del director"
               required
             />
           </div>
         </div>
+        <div class="form-group">
+          <label class="control-label">Selecciona el Programa Academico</label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="icono fas fa-check-square"></i>
+            </div>
+            <select name="departamento" class="form-control">
+              <option value="dptoMa">Ing. Sistemas</option>
+              <option value="dptoFi">Ing. Industrial</option>
+              <option value="dptoEl">Ing. Civil</option>
+            </select>
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="control-label">Correo Electronico</label>
           <div class="input-group">
@@ -63,11 +77,15 @@
           </div>
         </div>
         <div class="boton form-group">
-          <button type="submit" class=" btn btn-info">Registrarse</button>
+          <button type="submit" class=" btn btn-info">Registrar</button>
         </div>
       </form>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.cssRegistro .form-group {
+  margin-bottom: 0rem;
+}
+</style>

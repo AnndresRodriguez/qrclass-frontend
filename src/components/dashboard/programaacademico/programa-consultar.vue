@@ -1,38 +1,57 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Lista de Administradores</h2>
+      <h2>Consultar Programa Academico</h2>
+      <hr />
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Correo Electrico: </label>
+        <div class="col-sm-10">
+          <form class="navbar-form navbar-left" action="/action_page.php">
+            <div class="input-group">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="example@ufps.edu.co"
+              />
+              <div class="input-group-btn">
+                <button class="btn btn-info" type="submit">
+                  <i class="iconob fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <br />
+      <h5 class="h5L">Lista de Programas Academicos</h5>
       <hr />
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Documento</th>
+            <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
-            <th scope="col">Telefono</th>
             <th scope="col">Funcion</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
+            <th scope="row">115</th>
+            <td>ing. sistemas</td>
+            <td>ingsistemas@ufps.edu.co</td>
             <td><i class="icono fas fa-user-edit"></i></td>
           </tr>
           <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
+            <th scope="row">119</th>
+            <td>Ing. Industrial</td>
+            <td>ingindustrial@ufps.edu.co</td>
             <td><i class="icono fas fa-user-edit"></i></td>
           </tr>
           <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
+            <th scope="row">111</th>
+            <td>Ing. Civil</td>
+            <td>ingcivil@ufps.edu.co</td>
             <td>
               <a href="" data-toggle="modal" data-target="#EditarDocente"
                 ><i class="icono fas fa-user-edit"></i
@@ -54,7 +73,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">
-                Actualizar Datos del Administrador
+                Actualizar Datos Programa Academico
               </h4>
               <button
                 type="button"
@@ -68,22 +87,22 @@
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label class="control-label">Nombre Completo</label>
+                  <label class="control-label labD">Nombre Completo</label>
                   <input
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el nombre completo del docente a registrar"
+                    placeholder="Escriba el nombre completo"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Documento:</label>
+                  <label class="control-label">Codigo:</label>
                   <input
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el numero de codigo del docente"
+                    placeholder="Escriba el numero de codigo"
                     required
                   />
                 </div>
@@ -93,15 +112,6 @@
                     type="email"
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Numero de Telefono</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Escriba el numero de celular."
                     required
                   />
                 </div>
@@ -129,21 +139,9 @@
 </template>
 
 <style scoped>
-.icono {
-  font-size: 30px;
-  color: rgb(188, 0, 22);
-  margin-right: 0.5em;
-}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);
-}
-.cssRegistro h2 {
-  text-align: center;
-  color: rgb(188, 0, 22);
-}
-.cssRegistro hr {
-  border-top: 1px solid rgb(188, 0, 22);
 }
 .cssRegistro .form-group {
   margin-bottom: 0rem;

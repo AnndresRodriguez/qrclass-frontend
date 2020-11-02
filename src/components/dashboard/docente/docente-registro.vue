@@ -1,5 +1,5 @@
 <template>
-  <div class="margin-brand">
+  <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
       <h2>Registrar Docente</h2>
       <hr />
@@ -86,22 +86,6 @@
 </template>
 
 <style scoped>
-.icono {
-  font-size: 30px;
-  color: rgb(188, 0, 22);
-  margin-right: 0.5em;
-}
-.cssRegistro h2 {
-  text-align: center;
-  color: rgb(188, 0, 22);
-}
-.cssRegistro hr {
-  border-top: 1px solid rgb(188, 0, 22);
-}
-.boton {
-  justify-content: center;
-  display: flex;
-}
 .cssRegistro .form-group {
   margin-bottom: 0rem;
 }
