@@ -85,12 +85,12 @@
   </div>
 </template>
 <script>
-import item from "../dashboard/sidebar/item";
-import opcionesAdmin from "../dashboard/options/admin";
-import opcionesDocente from "../dashboard/options/docente";
-import optionsEstudiante from "../dashboard/options/estudiante";
-import optionsProgramaAcademico from "../dashboard/options/programaacademico";
-import optionsDirprograma from "../dashboard/options/dirprograma";
+import item from "./sidebar/item";
+import opcionesAdmin from "../modulo-admin/options/admin";
+import opcionesDocente from "../modulo-admin/options/docente";
+import optionsEstudiante from "../modulo-admin/options/estudiante";
+import optionsProgramaAcademico from "../modulo-admin/options/programaacademico";
+import optionsDirprograma from "../modulo-admin/options/dirprograma";
 
 export default {
   components: { item },
