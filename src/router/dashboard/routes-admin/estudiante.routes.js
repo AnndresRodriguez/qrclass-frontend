@@ -3,7 +3,7 @@ export default [
     path: "/consultar-estudiante",
     component: () =>
       import(
-        "../../components/modulo-admin/estudiante/estudiante-consulta.vue"
+        "../../../components/modulo-admin/estudiante/estudiante-consulta.vue"
       ),
     name: "consultar-estudiante"
   },
@@ -11,7 +11,7 @@ export default [
     path: "/registrar-estudiante",
     component: () =>
       import(
-        "../../components/modulo-admin/estudiante/estudiante-registro.vue"
+        "../../../components/modulo-admin/estudiante/estudiante-registro.vue"
       ),
     name: "registrar-estudiante"
   }

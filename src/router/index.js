@@ -3,11 +3,11 @@ import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 
-import adminroutes from "./dashboard/admin.routes";
-import docentesroutes from "./dashboard/docentes.routes";
-import estudianteroutes from "./dashboard/estudiante.routes";
-import dirprogramaroutes from "./dashboard/dirprograma.routes";
-import programaacademicoroutes from "./dashboard/programaacademico.routes";
+import adminroutes from "./dashboard/routes-admin/admin.routes";
+import docentesroutes from "./dashboard/routes-admin/docentes.routes";
+import estudianteroutes from "./dashboard/routes-admin/estudiante.routes";
+import dirprogramaroutes from "./dashboard/routes-admin/dirprograma.routes";
+import programaacademicoroutes from "./dashboard/routes-admin/programaacademico.routes";
 
 Vue.use(VueRouter);
 

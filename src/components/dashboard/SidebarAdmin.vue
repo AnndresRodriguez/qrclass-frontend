@@ -19,7 +19,7 @@
               >
                 <span>
                   Ing. Encargado
-                  <span class="user-level">Administrator</span>
+                  <span class="user-level">Administrador</span>
                   <span class="caret"></span>
                 </span>
               </a>

@@ -3,7 +3,7 @@ export default [
     path: "/consultar-programaaca",
     component: () =>
       import(
-        "../../components/modulo-admin/programaacademico/programa-consultar.vue"
+        "../../../components/modulo-admin/programaacademico/programa-consultar.vue"
       ),
     name: "consultar-programaaca"
   },
@@ -11,7 +11,7 @@ export default [
     path: "/registrar-programaaca",
     component: () =>
       import(
-        "../../components/modulo-admin/programaacademico/programa-regristrar"
+        "../../../components/modulo-admin/programaacademico/programa-regristrar"
       ),
     name: "registrar-programaaca"
   }

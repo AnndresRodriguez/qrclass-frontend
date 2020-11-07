@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <Sidebar />
+    <component :is="menuSidebar"></component>
     <div class="main-panel">
       <div class="margin-brand">
         <transition name="fade" mode="out-in">
@@ -13,9 +13,16 @@
 </template>
 <script>
 import Navbar from "../components/dashboard/Navbar";
-import Sidebar from "../components/dashboard/Sidebar";
+import Sidebaradmin from "../components/dashboard/SidebarAdmin";
+import SidebarDocente from "../components/dashboard/SidebarDocente";
+import SidebarDirector from "../components/dashboard/SidebarDirector";
 
 export default {
-  components: { Navbar, Sidebar }
+  components: { Navbar, Sidebaradmin, SidebarDocente, SidebarDirector },
+  data() {
+    return {
+      menuSidebar: "SidebarDocente"
+    };
+  }
 };
 </script>

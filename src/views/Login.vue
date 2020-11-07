@@ -4,7 +4,11 @@
       <div class="wrapper-2 fadeIn first">
         <h2>ASISTENTE DE CLASE</h2>
         <br />
-        <img id="lologin" src="img/ufps.png" class="img-responsive" /><br /><br />
+        <img
+          id="lologin"
+          src="img/ufps.png"
+          class="img-responsive"
+        /><br /><br />
         <h6>Identifiquese usando su cuenta institucional en:</h6>
         <br />
         <router-link to="/dashboard" active-class="btn btn-light">
