@@ -78,6 +78,12 @@
               href="dashboard-dirprograma"
             >
             </item>
+            <item
+              title="Gestor de Materia"
+              :items="itemsMateria"
+              href="dashboard-materia"
+            >
+            </item>
           </ul>
         </div>
       </div>
@@ -91,6 +97,7 @@ import opcionesDocente from "../modulo-admin/options/docente";
 import optionsEstudiante from "../modulo-admin/options/estudiante";
 import optionsProgramaAcademico from "../modulo-admin/options/programaacademico";
 import optionsDirprograma from "../modulo-admin/options/dirprograma";
+import optionsMateria from "../modulo-admin/options/materia";
 
 export default {
   components: { item },
@@ -100,7 +107,8 @@ export default {
       itemsDocente: opcionesDocente,
       itemsEstudiantes: optionsEstudiante,
       itemsDirPrograma: optionsDirprograma,
-      itemsProgramaAcademico: optionsProgramaAcademico
+      itemsProgramaAcademico: optionsProgramaAcademico,
+      itemsMateria: optionsMateria
     };
   }
 };

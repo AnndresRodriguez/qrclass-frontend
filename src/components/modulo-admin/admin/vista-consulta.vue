@@ -57,7 +57,7 @@
             <td>juanandresr@ufps.edu.co</td>
             <td>3216457896</td>
             <td>
-              <a href="" data-toggle="modal" data-target="#EditarDocente"
+              <a href="" data-toggle="modal" data-target="#EditarAdmin"
                 ><i class="icono fas fa-user-edit"></i
               ></a>
             </td>
@@ -68,7 +68,7 @@
     <div class="cssRegistro">
       <div
         class="modal fade"
-        id="EditarDocente"
+        id="EditarAdmin"
         tabindex="-1"
         role="dialog"
         aria-hidden="true"
