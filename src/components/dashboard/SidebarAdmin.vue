@@ -6,8 +6,8 @@
           <div class="user">
             <div class="avatar-sm float-left mr-2">
               <img
-                src="/img/profile.jpg"
-                alt="..."
+                :src="photo"
+                alt="img-perfil"
                 class="avatar-img rounded-circle"
               />
             </div>
@@ -18,7 +18,7 @@
                 aria-expanded="true"
               >
                 <span>
-                  Ing. Encargado
+                  Bienvenido {{ name }}
                   <span class="user-level">Administrador</span>
                   <span class="caret"></span>
                 </span>
@@ -86,6 +86,7 @@
 </template>
 <script>
 import item from "./sidebar/item";
+import userMixin from "../../mixins/userMixin";
 import opcionesAdmin from "../modulo-admin/options/admin";
 import opcionesDocente from "../modulo-admin/options/docente";
 import optionsEstudiante from "../modulo-admin/options/estudiante";
@@ -94,6 +95,7 @@ import optionsDirprograma from "../modulo-admin/options/dirprograma";
 
 export default {
   components: { item },
+  mixins: [userMixin],
   data() {
     return {
       itemsAdmin: opcionesAdmin,

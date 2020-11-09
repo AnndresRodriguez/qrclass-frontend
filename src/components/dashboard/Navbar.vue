@@ -60,8 +60,8 @@
             >
               <div class="avatar-sm">
                 <img
-                  src="/img/profile.jpg"
-                  alt="..."
+                  :src="photo"
+                  alt="imagen-perfil"
                   class="avatar-img rounded-circle"
                 />
               </div>
@@ -82,3 +82,9 @@
     <!-- End Navbar -->
   </div>
 </template>
+<script>
+import userMixin from "../../mixins/userMixin";
+export default {
+  mixins: [userMixin]
+};
+</script>
