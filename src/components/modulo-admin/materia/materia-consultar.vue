@@ -19,7 +19,6 @@
         </div>
       </div>
       <br />
-      <br />
       <h5 class="h5L">Lista de Materias</h5>
       <hr />
       <table class="table table-hover">
@@ -76,9 +75,7 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">
-                Actualizar Datos de la Materia
-              </h4>
+              <h4 class="modal-title">Actualizar Datos de la Materia</h4>
               <button
                 type="button"
                 class="close"
@@ -94,7 +91,7 @@
                   <label class="control-label">Nombre Completo</label>
                   <div class="input-group">
                     <div class="input-group-addon">
-                      <i class=" icono fas fa-user"></i>
+                      <i class="icono fas fa-user"></i>
                     </div>
                     <input
                       name="name"
@@ -165,7 +162,7 @@
                 <label class="control-label"
                   >Seleccione el horaro de la materia:<br
                 /></label>
-                <div class="row ">
+                <div class="row">
                   <div class="panels horama">
                     <div>
                       <label class="control-label">Lunes: </label>
@@ -243,11 +240,5 @@
 .icono:hover {
   background-color: rgb(188, 0, 22);
   color: #ffffff;
-}
-.esphora {
-  margin-left: 1em;
-}
-.horama {
-  margin-left: 4em;
 }
 </style>
