@@ -1,25 +1,33 @@
 export default [
   {
-    path: "/materia-consulta",
-    component: () =>
-      import("../../../components/modulo-docente/materia/materia-consulta.vue"),
-    name: "materia-consulta",
-  },
-  {
-    path: "/materia-asistencia",
+    path: "/materia-principal",
     component: () =>
       import(
-        "../../../components/modulo-docente/materia/materia-asistencia.vue"
+        "../../../components/modulo-docente/materia/materia-principal.vue"
       ),
-    name: "materia-asistencia",
+    // name: "materia-principal",
     children: [
       {
-        path: "/asistencia",
+        path: "/consulta",
         component: () =>
           import(
             "../../../components/modulo-docente/materia/materia-consulta.vue"
           ),
-        name: "materia-consulta"
+        name: "consulta"
+      },
+      {
+        path: "/materia-asistencia",
+        component: () =>
+          import(
+            "../../../components/modulo-docente/materia/materia-asistencia.vue"
+          ),
+        name: "materia-asistencia"
+      },
+      {
+        path: "/asistencias",
+        component: () =>
+          import("../../../components/modulo-docente/materia/asistencias.vue"),
+        name: "asistencia"
       }
     ]
   }

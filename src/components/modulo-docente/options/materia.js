@@ -1,7 +1,7 @@
 let optionsMateria = [
   {
     text: "Consultar Materia",
-    name: "materia-consulta"
+    name: "consulta"
   },
   {
     text: "Asistencias por Materias",

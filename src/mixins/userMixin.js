@@ -12,7 +12,7 @@ let userMixin = {
   mounted() {
     setTimeout(() => {
       this.initializeData();
-    }, 3000);
+    }, 2000);
   },
 
   methods: {

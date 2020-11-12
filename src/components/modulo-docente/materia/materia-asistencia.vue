@@ -64,7 +64,9 @@
           <tr>
             <th scope="row">1151103</th>
             <td>Programacion I</td>
-            <td>Ver</td>
+            <td>
+              <router-link :to="{ name: 'asistencia' }">Ver</router-link>
+            </td>
             <td>
               <a
                 href=""

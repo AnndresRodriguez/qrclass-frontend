@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     OnGoogleAuthSuccess(idToken) {
-      console.log(idToken);
+      // console.log(idToken);
       if (idToken != "") {
         axios
           .get(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`)

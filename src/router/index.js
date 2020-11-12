@@ -9,8 +9,9 @@ import estudianteroutes from "./dashboard/routes-admin/estudiante.routes";
 import dirprogramaroutes from "./dashboard/routes-admin/dirprograma.routes";
 import programaacademicoroutes from "./dashboard/routes-admin/programaacademico.routes";
 import materiaroutes from "./dashboard/routes-admin/materias.routes";
+
 import horarioroutes from "./dashboard/routes-docente/horario.routes";
-import dmateriasroutes from "./dashboard/routes-docente/materia.routes";
+import docenteMateriasroutes from "./dashboard/routes-docente/materia.routes";
 
 Vue.use(VueRouter);
 
@@ -32,7 +33,7 @@ const routes = [
       .concat(programaacademicoroutes)
       .concat(materiaroutes)
       .concat(horarioroutes)
-      .concat(dmateriasroutes)
+      .concat(docenteMateriasroutes)
   }
 ];
 
