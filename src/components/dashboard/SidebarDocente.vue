@@ -47,16 +47,20 @@
             </div>
           </div>
           <ul class="nav nav-danger">
-            <item title="Horario" :items="itemsAdmin" href="dashboard-admin">
+            <item
+              title="Horario"
+              :items="itemsHorario"
+              href="dashboard-horario"
+            >
             </item>
 
             <item
               title="Materias"
-              :items="itemsDocente"
-              href="dashboard-docentes"
+              :items="itemsMateria"
+              href="dashboard-materia"
             >
             </item>
-            <item
+            <!-- <item
               title="Estudiantes"
               :items="itemsEstudiantes"
               href="dashboard-estudiante"
@@ -73,7 +77,7 @@
               :items="itemsDirPrograma"
               href="dashboard-dirprograma"
             >
-            </item>
+            </item> -->
           </ul>
         </div>
       </div>
@@ -83,22 +87,21 @@
 <script>
 import item from "./sidebar/item";
 import userMixin from "../../mixins/userMixin";
-import opcionesAdmin from "../modulo-admin/options/admin";
-import opcionesDocente from "../modulo-admin/options/docente";
-import optionsEstudiante from "../modulo-admin/options/estudiante";
-import optionsProgramaAcademico from "../modulo-admin/options/programaacademico";
-import optionsDirprograma from "../modulo-admin/options/dirprograma";
+// import opcionesAdmin from "../modulo-admin/options/admin";
+// import opcionesDocente from "../modulo-admin/options/docente";
+// import optionsEstudiante from "../modulo-admin/options/estudiante";
+// import optionsProgramaAcademico from "../modulo-admin/options/programaacademico";
+// import optionsDirprograma from "../modulo-admin/options/dirprograma";
+import opcionesHorario from "../modulo-docente/options/horario";
+import opcionesMateria from "../modulo-docente/options/materia";
 
 export default {
   components: { item },
   mixins: [userMixin],
   data() {
     return {
-      itemsAdmin: opcionesAdmin,
-      itemsDocente: opcionesDocente,
-      itemsEstudiantes: optionsEstudiante,
-      itemsDirPrograma: optionsDirprograma,
-      itemsProgramaAcademico: optionsProgramaAcademico
+      itemsHorario: opcionesHorario,
+      itemsMateria: opcionesMateria
     };
   }
 };
