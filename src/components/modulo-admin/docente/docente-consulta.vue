@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
@@ -38,32 +39,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
+          <tr v-for="(docente, index) in docentes" :key="index">
+            <th scope="row">{{ docente.idDocenteCodigo }}</th>
+            <td>{{ docente.nombre }}</td>
+            <td>{{ docente.correo }}</td>
             <td>Departamento de Sistemas</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>Departamento de Sistemas</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>Departamento de Sistemas</td>
-            <td>3216457896</td>
+            <td>{{ docente.telefono }}</td>
             <td>
-              <a href="" data-toggle="modal" data-target="#EditarDocente"
-                ><i class="icono fas fa-user-edit"></i
-              ></a>
+              <a
+                data-toggle="modal"
+                data-target="#EditarDocente"
+                @click="editarDocente(docente)"
+              >
+                <i class="icono fas fa-user-edit"></i>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -80,9 +69,7 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">
-                Actualizar Datos del Docente
-              </h4>
+              <h4 class="modal-title">Actualizar Datos del Docente</h4>
               <button
                 type="button"
                 class="close"
@@ -102,6 +89,7 @@
                     class="form-control"
                     placeholder="Escriba el nombre completo del docente a registrar"
                     required
+                    v-model="nombre"
                   />
                 </div>
                 <div class="form-group">
@@ -111,7 +99,9 @@
                     type="text"
                     class="form-control"
                     placeholder="Escriba el numero de codigo del docente"
+                    disabled
                     required
+                    v-model="codigo"
                   />
                 </div>
                 <div class="form-group">
@@ -120,13 +110,13 @@
                   >
                   <div class="input-group">
                     <select name="departamento" class="form-control">
-                      <option value="dptoMa"
-                        >Departamento de Matematicas</option
-                      >
+                      <option value="dptoMa">
+                        Departamento de Matematicas
+                      </option>
                       <option value="dptoFi">Departamento de Fisica</option>
-                      <option value="dptoEl"
-                        >Departamento de Electronica</option
-                      >
+                      <option value="dptoEl">
+                        Departamento de Electronica
+                      </option>
                       <option value="dptoDi">Departamento de Diseño</option>
                     </select>
                   </div>
@@ -139,6 +129,7 @@
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
                     required
+                    v-model="correo"
                   />
                 </div>
                 <div class="form-group">
@@ -148,6 +139,7 @@
                     class="form-control"
                     placeholder="Escriba el numero de celular."
                     required
+                    v-model="telefono"
                   />
                 </div>
                 <div class="form-group">
@@ -172,6 +164,45 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+import axios from "axios";
+export default {
+  data() {
+    return {
+      docentes: [],
+      nombre: '',
+      codigo: '',
+      correo: '',
+      telefono: '',
+    };
+  },
+  created() {
+    this.getAllDocentes();
+  },
+  methods: {
+    getAllDocentes() {
+      axios
+        .get("http://de45137a8678.ngrok.io/docente")
+        .then((res) => {
+          console.log(res.data.operation);
+          this.docentes = res.data.data;
+          console.log("docentes -->", this.docentes);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    editarDocente(docente) {
+      this.nombre = docente.nombre;
+      this.codigo = docente.idDocenteCodigo;
+      this.correo = docente.correo;
+      this.telefono = docente.telefono;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .cssRegistro .modal-title {
