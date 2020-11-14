@@ -169,7 +169,6 @@
 </template>
 <script>
 /* eslint-disable */
-import axios from "axios";
 export default {
   data() {
     return {
@@ -190,7 +189,7 @@ export default {
   methods: {
     getAllDocentes() {
       axios
-        .get("http://357f799f5a1b.ngrok.io/docentes")
+        .get(`${process.env.VUE_APP_API}/docentes`)
         .then((res) => {
           console.log(res.data.operation);
           this.docentes = res.data.data;
@@ -209,7 +208,7 @@ export default {
     },
     getAllDepartamentos() {
       axios
-        .get("http://357f799f5a1b.ngrok.io/departamentos")
+        .get(`${process.env.URL_DEVELOPMENT_API}/departamentos`)
         .then((res) => {
           console.log(res.data.operation);
           this.departamentos = res.data.data;

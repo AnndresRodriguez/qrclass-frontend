@@ -144,7 +144,8 @@
 </template>
 <script>
 /* eslint-disable */
-import axios from "axios";
+// import axios from "axios";
+
 export default {
   data() {
     return {
@@ -161,7 +162,7 @@ export default {
   methods: {
     getAllEstudiantes() {
       axios
-        .get("http://357f799f5a1b.ngrok.io/estudiantes")
+        .get(`${process.env.VUE_APP_API}/estudiantes`)
         .then((res) => {
           console.log(res.data.operation);
           this.estudiantes = res.data.data;

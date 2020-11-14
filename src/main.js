@@ -8,6 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery/src/jquery.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 
+require("dotenv").config();
+window.axios = require("axios");
+
 Vue.config.productionTip = false;
 
 new Vue({
