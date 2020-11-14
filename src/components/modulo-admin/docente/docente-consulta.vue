@@ -109,15 +109,18 @@
                     >Selecciona el departamento</label
                   >
                   <div class="input-group">
-                    <select name="departamento" class="form-control">
-                      <option value="dptoMa">
-                        Departamento de Matematicas
-                      </option>
-                      <option value="dptoFi">Departamento de Fisica</option>
-                      <option value="dptoEl">
-                        Departamento de Electronica
-                      </option>
-                      <option value="dptoDi">Departamento de Diseño</option>
+                    <select
+                      @change="listarDepartamentos(departamento)"
+                      v-model="departamento"
+                      name="departamento"
+                      class="form-control"
+                    >
+                      <template v-for="(departamento, index) in departamentos">
+                        <option :key="index" :value="departamento">
+                          {{ departamento.idDepartamento }} -
+                          {{ departamento.nombre }}
+                        </option>
+                      </template>
                     </select>
                   </div>
                 </div>
@@ -171,19 +174,23 @@ export default {
   data() {
     return {
       docentes: [],
-      nombre: '',
-      codigo: '',
-      correo: '',
-      telefono: '',
+      nombre: "",
+      codigo: "",
+      correo: "",
+      telefono: "",
+      departamento: {},
+      departamentos: [],
+      iddepartamento: ""
     };
   },
   created() {
     this.getAllDocentes();
+    this.getAllDepartamentos();
   },
   methods: {
     getAllDocentes() {
       axios
-        .get("http://de45137a8678.ngrok.io/docente")
+        .get("http://357f799f5a1b.ngrok.io/docentes")
         .then((res) => {
           console.log(res.data.operation);
           this.docentes = res.data.data;
@@ -199,6 +206,24 @@ export default {
       this.codigo = docente.idDocenteCodigo;
       this.correo = docente.correo;
       this.telefono = docente.telefono;
+    },
+    getAllDepartamentos() {
+      axios
+        .get("http://357f799f5a1b.ngrok.io/departamentos")
+        .then((res) => {
+          console.log(res.data.operation);
+          this.departamentos = res.data.data;
+          console.log("departamentos -->", this.departamentos);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    listarDepartamentos(departamento) {
+      this.departamento = departamento;
+      console.log(this.departamento);
+      this.iddepartamento = departamento.idDepartamento;
     },
   },
 };

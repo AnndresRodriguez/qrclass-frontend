@@ -37,29 +37,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
+          <tr v-for="(estudiante, index) in estudiantes" :key="index">
+            <th scope="row">{{ estudiante.idEstudianteCodigo }}</th>
+            <td>{{ estudiante.nombre }}</td>
+            <td>{{ estudiante.correo }}</td>
+            <td>{{ estudiante.telefono }}</td>
             <td>
-              <a href="" data-toggle="modal" data-target="#EditarEstudiante"
-                ><i class="icono fas fa-user-edit"></i
-              ></a>
+              <a
+                data-toggle="modal"
+                data-target="#EditarEstudiante"
+                @click="editarEstudiante(estudiante)"
+              >
+                <i class="icono fas fa-user-edit"></i>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -76,9 +66,7 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title pl-2">
-                Actualizar Datos del Estudiante
-              </h4>
+              <h4 class="modal-title pl-2">Actualizar Datos del Estudiante</h4>
               <button
                 type="button"
                 class="close"
@@ -98,6 +86,7 @@
                     class="form-control"
                     placeholder="Escriba el nombre completo"
                     required
+                    v-model="nombre"
                   />
                 </div>
                 <div class="form-group">
@@ -108,6 +97,7 @@
                     class="form-control"
                     placeholder="Escriba el numero de codigo"
                     required
+                    v-model="codigo"
                   />
                 </div>
                 <div class="form-group">
@@ -117,6 +107,7 @@
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
                     required
+                    v-model="correo"
                   />
                 </div>
                 <div class="form-group">
@@ -126,6 +117,7 @@
                     class="form-control"
                     placeholder="Escriba el numero de celular."
                     required
+                    v-model="telefono"
                   />
                 </div>
                 <div class="form-group">
@@ -150,6 +142,45 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+import axios from "axios";
+export default {
+  data() {
+    return {
+      estudiantes: [],
+      nombre: "",
+      codigo: "",
+      correo: "",
+      telefono: "",
+    };
+  },
+  created() {
+    this.getAllEstudiantes();
+  },
+  methods: {
+    getAllEstudiantes() {
+      axios
+        .get("http://357f799f5a1b.ngrok.io/estudiantes")
+        .then((res) => {
+          console.log(res.data.operation);
+          this.estudiantes = res.data.data;
+          console.log("estudiantes -->", this.estudiantes);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    editarEstudiante(estudiante) {
+      this.nombre = estudiante.nombre;
+      this.codigo = estudiante.idEstudianteCodigo;
+      this.correo = estudiante.correo;
+      this.telefono = estudiante.telefono;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .cssRegistro .modal-title {
