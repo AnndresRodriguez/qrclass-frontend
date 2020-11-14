@@ -208,7 +208,7 @@ export default {
     },
     getAllDepartamentos() {
       axios
-        .get(`${process.env.URL_DEVELOPMENT_API}/departamentos`)
+        .get(`${process.env.VUE_APP_API}/departamentos`)
         .then((res) => {
           console.log(res.data.operation);
           this.departamentos = res.data.data;
