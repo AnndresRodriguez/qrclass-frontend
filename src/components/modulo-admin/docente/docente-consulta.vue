@@ -98,7 +98,7 @@
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el numero de codigo del docente"
+                    placeholder=""
                     disabled
                     required
                     v-model="codigo"

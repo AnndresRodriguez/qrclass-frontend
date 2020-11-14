@@ -32,30 +32,24 @@
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
+            <th scope="col">Director</th>
             <th scope="col">Funcion</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">115</th>
-            <td>ing. sistemas</td>
-            <td>ingsistemas@ufps.edu.co</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">119</th>
-            <td>Ing. Industrial</td>
-            <td>ingindustrial@ufps.edu.co</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">111</th>
-            <td>Ing. Civil</td>
-            <td>ingcivil@ufps.edu.co</td>
+          <tr v-for="(programa, index) in programas" :key="index">
+            <th scope="row">{{ programa.idcodigo_ProgramaAcademico }}</th>
+            <td>{{ programa.nombre }}</td>
+            <td>{{ programa.correo }}</td>
+            <td>director</td>
             <td>
-              <a href="" data-toggle="modal" data-target="#EditarDocente"
-                ><i class="icono fas fa-user-edit"></i
-              ></a>
+              <a
+                data-toggle="modal"
+                data-target="#EditarPrograma"
+                @click="editarPrograma(programa)"
+              >
+                <i class="icono fas fa-user-edit"></i>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -64,7 +58,7 @@
     <div class="cssRegistro">
       <div
         class="modal fade"
-        id="EditarDocente"
+        id="EditarPrograma"
         tabindex="-1"
         role="dialog"
         aria-hidden="true"
@@ -72,9 +66,7 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">
-                Actualizar Datos Programa Academico
-              </h4>
+              <h4 class="modal-title">Actualizar Datos Programa Academico</h4>
               <button
                 type="button"
                 class="close"
@@ -92,8 +84,8 @@
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el nombre completo"
-                    required
+                    disabled
+                    v-model="nombre"
                   />
                 </div>
                 <div class="form-group">
@@ -102,8 +94,8 @@
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el numero de codigo"
-                    required
+                    disabled
+                    v-model="codigo"
                   />
                 </div>
                 <div class="form-group">
@@ -111,9 +103,19 @@
                   <input
                     type="email"
                     class="form-control"
-                    placeholder="Escriba el corre institucional (example@ufps.edu.co)"
                     required
+                    v-model="correo"
                   />
+                </div>
+                <div class="form-group">
+                  <label class="control-label"
+                    >Director Programa Academico:</label
+                  >
+                  <div class="input-group">
+                    <select name="departamento" class="form-control">
+                      <option value="dptoMa"> :) Angelica Bermudez</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Accion:</label>
@@ -125,7 +127,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">
+                  <button type="submit" class="btn btn-primary">
                     Actualizar
                   </button>
                 </div>
@@ -137,6 +139,43 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+import axios from "axios";
+export default {
+  data() {
+    return {
+      programas: [],
+      nombre: "",
+      codigo: "",
+      correo: "",
+    };
+  },
+  created() {
+    this.getAllDProgramas();
+  },
+  methods: {
+    getAllDProgramas() {
+      axios
+        .get("http://357f799f5a1b.ngrok.io/programa-academicos")
+        .then((res) => {
+          console.log(res.data.operation);
+          this.programas = res.data.data;
+          console.log("programas -->", this.programas);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    editarPrograma(programa) {
+      this.nombre = programa.nombre;
+      this.codigo = programa.idcodigo_ProgramaAcademico;
+      this.correo = programa.correo;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .cssRegistro .modal-title {
