@@ -5,7 +5,7 @@
       <h2>Consultar Docente</h2>
       <hr />
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Correo Electrico: </label>
+        <label class="col-sm-2 col-form-label">Correo Electrónico: </label>
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
@@ -40,10 +40,10 @@
         </thead>
         <tbody>
           <tr v-for="(docente, index) in docentes" :key="index">
-            <th scope="row">{{ docente.idDocenteCodigo }}</th>
+            <th scope="row">{{ docente.codigo }}</th>
             <td>{{ docente.nombre }}</td>
             <td>{{ docente.correo }}</td>
-            <td>Departamento de Sistemas</td>
+            <td>{{ docente.departamento.nombre }}</td>
             <td>{{ docente.telefono }}</td>
             <td>
               <a
@@ -117,7 +117,7 @@
                     >
                       <template v-for="(departamento, index) in departamentos">
                         <option :key="index" :value="departamento">
-                          {{ departamento.idDepartamento }} -
+                          {{ departamento.codigo }} -
                           {{ departamento.nombre }}
                         </option>
                       </template>
@@ -202,7 +202,7 @@ export default {
 
     editarDocente(docente) {
       this.nombre = docente.nombre;
-      this.codigo = docente.idDocenteCodigo;
+      this.codigo = docente.codigo;
       this.correo = docente.correo;
       this.telefono = docente.telefono;
     },

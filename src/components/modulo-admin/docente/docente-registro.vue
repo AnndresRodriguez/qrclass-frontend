@@ -50,7 +50,7 @@
             >
               <template v-for="(departamento, index) in departamentos">
                 <option :key="index" :value="departamento">
-                  {{ departamento.idDepartamento }} -
+                  {{ departamento.codigo }} -
                   {{ departamento.nombre }}
                 </option>
               </template>
@@ -98,6 +98,7 @@
 
 <script>
 /* eslint-disable */
+import { fireToast } from '../../../util/toast'
 export default {
   data() {
     return {
@@ -134,15 +135,16 @@ export default {
 
     registrarDocente(){
 
-      const docente = { idDocenteCodigo: this.codigo, nombre: this.nombre, correo: this.correo, telefono: this.telefono, idDepartamento: this.iddepartamento }
-
-      // console.log('docenteCreado', docente)
+      const docente = { codigo: this.codigo, nombre: this.nombre, correo: this.correo, telefono: this.telefono, idDepartamento: this.iddepartamento }
 
       axios.post(`${process.env.VUE_APP_API}/docentes`, docente)
       .then( res => {
+
+         fireToast('success', 'Registro Exitoso', 'El Nuevo docente ha sido creado')
          console.log(res.data);
       })
       .catch(error => {
+        fireToast('success', 'Error en el registro', 'Ha ocurrido un error al crear el nuevo docente, intente nuevamente');
         console.log('registrarDocente', error)
       })
 
