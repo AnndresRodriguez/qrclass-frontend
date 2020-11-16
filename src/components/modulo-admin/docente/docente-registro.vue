@@ -130,7 +130,8 @@ export default {
     },
 
     listarDepartamentos(departamento) {
-      this.iddepartamento = departamento.idDepartamento;
+      this.iddepartamento = departamento.codigo;
+      console.log(this.codigo)
     },
 
     registrarDocente(){
