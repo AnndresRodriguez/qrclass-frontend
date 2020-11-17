@@ -7,7 +7,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Correo Electrónico: </label>
         <div class="col-sm-10">
-          <form class="navbar-form navbar-left" action="/action_page.php">
+          <form class="navbar-form navbar-left">
             <div class="input-group">
               <input
                 type="email"
@@ -80,7 +80,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form @submit.prevent="actualizarDocente">
                 <div class="form-group">
                   <label class="control-label labD">Nombre Completo</label>
                   <input
@@ -99,8 +99,8 @@
                     type="text"
                     class="form-control"
                     placeholder=""
-                    disabled
                     required
+                    disabled
                     v-model="codigo"
                   />
                 </div>
@@ -148,14 +148,19 @@
                 <div class="form-group">
                   <label class="control-label">Accion:</label>
                   <div class="input-group">
-                    <select name="accionA" class="form-control">
-                      <option value="habilitarAdmin">Habilitar</option>
-                      <option value="deshabilitarAdmin">Deshabilitar</option>
+                    <select
+                      name="accionA"
+                      class="form-control"
+                      @change="setEstadoDocente(estadoDocente)"
+                      v-model="estadoDocente"
+                    >
+                      <option value="1">Habilitar</option>
+                      <option value="0">Deshabilitar</option>
                     </select>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">
+                  <button type="submit" class="btn btn-primary">
                     Actualizar
                   </button>
                 </div>
@@ -169,17 +174,21 @@
 </template>
 <script>
 /* eslint-disable */
+import { fireToast } from '../../../util/toast'
+import $ from "jquery";
 export default {
   data() {
     return {
       docentes: [],
+      id: 0,
       nombre: "",
       codigo: "",
       correo: "",
       telefono: "",
       departamento: {},
       departamentos: [],
-      iddepartamento: ""
+      iddepartamento: "",
+      estadoDocente: 1
     };
   },
   created() {
@@ -200,9 +209,15 @@ export default {
         });
     },
 
+    setEstadoDocente(estadoDocente){
+      console.log(estadoDocente)
+      this.estadoDocente = estadoDocente;
+    },
+
     editarDocente(docente) {
-      this.nombre = docente.nombre;
+      this.id = docente.id;
       this.codigo = docente.codigo;
+      this.nombre = docente.nombre;
       this.correo = docente.correo;
       this.telefono = docente.telefono;
     },
@@ -222,7 +237,39 @@ export default {
     listarDepartamentos(departamento) {
       this.departamento = departamento;
       console.log(this.departamento);
-      this.iddepartamento = departamento.idDepartamento;
+      this.iddepartamento = departamento.codigo;
+    },
+
+    actualizarDocente() {
+      const docenteNuevo = {
+        id: this.id,
+        codigo: this.codigo,
+        nombre: this.nombre,
+        correo: this.correo,
+        telefono: this.telefono,
+        estado: this.estadoDocente,
+        idDepartamento: this.iddepartamento        
+      };
+
+      axios.put(`${process.env.VUE_APP_API}/docentes`, docenteNuevo )
+      .then( res => {
+        if(res.data.operation){
+          console.log(res.data)
+          $('#EditarDocente').modal('hide');
+          
+          fireToast('success', 'Actualización Exitosa', 'Los datos del docente han sido actualizado')
+        }
+        else{
+
+            console.log(res.data);
+
+            fireToast('error', 'Error en la actualización', 'Ha ocurrido un error al actualizar los datos del docente, intente nuevamente')
+        }
+      })
+
+      console.log(docenteNuevo);
+
+
     },
   },
 };
