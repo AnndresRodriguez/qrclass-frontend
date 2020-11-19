@@ -40,8 +40,7 @@ export default {
   },
   data() {
     return {
-      clientID:
-        "402309539316-lrei84id8ka8r1abeosec3fo0ubss5v0.apps.googleusercontent.com"
+      clientID: `${process.env.VUE_APP_GOOGLE_CLIENT_ID}`
     };
   },
   methods: {
