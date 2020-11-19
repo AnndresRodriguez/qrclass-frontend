@@ -13,6 +13,7 @@
                 type="email"
                 class="form-control"
                 placeholder="example@ufps.edu.co"
+                v-model="correo"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -27,36 +28,40 @@
       <br />
       <h5 class="h5L">Lista de Docentes</h5>
       <hr />
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Documento</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Departamento</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Funcion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(docente, index) in docentes" :key="index">
-            <th scope="row">{{ docente.codigo }}</th>
-            <td>{{ docente.nombre }}</td>
-            <td>{{ docente.correo }}</td>
-            <td>{{ docente.departamento.nombre }}</td>
-            <td>{{ docente.telefono }}</td>
-            <td>
-              <a
-                data-toggle="modal"
-                data-target="#EditarDocente"
-                @click="editarDocente(docente)"
-              >
-                <i class="icono fas fa-user-edit"></i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="ctabla">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Documento</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Departamento</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Funcion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(docente, index) in filtrarDocente" :key="index">
+              <th scope="row">{{ docente.codigo }}</th>
+              <td>{{ docente.nombre }}</td>
+              <td>{{ docente.correo }}</td>
+              <td>{{ docente.departamento.nombre }}</td>
+              <td>{{ docente.telefono }}</td>
+              <td>{{ validarEstado(docente.estado) }}</td>
+              <td>
+                <a
+                  data-toggle="modal"
+                  data-target="#EditarDocente"
+                  @click="editarDocente(docente)"
+                >
+                  <i class="icono fas fa-user-edit"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="cssRegistro">
       <div
@@ -174,7 +179,7 @@
 </template>
 <script>
 /* eslint-disable */
-import { fireToast } from '../../../util/toast'
+import { fireToast } from "../../../util/toast";
 import $ from "jquery";
 export default {
   data() {
@@ -188,7 +193,7 @@ export default {
       departamento: {},
       departamentos: [],
       iddepartamento: "",
-      estadoDocente: 1
+      estadoDocente: 1,
     };
   },
   created() {
@@ -196,6 +201,11 @@ export default {
     this.getAllDepartamentos();
   },
   methods: {
+    validarEstado(estado) {
+      let msn = "";
+      estado == 1 ? (msn = "Activo") : (msn = "Inactivo");
+      return msn;
+    },
     getAllDocentes() {
       axios
         .get(`${process.env.VUE_APP_API}/docentes`)
@@ -209,8 +219,8 @@ export default {
         });
     },
 
-    setEstadoDocente(estadoDocente){
-      console.log(estadoDocente)
+    setEstadoDocente(estadoDocente) {
+      console.log(estadoDocente);
       this.estadoDocente = estadoDocente;
     },
 
@@ -248,30 +258,42 @@ export default {
         correo: this.correo,
         telefono: this.telefono,
         estado: this.estadoDocente,
-        idDepartamento: this.iddepartamento        
+        idDepartamento: this.iddepartamento,
       };
 
-      axios.put(`${process.env.VUE_APP_API}/docentes`, docenteNuevo )
-      .then( res => {
-        if(res.data.operation){
-          console.log(res.data)
-          $('#EditarDocente').modal('hide');
-          
-          fireToast('success', 'Actualización Exitosa', 'Los datos del docente han sido actualizado')
-        }
-        else{
+      axios
+        .put(`${process.env.VUE_APP_API}/docentes`, docenteNuevo)
+        .then((res) => {
+          if (res.data.operation) {
+            console.log(res.data);
+            $("#EditarDocente").modal("hide");
 
+            fireToast(
+              "success",
+              "Actualización Exitosa",
+              "Los datos del docente han sido actualizado"
+            );
+          } else {
             console.log(res.data);
 
-            fireToast('error', 'Error en la actualización', 'Ha ocurrido un error al actualizar los datos del docente, intente nuevamente')
-        }
-      })
+            fireToast(
+              "error",
+              "Error en la actualización",
+              "Ha ocurrido un error al actualizar los datos del docente, intente nuevamente"
+            );
+          }
+        });
 
       console.log(docenteNuevo);
-
-
     },
   },
+  computed: {
+    filtrarDocente() {
+      return this.docentes.filter(docente =>
+        docente.correo.includes(this.correo)
+      );
+    }
+  }
 };
 </script>
 
@@ -282,6 +304,11 @@ export default {
 }
 .cssRegistro .form-group {
   margin-bottom: 0rem;
+}
+.ctabla {
+  overflow: auto;
+  margin-left: -70px;
+  margin-right: -50px;
 }
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th,

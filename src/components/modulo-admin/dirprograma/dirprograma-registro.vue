@@ -3,7 +3,7 @@
     <div class="col-md-10 cssRegistro">
       <h2>Registrar Director de Programa Academico</h2>
       <hr />
-      <form>
+      <form @submit.prevent="registrarDirector">
         <div class="form-group">
           <label class="control-label">Nombre Completo</label>
           <div class="input-group">
@@ -16,6 +16,8 @@
               class="form-control"
               placeholder="Escriba el nombre completo del director a registrar"
               required
+              maxlength="100"
+              v-model="nombre"
             />
           </div>
         </div>
@@ -31,6 +33,8 @@
               class="form-control"
               placeholder="Escriba el numero de codigo del director"
               required
+              maxlength="10"
+              v-model="codigo"
             />
           </div>
         </div>
@@ -45,6 +49,8 @@
               class="form-control"
               placeholder="Escriba el corre institucional (example@ufps.edu.co)"
               required
+              maxlength="45"
+              v-model="correo"
             />
           </div>
         </div>
@@ -59,6 +65,8 @@
               class="form-control"
               placeholder="Escriba el numero de celular."
               required
+              maxlength="10"
+              v-model="telefono"
             />
           </div>
         </div>
@@ -69,7 +77,51 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+import { fireToast } from "../../../util/toast";
+export default {
+  data() {
+    return {
+      directores: [],
+      nombre: "",
+      codigo: "",
+      correo: "",
+      telefono: "",
+    };
+  },
+  methods: {
+    registrarDirector() {
+      const director = {
+        nombre: this.nombre,
+        codigo: this.codigo,
+        correo: this.correo,
+        telefono: this.telefono,
+      };
 
+      console.log(director);
+      axios
+        .post(`${process.env.VUE_APP_API}/directores`, director)
+        .then((res) => {
+          fireToast(
+            "success",
+            "Registro Exitoso",
+            "El nuevo director de programa ha sido creado"
+          );
+          console.log(res.data);
+        })
+        .catch((error) => {
+          fireToast(
+            "error",
+            "Error en el registro",
+            "Ha ocurrido un error al crear el nuevo director de programa, intente nuevamente"
+          );
+          console.log("registrarDirector", error);
+        });
+    },
+  },
+};
+</script>
 <style scoped>
 .cssRegistro .form-group {
   margin-bottom: 0rem;

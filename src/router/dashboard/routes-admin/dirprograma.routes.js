@@ -1,6 +1,6 @@
 export default [
   {
-    path: "/consultar-estudiante",
+    path: "/consultar-director",
     component: () =>
       import(
         "../../../components/modulo-admin/dirprograma/dirprograma-consulta.vue"
@@ -8,7 +8,7 @@ export default [
     name: "consultar-dirprograma"
   },
   {
-    path: "/registrar-estudiante",
+    path: "/registrar-director",
     component: () =>
       import(
         "../../../components/modulo-admin/dirprograma/dirprograma-registro.vue"

@@ -4,14 +4,17 @@
       <h2>Consultar Programa Academico</h2>
       <hr />
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Correo Electrico: </label>
-        <div class="col-sm-10">
+        <label class="col-sm-4 col-form-label"
+          >Nombre del Programa Academico:
+        </label>
+        <div class="col-sm-8">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
               <input
-                type="email"
+                type="text"
                 class="form-control"
-                placeholder="example@ufps.edu.co"
+                placeholder="Nombre del Programa Academico"
+                v-model="nombre"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -37,11 +40,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(programa, index) in programas" :key="index">
-            <th scope="row">{{ programa.idcodigo_ProgramaAcademico }}</th>
+          <tr v-for="(programa, index) in filtrarPrograma" :key="index">
+            <th scope="row">{{ programa.codigo }}</th>
             <td>{{ programa.nombre }}</td>
             <td>{{ programa.correo }}</td>
-            <td>director</td>
+            <td>{{ programa.dirprograma.nombre }}</td>
             <td>
               <a
                 data-toggle="modal"
@@ -112,17 +115,32 @@
                     >Director Programa Academico:</label
                   >
                   <div class="input-group">
-                    <select name="departamento" class="form-control">
-                      <option value="dptoMa"> :) Angelica Bermudez</option>
+                    <select
+                      @change="listarDirectores(dirprograma)"
+                      v-model="dirprograma"
+                      name="dirprograma"
+                      class="form-control"
+                    >
+                      <template v-for="(dirprograma, index) in dirprogramas">
+                        <option :key="index" :value="dirprograma">
+                          {{ dirprograma.codigo }} -
+                          {{ dirprograma.nombre }}
+                        </option>
+                      </template>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Accion:</label>
                   <div class="input-group">
-                    <select name="accionA" class="form-control">
-                      <option value="habilitarAdmin">Habilitar</option>
-                      <option value="deshabilitarAdmin">Deshabilitar</option>
+                    <select
+                      name="accionA"
+                      class="form-control"
+                      @change="setEstadoPrograma(estadoPrograma)"
+                      v-model="estadoPrograma"
+                    >
+                      <option value="1">Habilitar</option>
+                      <option value="0">Deshabilitar</option>
                     </select>
                   </div>
                 </div>
@@ -141,21 +159,28 @@
 </template>
 <script>
 /* eslint-disable */
-
+import { fireToast } from "../../../util/toast";
+import $ from "jquery";
 export default {
   data() {
     return {
       programas: [],
+      id: 0,
       nombre: "",
       codigo: "",
       correo: "",
+      dirprograma: {},
+      dirprogramas: [],
+      idDirectorPrograma: "",
+      estadoPrograma: 1,
     };
   },
   created() {
-    this.getAllDProgramas();
+    this.getAllProgramas();
+    this.getAllDirectoresPrograma();
   },
   methods: {
-    getAllDProgramas() {
+    getAllProgramas() {
       axios
         .get(`${process.env.VUE_APP_API}/programa-academicos`)
         .then((res) => {
@@ -168,10 +193,77 @@ export default {
         });
     },
 
+    setEstadoPrograma(estadoPrograma) {
+      console.log(estadoPrograma);
+      this.estadoPrograma = estadoPrograma;
+    },
+
     editarPrograma(programa) {
+      this.id = programa.id;
+      this.codigo = programa.codigo;
       this.nombre = programa.nombre;
-      this.codigo = programa.idcodigo_ProgramaAcademico;
       this.correo = programa.correo;
+    },
+    getAllDirectoresPrograma() {
+      axios
+        .get(`${process.env.VUE_APP_API}/`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.dirprogramas = res.data.data;
+          console.log("dirprogramas -->", this.dirprogramas);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    listarDirectores(dirprograma) {
+      this.dirprograma = dirprograma;
+      console.log(this.dirprograma);
+      this.idDirectorPrograma = dirprograma.codigo;
+    },
+
+    actualizarPrograma() {
+      const programaNuevo = {
+        id: this.id,
+        codigo: this.codigo,
+        nombre: this.nombre,
+        correo: this.correo,
+        estado: this.estadoPrograma,
+        idDirectorPrograma: this.idDirectorPrograma,
+      };
+
+      axios
+        .put(`${process.env.VUE_APP_API}/programa-academicos`, programaNuevo)
+        .then((res) => {
+          if (res.data.operation) {
+            console.log(res.data);
+            $("#EditarPrograma").modal("hide");
+
+            fireToast(
+              "success",
+              "Actualización Exitosa",
+              "Los datos del programa academico han sido actualizados"
+            );
+          } else {
+            console.log(res.data);
+
+            fireToast(
+              "error",
+              "Error en la actualización",
+              "Ha ocurrido un error al actualizar los datos del programa academico, intente nuevamente"
+            );
+          }
+        });
+
+      console.log(programaNuevo);
+    },
+  },
+  computed: {
+    filtrarPrograma() {
+      return this.programas.filter((programa) =>
+        programa.nombre.includes(this.nombre)
+      );
     },
   },
 };

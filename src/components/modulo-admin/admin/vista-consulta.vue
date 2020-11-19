@@ -12,6 +12,7 @@
                 type="email"
                 class="form-control"
                 placeholder="example@ufps.edu.co"
+                v-model="correo"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -33,33 +34,25 @@
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
             <th scope="col">Telefono</th>
+            <th scope="col">Estado</th>
             <th scope="col">Funcion</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
+          <tr v-for="(admin, index) in filtrarAdministrador" :key="index">
+            <th scope="row">{{ admin.documento }}</th>
+            <td>{{ admin.nombrecompleto }}</td>
+            <td>{{ admin.correo }}</td>
+            <td>{{ admin.telefono }}</td>
+            <td>{{ validarEstado(admin.estado) }}</td>
             <td>
-              <a href="" data-toggle="modal" data-target="#EditarAdmin"
-                ><i class="icono fas fa-user-edit"></i
-              ></a>
+              <a
+                data-toggle="modal"
+                data-target="#EditarAdmin"
+                @click="editarAdmin(admin)"
+              >
+                <i class="icono fas fa-user-edit"></i>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -76,9 +69,7 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">
-                Actualizar Datos del Administrador
-              </h4>
+              <h4 class="modal-title">Actualizar Datos del Administrador</h4>
               <button
                 type="button"
                 class="close"
@@ -89,7 +80,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form @submit.prevent="actualizarAdmin">
                 <div class="form-group">
                   <label class="control-label">Nombre Completo</label>
                   <input
@@ -97,7 +88,9 @@
                     type="text"
                     class="form-control"
                     placeholder="Escriba el nombre completo del docente a registrar"
+                    maxlength="100"
                     required
+                    v-model="nombre"
                   />
                 </div>
                 <div class="form-group">
@@ -107,7 +100,10 @@
                     type="text"
                     class="form-control"
                     placeholder="Escriba el numero de codigo del docente"
+                    maxlength="10"
+                    disabled
                     required
+                    v-model="documento"
                   />
                 </div>
                 <div class="form-group">
@@ -116,7 +112,9 @@
                     type="email"
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+                    maxlength="45"
                     required
+                    v-model="correo"
                   />
                 </div>
                 <div class="form-group">
@@ -125,15 +123,22 @@
                     type="text"
                     class="form-control"
                     placeholder="Escriba el numero de celular."
+                    maxlength="10"
                     required
+                    v-model="telefono"
                   />
                 </div>
                 <div class="form-group">
                   <label class="control-label">Accion:</label>
                   <div class="input-group">
-                    <select name="accionA" class="form-control">
-                      <option value="habilitarAdmin">Habilitar</option>
-                      <option value="deshabilitarAdmin">Deshabilitar</option>
+                    <select
+                      name="accionA"
+                      class="form-control"
+                      @change="setEstadoAdmin(estadoAdmin)"
+                      v-model="estadoAdmin"
+                    >
+                      <option value="1">Habilitar</option>
+                      <option value="0">Deshabilitar</option>
                     </select>
                   </div>
                 </div>
@@ -150,7 +155,101 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+import { fireToast } from "../../../util/toast";
+import $ from "jquery";
+export default {
+  data() {
+    return {
+      administradores: [],
+      id: 0,
+      nombre: "",
+      documento: "",
+      correo: "",
+      telefono: "",
+      estadoAdmin: 1,
+    };
+  },
+  created() {
+    this.getAllAdmin();
+  },
+  methods: {
+    validarEstado(estado) {
+      let msn = "";
+      estado ==1 ? msn = "Activo": msn = "Inactivo"
+      return msn;
+    },
+    getAllAdmin() {
+      axios
+        .get(`${process.env.VUE_APP_API}/admin`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.administradores = res.data.data;
+          console.log("administradores -->", this.administradores);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    setEstadoAdmin(estadoAdmin) {
+      console.log(estadoAdmin);
+      this.estadoAdmin = estadoAdmin;
+    },
 
+    editarAdmin(admin) {
+      this.id = admin.id;
+      this.documento = admin.documento;
+      this.nombre = admin.nombrecompleto;
+      this.correo = admin.correo;
+      this.telefono = admin.telefono;
+      this.estadoAdmin = admin.estado;
+    },
+
+    actualizarAdmin() {
+      const actualizarAdmmin = {
+        id: this.id,
+        nombrecompleto: this.nombre,
+        documento: this.documento,
+        correo: this.correo,
+        telefono: this.telefono,
+        estado: this.estadoAdmin,
+      };
+      axios
+        .put(`${process.env.VUE_APP_API}/admin`, actualizarAdmmin)
+        .then((res) => {
+          if (res.data.operation) {
+            console.log(res.data);
+            $("#EditarAdmin").modal("hide");
+
+            fireToast(
+              "success",
+              "Actualización Exitosa",
+              "Los datos del administrador han sido actualizado"
+            );
+            this.getAllAdmin();
+          } else {
+            console.log(res.data);
+
+            fireToast(
+              "error",
+              "Error en la actualización",
+              "Ha ocurrido un error al actualizar los datos del administrador, intente nuevamente"
+            );
+          }
+        });
+      console.log(actualizarAdmmin);
+    },
+  },
+  computed: {
+    filtrarAdministrador() {
+      return this.administradores.filter(admin =>
+        admin.correo.includes(this.correo)
+      );
+    }
+  }
+};
+</script>
 <style scoped>
 .cssRegistro .modal-title h4 {
   text-align: center;

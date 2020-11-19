@@ -12,6 +12,7 @@
                 type="email"
                 class="form-control"
                 placeholder="example@ufps.edu.co"
+                v-model="correo"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -31,39 +32,27 @@
           <tr>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Programa Academico</th>
             <th scope="col">Correo</th>
             <th scope="col">Telefono</th>
+            <th scope="col">Estado</th>
             <th scope="col">Funcion</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>Ing. Sistemas</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>Ing. Civil</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">0147852</th>
-            <td>Juan Andres Rodriguez</td>
-            <td>Ing. Industrial</td>
-            <td>juanandresr@ufps.edu.co</td>
-            <td>3216457896</td>
+          <tr v-for="(director, index) in filtrarDirector" :key="index">
+            <th scope="row">{{ director.codigo }}</th>
+            <td>{{ director.nombre }}</td>
+            <td>{{ director.correo }}</td>
+            <td>{{ director.telefono }}</td>
+            <td>{{ validarEstado(director.estado) }}</td>
             <td>
-              <a href="" data-toggle="modal" data-target="#EditarDirPrograma"
-                ><i class="icono fas fa-user-edit"></i
-              ></a>
+              <a
+                data-toggle="modal"
+                data-target="#EditarDirPrograma"
+                @click="editarDirector(director)"
+              >
+                <i class="icono fas fa-user-edit"></i>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -93,7 +82,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form @submit.prevent="actualizarDirector">
                 <div class="form-group">
                   <label class="control-label labD">Nombre Completo</label>
                   <input
@@ -102,6 +91,8 @@
                     class="form-control"
                     placeholder="Escriba el nombre completo del director a registrar"
                     required
+                    maxlength="100"
+                    v-model="nombre"
                   />
                 </div>
                 <div class="form-group">
@@ -112,22 +103,11 @@
                     class="form-control"
                     placeholder="Escriba el numero de codigo del directos"
                     required
+                    maxlength="10"
+                    disabled
+                    v-model="codigo"
                   />
                 </div>
-                <div class="form-group">
-                  <label class="control-label"
-                    >Selecciona el Programa Academico</label
-                  >
-                  <div class="input-group">
-                    <select name="departamento" class="form-control">
-                      <option value="dptoMa">Ing. Sistemas</option>
-                      <option value="dptoFi">Ing. Civil</option>
-                      <option value="dptoEl">Ing. Industrial</option>
-                      <option value="dptoDi">Ing. Mecanica</option>
-                    </select>
-                  </div>
-                </div>
-
                 <div class="form-group">
                   <label class="control-label">Correo Electronico</label>
                   <input
@@ -135,6 +115,8 @@
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
                     required
+                    maxlength="45"
+                    v-model="correo"
                   />
                 </div>
                 <div class="form-group">
@@ -144,19 +126,26 @@
                     class="form-control"
                     placeholder="Escriba el numero de celular."
                     required
+                    maxlength="10"
+                    v-model="telefono"
                   />
                 </div>
                 <div class="form-group">
                   <label class="control-label">Accion:</label>
                   <div class="input-group">
-                    <select name="accionA" class="form-control">
-                      <option value="habilitarAdmin">Habilitar</option>
-                      <option value="deshabilitarAdmin">Deshabilitar</option>
+                    <select
+                      name="accionA"
+                      class="form-control"
+                      @change="setEstadoDirector(estadoDirector)"
+                      v-model="estadoDirector"
+                    >
+                      <option value="1">Habilitar</option>
+                      <option value="0">Deshabilitar</option>
                     </select>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">
+                  <button type="submit" class="btn btn-primary">
                     Actualizar
                   </button>
                 </div>
@@ -168,7 +157,101 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+import { fireToast } from "../../../util/toast";
+import $ from "jquery";
+export default {
+  data() {
+    return {
+      directores: [],
+      id: 0,
+      nombre: "",
+      codigo: "",
+      correo: "",
+      telefono: "",
+      estadoDirector: 1,
+    };
+  },
+  created() {
+    this.getAllDirector();
+  },
+  methods: {
+    validarEstado(estado) {
+      let msn = "";
+      estado == 1 ? (msn = "Activo") : (msn = "Inactivo");
+      return msn;
+    },
+    getAllDirector() {
+      axios
+        .get(`${process.env.VUE_APP_API}/directores`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.directores = res.data.data;
+          console.log("directores -->", this.directores);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    setEstadoDirector(estadoDirector) {
+      console.log(estadoDirector);
+      this.estadoDirector = estadoDirector;
+    },
 
+    editarDirector(director) {
+      this.id = director.id;
+      this.codigo = director.codigo;
+      this.nombre = director.nombre;
+      this.correo = director.correo;
+      this.telefono = director.telefono;
+      this.estadoDirector = director.estado;
+    },
+
+    actualizarDirector() {
+      const actualizarDirector = {
+        id: this.id,
+        nombre: this.nombre,
+        codigo: this.codigo,
+        correo: this.correo,
+        telefono: this.telefono,
+        estado: this.estadoDirector,
+      };
+      axios
+        .put(`${process.env.VUE_APP_API}/directores`, actualizarDirector)
+        .then((res) => {
+          if (res.data.operation) {
+            console.log(res.data);
+            $("#EditarDirPrograma").modal("hide");
+
+            fireToast(
+              "success",
+              "Actualización Exitosa",
+              "Los datos del director de programa han sido actualizado"
+            );
+            this.getAllDirector();
+          } else {
+            console.log(res.data);
+
+            fireToast(
+              "error",
+              "Error en la actualización",
+              "Ha ocurrido un error al actualizar los datos del director de programa, intente nuevamente"
+            );
+          }
+        });
+      console.log(actualizarDirector);
+    },
+  },
+  computed: {
+    filtrarDirector() {
+      return this.directores.filter(director =>
+        director.correo.includes(this.correo)
+      );
+    }
+  }
+}
+</script>
 <style scoped>
 .cssRegistro .modal-title {
   text-align: center;
