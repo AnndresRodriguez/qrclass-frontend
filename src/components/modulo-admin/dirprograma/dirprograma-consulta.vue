@@ -30,6 +30,7 @@
       <table class="table table-hover">
         <thead>
           <tr>
+            <th scope="col">No.</th>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
@@ -40,7 +41,8 @@
         </thead>
         <tbody>
           <tr v-for="(director, index) in filtrarDirector" :key="index">
-            <th scope="row">{{ director.codigo }}</th>
+            <th scope="row">{{ director.id }}</th>
+            <th>{{ director.codigo }}</th>
             <td>{{ director.nombre }}</td>
             <td>{{ director.correo }}</td>
             <td>{{ director.telefono }}</td>

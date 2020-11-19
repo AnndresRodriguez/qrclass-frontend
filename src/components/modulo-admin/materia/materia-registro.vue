@@ -16,6 +16,7 @@
               class="form-control"
               placeholder="Escriba el nombre de la materia a registrar"
               required
+              maxlength="100"
             />
           </div>
         </div>
@@ -31,6 +32,7 @@
               class="form-control"
               placeholder="Escriba el codigo de la materia"
               required
+              maxlength="10"
             />
           </div>
         </div>

@@ -32,6 +32,7 @@
       <table class="table table-hover">
         <thead>
           <tr>
+            <th scope="col">No.</th>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
@@ -41,10 +42,11 @@
         </thead>
         <tbody>
           <tr v-for="(programa, index) in filtrarPrograma" :key="index">
-            <th scope="row">{{ programa.codigo }}</th>
+            <th scope="row">{{ programa.id }}</th>
+            <th>{{ programa.codigo }}</th>
             <td>{{ programa.nombre }}</td>
             <td>{{ programa.correo }}</td>
-            <td>{{ programa.dirprograma.nombre }}</td>
+            <td>{{ programa.dirPrograma.nombre }}</td>
             <td>
               <a
                 data-toggle="modal"
@@ -80,7 +82,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form @submit.prevent="actualizarPrograma">
                 <div class="form-group">
                   <label class="control-label labD">Nombre Completo</label>
                   <input
@@ -130,7 +132,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label class="control-label">Accion:</label>
                   <div class="input-group">
                     <select
@@ -143,7 +145,7 @@
                       <option value="0">Deshabilitar</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">
                     Actualizar
@@ -172,7 +174,6 @@ export default {
       dirprograma: {},
       dirprogramas: [],
       idDirectorPrograma: "",
-      estadoPrograma: 1,
     };
   },
   created() {
@@ -203,10 +204,11 @@ export default {
       this.codigo = programa.codigo;
       this.nombre = programa.nombre;
       this.correo = programa.correo;
+      this.idDirectorPrograma = programa.idDirector;
     },
     getAllDirectoresPrograma() {
       axios
-        .get(`${process.env.VUE_APP_API}/`)
+        .get(`${process.env.VUE_APP_API}/directores`)
         .then((res) => {
           console.log(res.data.operation);
           this.dirprogramas = res.data.data;
@@ -220,7 +222,7 @@ export default {
     listarDirectores(dirprograma) {
       this.dirprograma = dirprograma;
       console.log(this.dirprograma);
-      this.idDirectorPrograma = dirprograma.codigo;
+      this.idDirectorPrograma = dirprograma.id;
     },
 
     actualizarPrograma() {
@@ -230,7 +232,7 @@ export default {
         nombre: this.nombre,
         correo: this.correo,
         estado: this.estadoPrograma,
-        idDirectorPrograma: this.idDirectorPrograma,
+        idDirector: this.idDirectorPrograma,
       };
 
       axios
@@ -245,6 +247,7 @@ export default {
               "Actualización Exitosa",
               "Los datos del programa academico han sido actualizados"
             );
+            this.getAllProgramas();
           } else {
             console.log(res.data);
 
@@ -262,7 +265,7 @@ export default {
   computed: {
     filtrarPrograma() {
       return this.programas.filter((programa) =>
-        programa.nombre.includes(this.nombre)
+        programa.nombre.toLowerCase().includes(this.nombre)
       );
     },
   },

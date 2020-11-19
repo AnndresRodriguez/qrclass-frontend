@@ -16,6 +16,7 @@
               class="form-control"
               placeholder="Escriba el nombre del programa academico"
               required
+              maxlength="100"
               v-model="nombre"
             />
           </div>
@@ -32,6 +33,7 @@
               class="form-control"
               placeholder="Escriba el codigo del programa academico"
               required
+              maxlength="10"
               v-model="codigo"
             />
           </div>
@@ -47,6 +49,7 @@
               class="form-control"
               placeholder="Escriba el corre institucional (example@ufps.edu.co)"
               required
+              maxlength="45"
               v-model="correo"
             />
           </div>
@@ -61,7 +64,7 @@
               <i class="icono fas fa-check-square"></i>
             </div>
             <select
-              @change="listardirectores(director)"
+              @change="listarDirectores(director)"
               v-model="director"
               name="director"
               class="form-control"
@@ -119,16 +122,16 @@ export default {
 
     listarDirectores(director) {
       this.iddirector = director.id;
-      console.log(this.codigo);
+      console.log(this.iddirector);
     },
     registrarProgramaAcademico() {
       const programa = {
         codigo: this.codigo,
         nombre: this.nombre,
         correo: this.correo,
-        iddirector: this.iddirector,
+        idDirector: this.iddirector,
       };
-
+      console.log(programa)
       axios
         .post(`${process.env.VUE_APP_API}/programa-academicos`, programa)
         .then((res) => {

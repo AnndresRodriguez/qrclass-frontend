@@ -32,6 +32,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th scope="col">No.</th>
               <th scope="col">Documento</th>
               <th scope="col">Nombre</th>
               <th scope="col">Correo</th>
@@ -43,7 +44,8 @@
           </thead>
           <tbody>
             <tr v-for="(docente, index) in filtrarDocente" :key="index">
-              <th scope="row">{{ docente.codigo }}</th>
+              <th scope="row">{{ docente.id }}</th>
+              <th>{{ docente.codigo }}</th>
               <td>{{ docente.nombre }}</td>
               <td>{{ docente.correo }}</td>
               <td>{{ docente.departamento.nombre }}</td>
