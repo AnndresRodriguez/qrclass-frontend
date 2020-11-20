@@ -248,7 +248,7 @@ export default {
   computed: {
     filtrarDirector() {
       return this.directores.filter(director =>
-        director.correo.includes(this.correo)
+        director.correo.toLowerCase().includes(this.correo)
       );
     }
   }

@@ -241,7 +241,7 @@ export default {
   computed: {
     filtrarEstudiante() {
       return this.estudiantes.filter(estudiante =>
-        estudiante.correo.includes(this.correo)
+        estudiante.correo.toLowerCase().includes(this.correo)
       );
     }
   }
