@@ -69,7 +69,7 @@ npm install
 
 * Creamos nuestro archivo **_.env_** para nuestras variables de entorno en **la raíz de nuestro proyecto** y creamos las siguientes
  <pre> 
- VUE_APP_API="http://35.171.47.48" // Url del API de los servicios de la API 
+ VUE_APP_API="http://35.171.47.48" // Url de los servicios de la API de QR-Class
  VUE_APP_GOOGLE_CLIENT_ID=402309539316-lrei84id8ka8r1abeosec3fo0ubss5v0.apps.googleusercontent.com // token privado para el login
  </pre>
 
