@@ -1,11 +1,13 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
+      <button type="" class=" btn btn-info">Volver</button>
       <h2>Lista de Asistencia</h2>
       <hr />
       <p>Materia: Calculo I</p>
       <p>Codigo: 1151101</p>
       <p>No. de Estudiantes: 35</p>
+      <button type="" class=" btn btn-info">Imprimir</button>
       <table class="table table-hover">
         <thead>
           <tr>
