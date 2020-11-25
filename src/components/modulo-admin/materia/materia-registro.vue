@@ -3,7 +3,7 @@
     <div class="col-md-10 cssRegistro">
       <h2>Registrar Materia</h2>
       <hr />
-      <form>
+      <form @submit.prevent="registrarMateria">
         <div class="form-group">
           <label class="control-label">Nombre Completo</label>
           <div class="input-group">
@@ -17,6 +17,7 @@
               placeholder="Escriba el nombre de la materia a registrar"
               required
               maxlength="100"
+              v-model="nombre"
             />
           </div>
         </div>
@@ -33,6 +34,7 @@
               placeholder="Escriba el codigo de la materia"
               required
               maxlength="10"
+              v-model="codigo"
             />
           </div>
         </div>
@@ -70,6 +72,7 @@
               v-model="docente"
               name="dirprograma"
               class="form-control"
+              required
             >
               <template v-for="(docente, index) in docentes">
                 <option :key="index" :value="docente">
@@ -86,7 +89,14 @@
             <div class="input-group-addon">
               <i class="icono fas fa-users"></i>
             </div>
-            <input type="number" class="form-control col-2" value="0" min="1" />
+            <input
+              type="number"
+              class="form-control col-2"
+              value="0"
+              min="1"
+              required
+              v-model="noestudiantes"
+            />
           </div>
         </div>
         <div class="form-group">
@@ -95,36 +105,14 @@
             <div class="input-group-addon">
               <i class="icono icono fas fa-chalkboard-teacher"></i>
             </div>
-            <input type="number" class="form-control col-2" value="0" min="1" />
-          </div>
-        </div>
-        <label class="control-label"
-          >Seleccione el horaro de la materia:<br
-        /></label>
-        <div class="row">
-          <div class="panels horama">
-            <div>
-              <label class="control-label">Lunes: </label>
-              <input class="esphora" type="time" id="appt" name="appt" />
-            </div>
-            <div>
-              <label class="control-label">Martes:</label>
-              <input class="esphora" type="time" id="appt" name="appt" />
-            </div>
-            <div>
-              <label class="control-label">Miercoles:</label>
-              <input class="esphora" type="time" id="appt" name="appt" />
-            </div>
-          </div>
-          <div class="panels horama">
-            <div>
-              <label class="control-label">Jueves:</label>
-              <input class="esphora" type="time" id="appt" name="appt" />
-            </div>
-            <div>
-              <label class="control-label">Viernes:</label>
-              <input class="esphora" type="time" id="appt" name="appt" />
-            </div>
+            <input
+              type="number"
+              class="form-control col-2"
+              value="0"
+              min="1"
+              required
+              v-model="nocreditos"
+            />
           </div>
         </div>
         <div class="boton form-group">
@@ -147,6 +135,10 @@ export default {
       docente: {},
       docentes: [],
       idDocente: "",
+      nombre: "",
+      codigo: "",
+      noestudiantes: "",
+      nocreditos: "",
     };
   },
   created() {
@@ -168,9 +160,9 @@ export default {
     },
 
     listarProgramas(programa) {
-      this.programa = programa;
-      console.log(this.programa);
       this.idPrograma = programa.id;
+      console.log(this.idPograma);
+      
     },
 
     getAllDocentes() {
@@ -186,9 +178,38 @@ export default {
         });
     },
     listarDocentes(docente) {
-      this.docente = docente;
-      console.log(this.docente);
       this.idDocente = docente.id;
+      console.log(this.docente);
+    },
+    registrarMateria() {
+      const materia = {
+        nombre: this.nombre,
+        codigo: this.codigo,
+        noestudiantes: this.noestudiantes,
+        nocreditos: this.nocreditos,
+        idProgramaAcademico: this.idPrograma,
+        idDocente: this.idDocente
+      };
+
+      console.log(materia);
+      axios
+        .post(`${process.env.VUE_APP_API}/materias`, materia)
+        .then((res) => {
+          fireToast(
+            "success",
+            "Registro Exitoso",
+            "La nueva materia ha sido creada"
+          );
+          console.log(res.data);
+        })
+        .catch((error) => {
+          fireToast(
+            "error",
+            "Error en el registro",
+            "Ha ocurrido un error al crear la nueva materia, intente nuevamente"
+          );
+          console.log("registrarMateria", error);
+        });
     },
   },
 };

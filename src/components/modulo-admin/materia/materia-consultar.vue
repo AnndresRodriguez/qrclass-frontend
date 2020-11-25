@@ -8,7 +8,12 @@
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="1151103" />
+              <input
+                type="email"
+                class="form-control"
+                placeholder="1151103"
+                v-model="codigo"
+              />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
                   <i class="iconob fas fa-search"></i>
@@ -33,32 +38,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>Ing. Sistemas</td>
-            <td>35</td>
-            <td>L 8 a 10, Mi 8 a 10</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>Ing. Sistemas</td>
-            <td>35</td>
-            <td>L 8 a 10, Mi 8 a 10</td>
-            <td><i class="icono fas fa-user-edit"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>Ing. Sistemas</td>
-            <td>35</td>
-            <td>L 8 a 10, Mi 8 a 10</td>
+          <tr v-for="(materia, index) in filtrarMateria" :key="index">
+            <th scope="row">{{ materia.codigo }}</th>
+            <td>{{ materia.nombre }}</td>
+            <td>{{ materia.programaAcademico.nombre }}</td>
+            <td>{{ materia.noestudiantes }}</td>
+            <td>clase</td>
             <td>
-              <a href="" data-toggle="modal" data-target="#EditarMateria"
-                ><i class="icono fas fa-user-edit"></i
-              ></a>
+              <a
+                data-toggle="modal"
+                data-target="#EditarMateria"
+                @click="editarMateria(materia)"
+              >
+                <i class="icono fas fa-user-edit"></i>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -99,6 +92,8 @@
                       class="form-control"
                       placeholder="Escriba el nombre de la materia a registrar"
                       required
+                      disabled
+                      v-model="nombre"
                     />
                   </div>
                 </div>
@@ -114,21 +109,26 @@
                       class="form-control"
                       placeholder="Escriba el codigo de la materia"
                       required
+                      disabled
+                      v-model="codigo"
                     />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label"
-                    >Seleccione el Programa Academico</label
-                  >
+                  <label class="control-label">Programa Academico:</label>
                   <div class="input-group">
                     <div class="input-group-addon">
-                      <i class="icono fas fa-check-square"></i>
+                      <i class="icono fas fa-id-card"></i>
                     </div>
-                    <select name="departamento" class="form-control">
-                      <option value="ingsistemas">Ing. Sistemas</option>
-                      <option value="ingcivil">Ing. Civil</option>
-                    </select>
+                    <input
+                      name="name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Programa Academico"
+                      required
+                      disabled
+                      v-model="idPrograma"
+                    />
                   </div>
                 </div>
                 <div class="form-group">
@@ -142,6 +142,8 @@
                       class="form-control col-2"
                       value="0"
                       min="1"
+                      required
+                      v-model="noestudiantes"
                     />
                   </div>
                 </div>
@@ -156,6 +158,8 @@
                       class="form-control col-2"
                       value="0"
                       min="1"
+                      disabled
+                      v-model="nocreditos"
                     />
                   </div>
                 </div>
@@ -166,50 +170,160 @@
                   <div class="panels horama">
                     <div>
                       <label class="control-label">Lunes: </label>
-                      <input
-                        class="esphora"
-                        type="time"
-                        id="appt"
-                        name="appt"
-                      />
+                      <div class="input-group">
+                        <label class="control-label">Hora de Incio:</label>
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horainicio }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
+                      <div class="input-group">
+                        <label class="control-label">Hora de final:</label>
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horafinal }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
                     </div>
                     <div>
-                      <label class="control-label">Martes:</label>
-                      <input
-                        class="esphora"
-                        type="time"
-                        id="appt"
-                        name="appt"
-                      />
+                      <label class="control-label">Martes: </label>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horainicio }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horafinal }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
                     </div>
                     <div>
-                      <label class="control-label">Miercoles:</label>
-                      <input
-                        class="esphora"
-                        type="time"
-                        id="appt"
-                        name="appt"
-                      />
+                      <label class="control-label">Miercoles: </label>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horainicio }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horafinal }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  <div class="panels horama">
                     <div>
-                      <label class="control-label">Jueves:</label>
-                      <input
-                        class="esphora"
-                        type="time"
-                        id="appt"
-                        name="appt"
-                      />
+                      <label class="control-label">Jueves: </label>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horainicio }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horafinal }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
                     </div>
                     <div>
-                      <label class="control-label">Viernes:</label>
-                      <input
-                        class="esphora"
-                        type="time"
-                        id="appt"
-                        name="appt"
-                      />
+                      <label class="control-label">Viernes: </label>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horainicio }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
+                      <div class="input-group">
+                        <select
+                          @change="listarDeHoras(hora)"
+                          v-model="hora"
+                          name="hora"
+                          class="form-control"
+                        >
+                          <template v-for="(hora, index) in horas">
+                            <option :key="index" :value="hora">
+                              {{ hora.horafinal }}
+                            </option>
+                          </template>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -226,8 +340,155 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+import { fireToast } from "../../../util/toast";
+import $ from "jquery";
+export default {
+  data() {
+    return {
+      programa: {},
+      materia: {},
+      docente: {},
+      hora: {},
+      programas: [],
+      materias: [],
+      docentes: [],
+      horas: [],
+      idPrograma: "",
+      idmateria: "",
+      idHora: "",
+      idDia: "",
+      idDocente: "",
+      nombre: "",
+      codigo: "",
+      noestudiantes: "",
+      nocreditos: "",
+    };
+  },
+  created() {
+    this.getAllDocentes();
+    this.getAllHoras();
+    this.getAllProgramas();
+    this.getAllMaterias();
+  },
+  methods: {
+    getAllDocentes() {
+      axios
+        .get(`${process.env.VUE_APP_API}/docentes`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.docentes = res.data.data;
+          console.log("docentes -->", this.docentes);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getAllHoras() {
+      axios
+        .get(`${process.env.VUE_APP_API}/horas`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.horas = res.data.data;
+          console.log("horas -->", this.horas);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getAllProgramas() {
+      axios
+        .get(`${process.env.VUE_APP_API}/programa-academicos`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.programas = res.data.data;
+          console.log("programas -->", this.programas);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getAllMaterias() {
+      axios
+        .get(`${process.env.VUE_APP_API}/materias`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.materias = res.data.data;
+          console.log("materias -->", this.materias);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    editarMateria(materia){
+      this.idmateria = materia.id;
+      this.idDocente = materia.idDocente;
+      this.idPrograma = materia.programaAcademico.nombre
+      this.nombre = materia.nombre;
+      this.codigo = materia.codigo;
+      this.noestudiantes = materia.noestudiantes
+      this.nocreditos = materia.nocreditos
 
+      console.log(materia)
+    },
+    actualizarMateria() {
+      const materia = {
+        id: this.idmateria,
+        codigo: this.codigo,
+        nombre: this.nombre,
+        noestudiantes: this.noestudiantes,
+        nocreditos: this.nocreditos,
+        idDocente: this.idDocente,
+        idProgramaAcademico : this.idProgramaAcademico
+      };
+
+      axios
+        .put(`${process.env.VUE_APP_API}/materias`, materia)
+        .then((res) => {
+          if (res.data.operation) {
+            console.log(res.data);
+            $("#EditarMateria").modal("hide");
+
+            fireToast(
+              "success",
+              "Actualización Exitosa",
+              "Los datos del docente han sido actualizado"
+            );
+          } else {
+            console.log(res.data);
+
+            fireToast(
+              "error",
+              "Error en la actualización",
+              "Ha ocurrido un error al actualizar los datos del docente, intente nuevamente"
+            );
+          }
+        });
+
+      console.log(docenteNuevo);
+    }
+  },
+  computed: {
+    filtrarMateria() {
+      return this.materias.filter((materia) =>
+        materia.codigo.toLowerCase().includes(this.codigo)
+      );
+    },
+  },
+};
+</script>
 <style scoped>
+.horama {
+  display: flex;
+}
+.horaInicio{
+    margin-left: 70px;
+    margin-right: 70px;
+}
+.espaciohora{
+  margin-left: 15px;
+}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);
