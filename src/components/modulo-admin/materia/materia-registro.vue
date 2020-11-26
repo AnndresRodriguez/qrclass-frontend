@@ -100,7 +100,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">Numero de Credritos</label>
+          <label class="control-label">Numero de Créditos</label>
           <div class="input-group">
             <div class="input-group-addon">
               <i class="icono icono fas fa-chalkboard-teacher"></i>
@@ -115,8 +115,25 @@
             />
           </div>
         </div>
+        <div class="form-group">
+          <label class="control-label">
+            Seleccione el horario de la Materia
+          </label>
+          <VueSchedule
+            v-model="schedule"
+            :dayTable="daysSchedule"
+            :steps="240"
+            disableWeekSelect
+            disableDaySelect
+            bg="#bc0016"
+            bgHover="#818386"
+            bgActive="#ffc8ce"
+            textColor="transparent"
+          />
+        </div>
+        <pre>{{ schedule }}</pre>
         <div class="boton form-group">
-          <button type="submit" class="btn btn-info">Registrarse</button>
+          <button type="submit" class="btn btn-info">Registrar Materia</button>
         </div>
       </form>
     </div>
@@ -125,8 +142,17 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import "vue-daily-scheduler/dist/vue-schedule.min.css";
+import VueSchedule from "vue-daily-scheduler";
+import { configLangSchedule, daysOfWeek } from "../../../util/config-schedule";
 import $ from "jquery";
+
+
+
 export default {
+  components: {
+    VueSchedule,
+  },
   data() {
     return {
       programa: {},
@@ -139,12 +165,15 @@ export default {
       codigo: "",
       noestudiantes: "",
       nocreditos: "",
+      schedule: { 0: [], 1: [], 2: [], 3: [], 4: [] },
+      daysSchedule: daysOfWeek,
     };
   },
   created() {
     this.getAllProgramas();
     this.getAllDocentes();
   },
+
   methods: {
     getAllProgramas() {
       axios
@@ -162,10 +191,10 @@ export default {
     listarProgramas(programa) {
       this.idPrograma = programa.id;
       console.log(this.idPograma);
-      
     },
 
     getAllDocentes() {
+      
       axios
         .get(`${process.env.VUE_APP_API}/docentes`)
         .then((res) => {
@@ -188,7 +217,7 @@ export default {
         noestudiantes: this.noestudiantes,
         nocreditos: this.nocreditos,
         idProgramaAcademico: this.idPrograma,
-        idDocente: this.idDocente
+        idDocente: this.idDocente,
       };
 
       console.log(materia);
@@ -211,6 +240,9 @@ export default {
           console.log("registrarMateria", error);
         });
     },
+  },
+  updated() {
+      configLangSchedule();
   },
 };
 </script>

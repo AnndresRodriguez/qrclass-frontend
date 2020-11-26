@@ -11,8 +11,8 @@
               <input
                 type="email"
                 class="form-control"
-                placeholder="1151103"
-                v-model="codigo"
+                placeholder="Ingrese el código de la materia"
+                v-model="codigoBusqueda"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -148,7 +148,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Numero de Credritos</label>
+                  <label class="control-label">Numero de Créditos</label>
                   <div class="input-group">
                     <div class="input-group-addon">
                       <i class="icono icono fas fa-chalkboard-teacher"></i>
@@ -163,170 +163,27 @@
                     />
                   </div>
                 </div>
-                <label class="control-label"
-                  >Seleccione el horaro de la materia:<br
-                /></label>
-                <div class="row">
-                  <div class="panels horama">
-                    <div>
-                      <label class="control-label">Lunes: </label>
-                      <div class="input-group">
-                        <label class="control-label">Hora de Incio:</label>
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horainicio }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                      <div class="input-group">
-                        <label class="control-label">Hora de final:</label>
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horafinal }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                    </div>
-                    <div>
-                      <label class="control-label">Martes: </label>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horainicio }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horafinal }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                    </div>
-                    <div>
-                      <label class="control-label">Miercoles: </label>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horainicio }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horafinal }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                    </div>
-                    <div>
-                      <label class="control-label">Jueves: </label>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horainicio }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horafinal }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                    </div>
-                    <div>
-                      <label class="control-label">Viernes: </label>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horainicio }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                      <div class="input-group">
-                        <select
-                          @change="listarDeHoras(hora)"
-                          v-model="hora"
-                          name="hora"
-                          class="form-control"
-                        >
-                          <template v-for="(hora, index) in horas">
-                            <option :key="index" :value="hora">
-                              {{ hora.horafinal }}
-                            </option>
-                          </template>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
+
+                <div class="form-group">
+                  <label class="control-label"
+                    >Seleccione el horaro de la materia:<br
+                  /></label>
                 </div>
+
+                <VueSchedule
+                  v-model="schedule"
+                  :dayTable="daysSchedule"
+                  :steps="240"
+                  disableWeekSelect
+                  disableDaySelect
+                  bg="#bc0016"
+                  bgHover="#818386"
+                  bgActive="#ffc8ce"
+                  textColor="transparent"
+                />
+
+                <pre>{{ schedule }}</pre>
+
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">
                     Actualizar
@@ -344,9 +201,17 @@
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
 import $ from "jquery";
+import 'vue-daily-scheduler/dist/vue-schedule.min.css'
+import VueSchedule from 'vue-daily-scheduler'
+import { configLangSchedule, daysOfWeek } from '../../../util/config-schedule'
+
 export default {
+  components: {
+      VueSchedule
+  },
   data() {
     return {
+      codigoBusqueda: "",
       programa: {},
       materia: {},
       docente: {},
@@ -364,6 +229,8 @@ export default {
       codigo: "",
       noestudiantes: "",
       nocreditos: "",
+      schedule: { 0: [], 1: [], 2: [], 3: [], 4: [] },
+      daysSchedule: daysOfWeek
     };
   },
   created() {
@@ -372,6 +239,9 @@ export default {
     this.getAllProgramas();
     this.getAllMaterias();
   },
+
+ 
+
   methods: {
     getAllDocentes() {
       axios
@@ -421,16 +291,19 @@ export default {
           console.log(error);
         });
     },
-    editarMateria(materia){
+    editarMateria(materia) {
+
+      configLangSchedule();
+
       this.idmateria = materia.id;
       this.idDocente = materia.idDocente;
-      this.idPrograma = materia.programaAcademico.nombre
+      this.idPrograma = materia.programaAcademico.nombre;
       this.nombre = materia.nombre;
       this.codigo = materia.codigo;
-      this.noestudiantes = materia.noestudiantes
-      this.nocreditos = materia.nocreditos
+      this.noestudiantes = materia.noestudiantes;
+      this.nocreditos = materia.nocreditos;
 
-      console.log(materia)
+      console.log(materia);
     },
     actualizarMateria() {
       const materia = {
@@ -440,31 +313,29 @@ export default {
         noestudiantes: this.noestudiantes,
         nocreditos: this.nocreditos,
         idDocente: this.idDocente,
-        idProgramaAcademico : this.idProgramaAcademico
+        idProgramaAcademico: this.idProgramaAcademico,
       };
 
-      axios
-        .put(`${process.env.VUE_APP_API}/materias`, materia)
-        .then((res) => {
-          if (res.data.operation) {
-            console.log(res.data);
-            $("#EditarMateria").modal("hide");
+      axios.put(`${process.env.VUE_APP_API}/materias`, materia).then((res) => {
+        if (res.data.operation) {
+          console.log(res.data);
+          $("#EditarMateria").modal("hide");
 
-            fireToast(
-              "success",
-              "Actualización Exitosa",
-              "Los datos del docente han sido actualizado"
-            );
-          } else {
-            console.log(res.data);
+          fireToast(
+            "success",
+            "Actualización Exitosa",
+            "Los datos del docente han sido actualizado"
+          );
+        } else {
+          console.log(res.data);
 
-            fireToast(
-              "error",
-              "Error en la actualización",
-              "Ha ocurrido un error al actualizar los datos del docente, intente nuevamente"
-            );
-          }
-        });
+          fireToast(
+            "error",
+            "Error en la actualización",
+            "Ha ocurrido un error al actualizar los datos del docente, intente nuevamente"
+          );
+        }
+      });
 
       console.log(docenteNuevo);
     }
@@ -472,7 +343,7 @@ export default {
   computed: {
     filtrarMateria() {
       return this.materias.filter((materia) =>
-        materia.codigo.toLowerCase().includes(this.codigo)
+        materia.codigo.toLowerCase().includes(this.codigoBusqueda)
       );
     },
   },
@@ -482,11 +353,11 @@ export default {
 .horama {
   display: flex;
 }
-.horaInicio{
-    margin-left: 70px;
-    margin-right: 70px;
+.horaInicio {
+  margin-left: 70px;
+  margin-right: 70px;
 }
-.espaciohora{
+.espaciohora {
   margin-left: 15px;
 }
 .cssRegistro .modal-title {

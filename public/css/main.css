@@ -65,3 +65,17 @@
     justify-content: center;
     display: flex;
   }
+
+
+  .vws-table-rule-heading > div{
+    font-size: 13px !important;
+}
+
+
+  .vws-time-list{
+      font-size: 13px !important;
+  }
+
+  .opacity-0{
+      color: white !important;
+  }
