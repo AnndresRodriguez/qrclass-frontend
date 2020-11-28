@@ -28,6 +28,14 @@ export default [
         component: () =>
           import("../../../components/modulo-docente/materia/asistencias.vue"),
         name: "asistencia"
+      },
+      {
+        path: "/registrar-estudiantes",
+        component: () =>
+          import(
+            "../../../components/modulo-docente/materia/registrar-estudiantes.vue"
+          ),
+        name: "registrar-estudiantes"
       }
     ]
   }

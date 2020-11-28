@@ -12,6 +12,9 @@ import materiaroutes from "./dashboard/routes-admin/materias.routes";
 
 import horarioroutes from "./dashboard/routes-docente/horario.routes";
 import docenteMateriasroutes from "./dashboard/routes-docente/materia.routes";
+import docenteEstudianteroutes from "./dashboard/routes-docente/estudiante.routes";
+import docenteConfiguracionesroutes from "./dashboard/routes-docente/configuraciones.routes";
+import docenteReportesroutes from "./dashboard/routes-docente/reportes.routes";
 
 Vue.use(VueRouter);
 
@@ -34,6 +37,9 @@ const routes = [
       .concat(materiaroutes)
       .concat(horarioroutes)
       .concat(docenteMateriasroutes)
+      .concat(docenteEstudianteroutes)
+      .concat(docenteConfiguracionesroutes)
+      .concat(docenteReportesroutes)
   }
 ];
 

@@ -27,7 +27,6 @@
           <tr>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Programa Academico</th>
             <th scope="col">No.Est.</th>
             <th scope="col">Horario</th>
             <th scope="col">Lista Estudiantes</th>
@@ -37,41 +36,6 @@
           <tr>
             <th scope="row">1151103</th>
             <td>Programacion I</td>
-            <td>Ing. Sistemas</td>
-            <td>35</td>
-            <td>L 8 a 10, Mi 8 a 10</td>
-            <td>
-              <a
-                href=""
-                type="button"
-                class="btn btn-link"
-                data-toggle="modal"
-                data-target="#ver"
-                >Ver</a
-              >
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>Ing. Sistemas</td>
-            <td>35</td>
-            <td>L 8 a 10, Mi 8 a 10</td>
-            <td>
-              <a
-                href=""
-                type="button"
-                class="btn btn-link"
-                data-toggle="modal"
-                data-target="#ver"
-                >Ver</a
-              >
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>Ing. Sistemas</td>
             <td>35</td>
             <td>L 8 a 10, Mi 8 a 10</td>
             <td>
@@ -110,6 +74,9 @@
               </button>
             </div>
             <div class="modal-body">
+              <router-link :to="{ name: 'registrar-estudiantes' }"
+                >Registrar Estudiantes</router-link
+              >
               <p>Materia: Calculo I</p>
               <p>Codigo: 1151101</p>
               <p>No. de Estudiantes: 35</p>
@@ -137,7 +104,7 @@
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Imprimir</button>
+              <button type="button" class="btn btn-primary">Volver</button>
             </div>
           </div>
         </div>

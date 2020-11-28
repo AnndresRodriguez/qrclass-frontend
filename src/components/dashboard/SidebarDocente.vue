@@ -60,7 +60,7 @@
               href="dashboard-materia"
             >
             </item>
-            <!-- <item
+            <item
               title="Estudiantes"
               :items="itemsEstudiantes"
               href="dashboard-estudiante"
@@ -68,16 +68,16 @@
             </item>
             <item
               title="Configuraciones"
-              :items="itemsProgramaAcademico"
-              href="dashboard-programaacademico"
+              :items="itemsconfiguraciones"
+              href="dashboard-configuraciones"
             >
             </item>
             <item
-              title="Notificaciones"
-              :items="itemsDirPrograma"
-              href="dashboard-dirprograma"
+              title="Reportes"
+              :items="itemsReportes"
+              href="dashboard-reportes"
             >
-            </item> -->
+            </item>
           </ul>
         </div>
       </div>
@@ -94,6 +94,9 @@ import userMixin from "../../mixins/userMixin";
 // import optionsDirprograma from "../modulo-admin/options/dirprograma";
 import opcionesHorario from "../modulo-docente/options/horario";
 import opcionesMateria from "../modulo-docente/options/materia";
+import optionsEstudiante from "../modulo-docente/options/estudiante";
+import optionsConfiguraciones from "../modulo-docente/options/configuraciones";
+import optionsReportes from "../modulo-docente/options/reportes";
 
 export default {
   components: { item },
@@ -101,7 +104,10 @@ export default {
   data() {
     return {
       itemsHorario: opcionesHorario,
-      itemsMateria: opcionesMateria
+      itemsMateria: opcionesMateria,
+      itemsEstudiantes: optionsEstudiante,
+      itemsconfiguraciones: optionsConfiguraciones,
+      itemsReportes: optionsReportes
     };
   }
 };

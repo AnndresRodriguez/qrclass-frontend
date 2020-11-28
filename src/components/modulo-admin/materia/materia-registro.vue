@@ -115,7 +115,7 @@
             />
           </div>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label class="control-label">
             Seleccione el horario de la Materia
           </label>
@@ -130,8 +130,8 @@
             bgActive="#ffc8ce"
             textColor="transparent"
           />
-        </div>
-        <pre>{{ schedule }}</pre>
+        </div> -->
+        <!-- <pre>{{ schedule }}</pre> -->
         <div class="boton form-group">
           <button type="submit" class="btn btn-info">Registrar Materia</button>
         </div>
