@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center">
-    <div class="col-md-10 cssRegistro">
+    <div class="col-md-11 cssRegistro">
       <h2>Consultar Materia</h2>
       <hr />
       <div class="form-group row">
@@ -31,8 +31,9 @@
           <tr>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Docente</th>
             <th scope="col">Programa Aca.</th>
-            <th scope="col">No.Est.</th>
+            <!-- <th scope="col">No.Est.</th> -->
             <th scope="col">Horario</th>
             <th scope="col">Funcion</th>
           </tr>
@@ -41,9 +42,32 @@
           <tr v-for="(materia, index) in filtrarMateria" :key="index">
             <th scope="row">{{ materia.codigo }}</th>
             <td>{{ materia.nombre }}</td>
+            <td>{{ materia.docente.nombre }}</td>
             <td>{{ materia.programaAcademico.nombre }}</td>
-            <td>{{ materia.noestudiantes }}</td>
-            <td>clase</td>
+            <!-- <td>{{ materia.noestudiantes }}</td> -->
+
+            <template v-if="materia.dias.length == 0">
+              <td>
+                <a
+                  href=""
+                  type="button"
+                  class="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#registrarHorario"
+                  :key="materia.id"
+                  @click="asignarHorarioMateria(materia.id)"
+                  >Asignar Horario</a
+                >
+              </td>
+            </template>
+            <template v-else>
+              <td>
+                <template v-for="dia in materia.dias">
+                  {{ dia.dia }} - {{ getNameHoras(dia.horas) }}
+                </template>
+              </td>
+            </template>
+
             <td>
               <a
                 data-toggle="modal"
@@ -79,7 +103,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form @submit.prevent="actualizarMateria">
                 <div class="form-group">
                   <label class="control-label">Nombre Completo</label>
                   <div class="input-group">
@@ -182,7 +206,7 @@
                   textColor="transparent"
                 />
 
-                <pre>{{ schedule }}</pre>
+                <!-- <pre>{{ schedule }}</pre> -->
 
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">
@@ -195,19 +219,68 @@
         </div>
       </div>
     </div>
+
+    <div class="cssRegistro">
+      <div
+        class="modal fade"
+        id="registrarHorario"
+        tabindex="-1"
+        role="dialog"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Asignar Horario</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <VueSchedule
+                v-model="schedule"
+                :dayTable="daysSchedule"
+                :steps="240"
+                disableWeekSelect
+                disableDaySelect
+                bg="#bc0016"
+                bgHover="#818386"
+                bgActive="#ffc8ce"
+                textColor="transparent"
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="asignarNuevoHorario"
+              >
+                Asignar Horario
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
 import $ from "jquery";
-import 'vue-daily-scheduler/dist/vue-schedule.min.css'
-import VueSchedule from 'vue-daily-scheduler'
-import { configLangSchedule, daysOfWeek } from '../../../util/config-schedule'
+import "vue-daily-scheduler/dist/vue-schedule.min.css";
+import VueSchedule from "vue-daily-scheduler";
+import { configLangSchedule, daysOfWeek } from "../../../util/config-schedule";
+import { formatNameDay, formatNameHour } from "../../../util/formatHorario";
 
 export default {
   components: {
-      VueSchedule
+    VueSchedule,
   },
   data() {
     return {
@@ -230,7 +303,8 @@ export default {
       noestudiantes: "",
       nocreditos: "",
       schedule: { 0: [], 1: [], 2: [], 3: [], 4: [] },
-      daysSchedule: daysOfWeek
+      daysSchedule: daysOfWeek,
+      idMateriaHorario: 0,
     };
   },
   created() {
@@ -240,9 +314,59 @@ export default {
     this.getAllMaterias();
   },
 
- 
-
   methods: {
+    asignarHorarioMateria(idMateriaHorario) {
+      configLangSchedule();
+      this.idMateriaHorario = idMateriaHorario;
+    },
+    asignarNuevoHorario() {
+      const dataToEndpoint = {
+        idMateria: this.idMateriaHorario,
+        horario: this.schedule,
+      };
+
+      // console.log(dataToEndpoint);
+
+      axios
+        .post(`${process.env.VUE_APP_API}/clases`, {
+          idMateria: this.idMateriaHorario,
+          horario: this.schedule,
+        })
+        .then((res) => {
+          if (res.data.operation) {
+            console.log(res.data);
+            $("#registrarHorario").modal("hide");
+
+            fireToast(
+              "success",
+              "Registro Exitoso",
+              "El horario se asignó Correctamente"
+            );
+
+            this.getAllMaterias();
+          } else {
+            console.log(res.data);
+
+            fireToast(
+              "error",
+              "Error en la actualización",
+              "Ha ocurrido un error al asignar el horario, intente nuevamente"
+            );
+          }
+        });
+    },
+    getNameHoras(horas) {
+      const limit = horas.length;
+
+      if (limit > 0) {
+        const horaInicio = horas[0].horainicio;
+        const horaFinal = horas[limit - 1].horafinal;
+        return `${formatNameHour(horaInicio)} - ${formatNameHour(horaFinal)}`;
+      }
+
+      return "";
+    },
+
     getAllDocentes() {
       axios
         .get(`${process.env.VUE_APP_API}/docentes`)
@@ -292,7 +416,6 @@ export default {
         });
     },
     editarMateria(materia) {
-
       configLangSchedule();
 
       this.idmateria = materia.id;
@@ -314,6 +437,8 @@ export default {
         nocreditos: this.nocreditos,
         idDocente: this.idDocente,
         idProgramaAcademico: this.idProgramaAcademico,
+        horario: this.schedule,
+        idMateria: this.idmateria,
       };
 
       axios.put(`${process.env.VUE_APP_API}/materias`, materia).then((res) => {
@@ -338,7 +463,7 @@ export default {
       });
 
       console.log(docenteNuevo);
-    }
+    },
   },
   computed: {
     filtrarMateria() {
