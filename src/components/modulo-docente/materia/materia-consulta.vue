@@ -117,6 +117,42 @@
   </div>
 </template>
 
+<script>
+/* eslint-disable */
+export default {
+  data() {
+    return {
+       materiasDocente: []
+    }
+  },
+
+  created() {
+      this.getAllDataDocente();
+
+   
+      
+   // axios.post()
+  },
+
+  methods: {
+      getAllDataDocente(){
+
+        axios.post(`${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`)
+        .then( res => {
+          this.materiasDocente = res.data.data;
+          console.log(this.materiasDocente)
+        })
+        .catch( err => {
+          console.log(err);
+        })
+
+      }
+      
+  },  
+
+}
+</script>
+
 <style scoped>
 .cssRegistro .modal-title {
   text-align: center;

@@ -78,7 +78,9 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Generar Reporte</button>
+                  <button type="button" class="btn btn-primary">
+                    Generar Reporte
+                  </button>
                 </div>
               </div>
             </div>
