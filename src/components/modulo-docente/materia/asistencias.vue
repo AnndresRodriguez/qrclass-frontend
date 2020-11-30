@@ -1,7 +1,10 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <button type="" class="btn btn-info">Volver</button>
+      <!-- <button type="" class="btn btn-info">Volver</button> -->
+      <router-link class="btn btn-info" :to="{ name: 'materia-asistencia' }"
+        >Volver</router-link
+      >
       <h2>Lista de Asistencia</h2>
       <hr />
       <p>Materia: Calculo I</p>

@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <router-link class="btn btn-info" :to="{ name: 'consulta-estudiantes' }"
+      <router-link class="btn btn-info" :to="{ name: 'reportes' }"
         >Volver</router-link
       >
       <h2>Lista de Estudiantes</h2>
@@ -78,7 +78,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">volver</button>
+                  <button type="button" class="btn btn-primary">Generar Reporte</button>
                 </div>
               </div>
             </div>

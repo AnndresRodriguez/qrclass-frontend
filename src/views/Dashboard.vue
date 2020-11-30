@@ -27,7 +27,11 @@ export default {
 
   data() {
     return {
+<<<<<<< HEAD
       menuSidebar: ""
+=======
+      menuSidebar: "SidebarDirector"
+>>>>>>> 7047f6d214bc66f8d613157e9dbcb88b614da12d
     };
   }
 };

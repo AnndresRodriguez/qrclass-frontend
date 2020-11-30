@@ -74,7 +74,9 @@
               </button>
             </div>
             <div class="modal-body">
-              <router-link :to="{ name: 'registrar-estudiantes' }"
+              <router-link
+                data-dismiss="modal"
+                :to="{ name: 'registrar-estudiantes' }"
                 >Registrar Estudiantes</router-link
               >
               <p>Materia: Calculo I</p>
@@ -104,7 +106,9 @@
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Volver</button>
+              <a data-dismiss="modal" aria-label="Close" class="btn btn-info"
+                >Volver</a
+              >
             </div>
           </div>
         </div>

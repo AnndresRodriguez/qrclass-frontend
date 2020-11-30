@@ -134,7 +134,7 @@ export default {
   computed: {
     habilitarboton() {
       return this.selected == "";
-    },
-  },
+    }
+  }
 };
 </script>

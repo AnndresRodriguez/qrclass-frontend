@@ -47,7 +47,11 @@
             </div>
           </div>
           <ul class="nav nav-danger">
-            <item title="Reportes" :items="itemsAdmin" href="dashboard-admin">
+            <item
+              title="Reportes"
+              :items="itemsReportes"
+              href="dashboard-reportes"
+            >
             </item>
           </ul>
         </div>
@@ -58,22 +62,14 @@
 <script>
 import item from "./sidebar/item";
 import userMixin from "../../mixins/userMixin";
-import opcionesAdmin from "../modulo-admin/options/admin";
-import opcionesDocente from "../modulo-admin/options/docente";
-import optionsEstudiante from "../modulo-admin/options/estudiante";
-import optionsProgramaAcademico from "../modulo-admin/options/programaacademico";
-import optionsDirprograma from "../modulo-admin/options/dirprograma";
+import optionsReportes from "../modulo-director/options/reportes";
 
 export default {
   components: { item },
   mixins: [userMixin],
   data() {
     return {
-      itemsAdmin: opcionesAdmin,
-      itemsDocente: opcionesDocente,
-      itemsEstudiantes: optionsEstudiante,
-      itemsDirPrograma: optionsDirprograma,
-      itemsProgramaAcademico: optionsProgramaAcademico
+      itemsReportes: optionsReportes
     };
   }
 };

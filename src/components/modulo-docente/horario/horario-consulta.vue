@@ -152,7 +152,12 @@
                   <div class="input-group"></div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Volver</button>
+                  <a
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    class="btn btn-info"
+                    >Volver</a
+                  >
                 </div>
               </form>
             </div>
