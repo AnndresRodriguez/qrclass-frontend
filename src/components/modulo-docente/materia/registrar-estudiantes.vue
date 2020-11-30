@@ -14,6 +14,9 @@
           </p>
         </div>
         <div class="modal-footer">
+          <router-link class="btn btn-info" :to="{ name: 'consulta' }"
+            >Volver</router-link
+          >
           <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
       </form>

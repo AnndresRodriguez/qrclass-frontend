@@ -39,7 +39,7 @@
 </template>
 <script>
 import GoogleSignInButton from "vue-google-signin-button-directive";
-import axios from "axios";
+// import axios from "axios";
 export default {
   directives: {
     GoogleSignInButton
@@ -60,24 +60,24 @@ export default {
         lastName: lastName
       });
     },
-    OnGoogleAuthSuccess(idToken) {
-      // console.log(idToken);
-      if (idToken != "") {
-        axios
-          .get(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`)
-          .then(res => {
-            // this.$store.dispatch("loadInfoUser", {
-            //   fullName: res.data.name,
-            //   photo: res.data.picture,
-            //   email: res.data.email,
-            //   name: res.data.given_name,
-            //   lastName: res.data.family_name
-            // });
-          });
+    // OnGoogleAuthSuccess(idToken) {
+    //   // console.log(idToken);
+    //   if (idToken != "") {
+    //     // axios
+    //     //   .get(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`)
+    //     //   .then(res => {
+    //         // this.$store.dispatch("loadInfoUser", {
+    //         //   fullName: res.data.name,
+    //         //   photo: res.data.picture,
+    //         //   email: res.data.email,
+    //         //   name: res.data.given_name,
+    //         //   lastName: res.data.family_name
+    //         // });
+    //       // });
 
-        this.$router.replace("/dashboard");
-      }
-    },
+    //     this.$router.replace("/dashboard");
+    //   }
+    // },
     OnGoogleAuthFail(error) {
       console.log(error);
     }
@@ -85,7 +85,7 @@ export default {
   computed: {
     habilitarboton() {
       return this.selected == "";
-    },
-  },
+    }
+  }
 };
 </script>

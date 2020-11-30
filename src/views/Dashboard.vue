@@ -21,7 +21,7 @@ export default {
   components: { Navbar, Sidebaradmin, SidebarDocente, SidebarDirector },
   data() {
     return {
-      menuSidebar: "Sidebaradmin"
+      menuSidebar: "SidebarDirector"
     };
   }
 };
