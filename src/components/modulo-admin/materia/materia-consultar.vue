@@ -254,6 +254,9 @@
                 textColor="transparent"
               />
             </div>
+
+            <!-- {{ schedule }} -->
+
             <div class="modal-footer">
               <button
                 type="button"
@@ -325,12 +328,33 @@ export default {
         horario: this.schedule,
       };
 
+      
+
+      const daysToStore = [];
+
+      const horarioValues = Object.keys(this.schedule)
+
+      // { "0": [], "1": [], "2": [], "3": [], "4": [] }
+
+      const daysFiltered = horarioValues.map(dia => {
+         if(this.schedule[parseInt(dia)].length !== 0){
+           daysToStore.push({ dia: dia, horas: this.schedule[parseInt(dia)] })  
+         }
+         return {}
+      })
+
+      console.log('-------------------------------------')
+      console.log(daysToStore)
+
+
+      // ['0', '1', '2', '3', '4']
+
       // console.log(dataToEndpoint);
 
       axios
         .post(`${process.env.VUE_APP_API}/clases`, {
           idMateria: this.idMateriaHorario,
-          horario: this.schedule,
+          horario: daysToStore,
         })
         .then((res) => {
           if (res.data.operation) {
@@ -344,6 +368,7 @@ export default {
             );
 
             this.getAllMaterias();
+            this.resetData();
           } else {
             console.log(res.data);
 
@@ -464,6 +489,13 @@ export default {
 
       console.log(docenteNuevo);
     },
+
+    resetData(){
+
+      this.schedule = { 0: [], 1: [], 2: [], 3: [], 4: [] };
+
+
+    }
   },
   computed: {
     filtrarMateria() {
