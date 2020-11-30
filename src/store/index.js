@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
@@ -8,14 +9,18 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     infoUser: {},
-    infoRole: {}
+    infoRole: {},
+    infoMateria: {},
   },
   getters: {
-    getInfoUser: state => {
+    getInfoUser: (state) => {
       return state.infoUser;
     },
-    getInfoRole: state => {
+    getInfoRole: (state) => {
       return state.infoRole;
+    },
+    getInfoMateria: (state) => {
+      return state.infoMateria;
     }
   },
   mutations: {
@@ -24,7 +29,10 @@ export default new Vuex.Store({
     },
     SET_DATA_ROL: (state, data) => {
       state.infoRole = data;
-    }
+    },
+    SET_DATA_MATERIA: (state, data) => {
+      state.infoMateria = data;
+    },
   },
   actions: {
     loadInfoUser({ commit }, data) {
@@ -32,7 +40,10 @@ export default new Vuex.Store({
     },
     loadRoleID({ commit }, data) {
       commit("SET_DATA_ROL", data);
-    }
+    },
+    listarEstudianteMateria({ commit }, data) {
+      commit("SET_DATA_MATERIA", data);
+    },
   },
-  modules: {}
+  modules: {},
 });

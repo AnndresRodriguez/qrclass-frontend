@@ -32,11 +32,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1151103</th>
-              <td>Programacion I</td>
+            <tr v-for="(materia, index) in filtrarMateria" :key="index">
+              <th scope="row">{{ materia.codigo }}</th>
+              <td>{{ materia.nombre }}</td>
               <td>
-                <router-link :to="{ name: 'estudiante' }">Ver</router-link>
+                <router-link class="btn btn-light" :to="{ name: 'estudiante' }">Ver</router-link>
               </td>
             </tr>
           </tbody>
@@ -45,7 +45,72 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+/* eslint-disable */
+export default {
+  data() {
+    return {
+      materiasDocente: [],
+      materia: {},
+      estudiantes: [],
+      estudiante: {},
+      codigo: "",
+      id: 0,
+      nombre: "",
+      noestudiantes: "",
+      consultac: "",
+    };
+  },
+
+  created() {
+    this.getAllDataDocente();
+
+    // axios.post()
+  },
+
+  methods: {
+    getAllDataDocente() {
+      axios
+        .post(
+          `${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`
+        )
+        .then((res) => {
+          this.materiasDocente = res.data.data;
+          console.log("materias por docente", this.materiasDocente);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getAllDataEstudiantes(id) {
+      axios
+        .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
+        .then((res) => {
+          this.estudiantes = res.data.data[0].estudiantes;
+          console.log("lista de estudiantess", this.estudiantes);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    verEstudiantesMateria(materia) {
+      this.id = materia.id;
+      this.codigo = materia.codigo;
+      this.nombre = materia.nombre;
+      this.noestudiantes = materia.noestudiantes;
+
+      this.getAllDataEstudiantes(this.id);
+    },
+  },
+  computed: {
+    filtrarMateria() {
+      return this.materiasDocente.filter((materia) =>
+        materia.codigo.toLowerCase().includes(this.consultac)
+      );
+    },
+  },
+};
+</script>
 <style scoped>
 .cssRegistro .modal-title {
   text-align: center;

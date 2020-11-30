@@ -8,7 +8,12 @@
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="1151103" />
+              <input
+                v-model="consultac"
+                type="email"
+                class="form-control"
+                placeholder="Escriba el codigo de la materia consultar"
+              />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
                   <i class="iconob fas fa-search"></i>
@@ -33,20 +38,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>35</td>
-            <td>L 8 a 10, Mi 8 a 10</td>
+          <tr v-for="(materia, index) in filtrarMateria" :key="index">
+            <th scope="row">{{ materia.codigo }}</th>
+            <td>{{ materia.nombre }}</td>
+            <td>{{ materia.noestudiantes }}</td>
+            <td>horario</td>
             <td>
               <a
-                href=""
-                type="button"
-                class="btn btn-link"
                 data-toggle="modal"
                 data-target="#ver"
-                >Ver</a
-              >
+                class="btn btn-light"
+                @click="verEstudiantesMateria(materia)"
+                >Ver
+              </a>
             </td>
           </tr>
         </tbody>
@@ -74,14 +78,22 @@
               </button>
             </div>
             <div class="modal-body">
-              <router-link
-                data-dismiss="modal"
-                :to="{ name: 'registrar-estudiantes' }"
-                >Registrar Estudiantes</router-link
-              >
-              <p>Materia: Calculo I</p>
-              <p>Codigo: 1151101</p>
-              <p>No. de Estudiantes: 35</p>
+              <div>
+                <router-link
+                  data-dismiss="modal"
+                  :to="{ name: 'registrar-estudiantes' }"
+                  >Registrar Estudiantes</router-link
+                >
+              </div>
+              <div>
+                <label class="col-form-label">Materia: </label>
+                <input class="bordeInput" disabled v-model="nombre" /><br />
+                <label class="col-form-label">Codigo: </label>
+                <input class="bordeInput" disabled v-model="codigo" /><br />
+                <label class="col-form-label">No. de Estudiante: </label>
+                <input class="bordeInput" disabled v-model="noestudiantes" />
+              </div>
+
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -90,17 +102,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1151123</th>
-                    <td>Juan Jose Camargo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1151124</th>
-                    <td>Juan Luis Sandoval</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1151125</th>
-                    <td>Andrea Gutierrez</td>
+                  <tr v-for="(estudiante, index) in estudiantes" :key="index">
+                    <th scope="row">{{ estudiante.codigo }}</th>
+                    <td>{{ estudiante.nombre }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -122,38 +126,77 @@
 export default {
   data() {
     return {
-       materiasDocente: []
-    }
+      materiasDocente: [],
+      materia: {},
+      estudiantes:[],
+      estudiante :{},
+      codigo: "",
+      id: 0,
+      nombre: "",
+      noestudiantes: "",
+      consultac:"",
+    };
   },
 
   created() {
-      this.getAllDataDocente();
+    this.getAllDataDocente();
+    
 
-   
-      
-   // axios.post()
+    // axios.post()
   },
 
   methods: {
-      getAllDataDocente(){
-
-        axios.post(`${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`)
-        .then( res => {
+    getAllDataDocente() {
+      axios
+        .post(
+          `${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`
+        )
+        .then((res) => {
           this.materiasDocente = res.data.data;
-          console.log(this.materiasDocente)
+          console.log("materias por docente", this.materiasDocente);
         })
-        .catch( err => {
+        .catch((err) => {
           console.log(err);
+        });
+    },
+    getAllDataEstudiantes(id) {
+      axios
+        .get(
+          `${process.env.VUE_APP_API}/materias/estudiantes/${id}`
+        )
+        .then((res) => {
+          this.estudiantes = res.data.data[0].estudiantes;
+          console.log("lista de estudiantess",this.estudiantes);
         })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    verEstudiantesMateria(materia) {
+      this.id = materia.id;
+      this.codigo = materia.codigo;
+      this.nombre = materia.nombre;
+      this.noestudiantes = materia.noestudiantes;
 
-      }
-      
-  },  
-
-}
+      this.getAllDataEstudiantes(this.id)
+    },
+  },
+  computed: {
+    filtrarMateria() {
+      return this.materiasDocente.filter((materia) =>
+        materia.codigo.toLowerCase().includes(this.consultac)
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>
+.bordeInput {
+  background: white;
+  border: white;
+  width: 60%;
+}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);

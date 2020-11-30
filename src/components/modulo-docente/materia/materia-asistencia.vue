@@ -8,7 +8,12 @@
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="1151103" />
+              <input
+                v-model="ccodigo"
+                type="email"
+                class="form-control"
+                placeholder="Escriba el codigo de la materia consultar"
+              />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
                   <i class="iconob fas fa-search"></i>
@@ -31,41 +36,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>Ver</td>
+          <tr v-for="(materia, index) in filtrarMateria" :key="index">
+            <th scope="row">{{ materia.codigo }}</th>
+            <td>{{ materia.nombre }}</td>
             <td>
-              <a
-                href=""
-                type="button"
+              <button
                 class="btn btn-light"
-                data-toggle="modal"
-                data-target="#codigoQR"
-                >Generar QR</a
+                @click="verEstudiantesMateria(materia)"
               >
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>Ver</td>
-            <td>
-              <a
-                href=""
-                type="button"
-                class="btn btn-light"
-                data-toggle="modal"
-                data-target="#codigoQR"
-                >Generar QR</a
-              >
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1151103</th>
-            <td>Programacion I</td>
-            <td>
-              <router-link :to="{ name: 'asistencia' }">Ver</router-link>
+                Ver
+              </button>
             </td>
             <td>
               <a
@@ -114,7 +94,57 @@
     </div>
   </div>
 </template>
+<script>
+/* eslint-disable */
+export default {
+  data() {
+    return {
+      materiasDocente: [],
+      materia: {},
+      codigo: "",
+      ccodigo: "",
+      id: 0,
+      nombre: "",
+      noestudiantes: "",
+    };
+  },
 
+  created() {
+    this.getAllDataDocente();
+
+    // axios.post()
+  },
+
+  methods: {
+    getAllDataDocente() {
+      axios
+        .post(
+          `${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`
+        )
+        .then((res) => {
+          this.materiasDocente = res.data.data;
+          console.log(this.materiasDocente);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    verEstudiantesMateria(materia) {
+      this.$store.dispatch("listarEstudianteMateria", materia);
+      this.$router.replace({ name: "asistencia" });
+      console.log("materia que envio de materia asistencia", materia);
+    },
+  },
+  computed: {
+    filtrarMateria() {
+      return this.materiasDocente.filter((materia) =>
+        materia.codigo.toLowerCase().includes(this.ccodigo)
+      );
+    },
+  },
+};
+</script>
 <style scoped>
 .cssRegistro .modal-title {
   text-align: center;

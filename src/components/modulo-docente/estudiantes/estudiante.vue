@@ -8,13 +8,18 @@
       <hr />
       <div>
         <label class="col-sm-2 col-form-label">Materia: </label>
+        <input v-model="nombre" class="bordeInput" disabled />
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Codigo Estudiante: </label>
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="1151103" />
+              <input
+                v-model="ccodigo"
+                class="form-control"
+                placeholder="Escriba el codigo del estudiante a consultar"
+              />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
                   <i class="iconob fas fa-search"></i>
@@ -22,7 +27,9 @@
               </div>
             </div>
           </form>
+          <br />
         </div>
+        <br />
         <table class="table table-hover">
           <thead>
             <tr>
@@ -32,18 +39,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1151103</th>
-              <td>Isabela Contreras</td>
+            <tr v-for="(estudiante, index) in filtrarEstudiante" :key="index">
+              <th scope="row">{{ estudiante.codigo }}</th>
+              <td>{{ estudiante.nombre }}</td>
               <td>
                 <a
-                  href=""
-                  type="button"
-                  class="btn btn-light"
                   data-toggle="modal"
                   data-target="#detalleAsistencia"
-                  >ver</a
-                >
+                  class="btn btn-light"
+                  @click="detalleAsistencia(estudiante)"
+                  >Ver
+                </a>
               </td>
             </tr>
           </tbody>
@@ -70,15 +76,33 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div class="form-group">
-                    <label class="control-label">codigo:</label>
+                  <div>
+                    <label class="control-label">Codigo:</label>
+                    <input
+                      class="bordeInput"
+                      disabled
+                      v-model="codigoE"
+                    /><br />
                     <label class="control-label">Estudiante</label>
-                    <label class="control-label">codigo + Materia</label>
+                    <input
+                      class="bordeInput"
+                      disabled
+                      v-model="nombreE"
+                    /><br />
+                    <label class="control-label">Materia</label>
+                    <input class="bordeInput" disabled v-model="nombre" /><br />
                     <label class="control-label">No. de Asistencias</label>
+                    <input class="bordeInput" disabled />aqui van las
+                    asistencias 5/100<br />
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">volver</button>
+                  <a
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    class="btn btn-info"
+                    >Volver</a
+                  >
                 </div>
               </div>
             </div>
@@ -88,8 +112,86 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+/* eslint-disable */
+export default {
+  data() {
+    return {
+      materiasDocente: [],
+      materia: {},
+      estudiantes: [],
+      estudiante: {},
+      nombreE: "",
+      codigoE: "",
+      codigo: "",
+      ccodigo: "",
+      id: 0,
+      nombre: "",
+      noestudiantes: "",
+    };
+  },
+
+  created() {
+    this.getAllDataDocente();
+    this.verEstudiantesMateria();
+    this.getAllDataEstudiantes(this.id);
+
+    // axios.post()
+  },
+
+  methods: {
+    getAllDataDocente() {
+      axios
+        .post(
+          `${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`
+        )
+        .then((res) => {
+          this.materiasDocente = res.data.data;
+          console.log(this.materiasDocente);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    verEstudiantesMateria() {
+      let materia = this.$store.getters.getInfoMateria;
+      this.id = materia.id;
+      this.codigo = materia.codigo;
+      this.nombre = materia.nombre;
+      this.noestudiantes = materia.noestudiantes;
+      console.log("materia del stor", materia);
+    },
+    getAllDataEstudiantes(id) {
+      axios
+        .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
+        .then((res) => {
+          this.estudiantes = res.data.data[0].estudiantes;
+          console.log("lista de estudiantess", this.estudiantes);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    detalleAsistencia(estudiante){
+      this.nombreE= estudiante.nombre;
+      this.codigoE= estudiante.codigo;
+    },
+  },
+  computed: {
+    filtrarEstudiante() {
+      return this.estudiantes.filter((estudiante) =>
+        estudiante.codigo.toLowerCase().includes(this.ccodigo)
+      );
+    },
+  },
+};
+</script>
 <style scoped>
+.bordeInput {
+  background: white;
+  border: white;
+  width: 60%;
+}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);
