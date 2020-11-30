@@ -5,10 +5,13 @@
       <hr />
       <form @submit.prevent="registrarEstudiante">
         <div for="archivoEstudiantes" class="form-group">
-          <label class="control-label"
-            >Seleccione el archivo con la lista de estudiantes a registrar:<br
-          /></label>
-          <input type="file" id="archivoEstudiantes" />
+          <p class="control-label">
+            Seleccione el archivo con la lista de estudiantes a registrar:<br />
+          </p>
+          <input type="file" id="archivoEstudiantes" accept=".csv" />
+          <p class="control-label">
+            Nota: Solo se permiten archivos en formato .csv.<br />
+          </p>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Registrar</button>
