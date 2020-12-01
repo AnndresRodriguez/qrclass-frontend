@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
+import Home from "../views/Home.vue";
 import estudianteV from "../components/modulo-estudiante/registrar-asistencia.vue";
 import scanEstudiante from "../components/modulo-estudiante/qrscanner.vue";
 
@@ -52,6 +53,11 @@ const routes = [
     path: "/scan-estudiante",
     name: "scan-estudiante",
     component: scanEstudiante
+  },
+  {
+    path: "*",
+    name: "catchAll",
+    component: Home
   }
 ];
 
