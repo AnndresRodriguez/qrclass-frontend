@@ -1,4 +1,3 @@
-import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.entity';
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
@@ -9,8 +8,8 @@ import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.en
           <div class="box">
             <h2>
               Programación Web <br /><br />
-              <span> Lunes 8 a 10 a.m </span><br /><br />
-              <h6>30/11/2020</h6>
+              <span> 30/11/2020 </span><br /><br />
+              <!-- <h6>30/11/2020</h6> -->
             </h2>
             <i class="far fa-calendar-check fa-4x" style="color: #bc0016"></i>
             <br /><br />
@@ -18,7 +17,11 @@ import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.en
             <h5>Maria del Pilar Rojas Puentes</h5>
             <div>
               <br />
-              <button type="button" class="btn btn-primary">
+              <button
+                v-google-signin-button="clientID"
+                type="button"
+                class="btn btn-primary"
+              >
                 Marcar Asistencia
               </button>
             </div>
@@ -29,7 +32,103 @@ import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.en
     </div>
   </div>
 </template>
-<script></script>
+<script>
+/* eslint-disable */
+import GoogleSignInButton from "vue-google-signin-button-directive";
+import axios from "axios";
+import { createURL } from "../../util/tools";
+import { fireToast } from "../../util/toast";
+export default {
+  directives: {
+    GoogleSignInButton,
+  },
+  data() {
+    return {
+      id: "",
+      selected: "",
+      emailToFind: "",
+      fullName: "",
+      photo: "",
+      email: "",
+      name: "",
+      lastName: "",
+      clientID: `${process.env.VUE_APP_GOOGLE_CLIENT_ID}`,
+    };
+  },
+  methods: {
+    test() {
+      console.log("url", createURL(this.selected));
+      console.log(
+        "endpoint",
+        `${process.env.VUE_APP_API}/estudiantes/email`
+      );
+    },
+
+    async OnGoogleAuthSuccess(idToken) {
+      if (idToken != "") {
+        await axios
+          .get(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`)
+          .then((res) => {
+            console.log("google-response", res.data);
+
+            this.emailToFind = res.data.email;
+            this.fullName = res.data.name;
+            this.photo = res.data.picture;
+            this.email = res.data.email;
+            this.name = res.data.given_name;
+            this.lastName = res.data.family_name;
+          });
+
+        axios
+          .post(
+            `${process.env.VUE_APP_API}/estudiantes/email`,
+            { email: this.emailToFind, id: this.selected }
+          )
+          .then((res) => {
+            console.log(res.data);
+
+            if (res.data.operation) {
+              this.$store.dispatch("loadInfoUser", {
+                fullName: this.fullName,
+                photo: this.photo,
+                email: this.email,
+                name: this.name,
+                lastName: this.lastName,
+              });
+
+              this.$store.dispatch("loadRoleID", {
+                idRole: this.selected,
+                id: res.data.data.id,
+              });
+
+              this.$router.replace("/dashboard");
+            } else {
+              fireToast(
+                "error",
+                "Acceso denegado",
+                "El usuario ingresado no tiene acceso al sistema, ingrese con una cuenta autorizada"
+              );
+
+              this.$router.replace("/");
+              this.selected = "";
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    OnGoogleAuthFail(error) {
+      console.log(error);
+    },
+  },
+  computed: {
+    habilitarboton() {
+      return this.selected == "";
+    },
+  },
+};
+</script>
 <style scoped>
 .bordeInput {
   background: white;
@@ -40,7 +139,7 @@ import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.en
   text-align: center;
 }
 .cssRegistro {
-  margin-top: 2%;
+  margin-top: 5%;
 }
 .centrar {
   justify-content: center;

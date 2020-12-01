@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 import estudianteV from "../components/modulo-estudiante/registrar-asistencia.vue";
+import scanEstudiante from "../components/modulo-estudiante/qrscanner.vue";
 
 import adminroutes from "./dashboard/routes-admin/admin.routes";
 import docentesroutes from "./dashboard/routes-admin/docentes.routes";
@@ -46,6 +47,11 @@ const routes = [
     path: "/asistencia-estudiante",
     name: "asistencia-estudiante",
     component: estudianteV
+  },
+  {
+    path: "/scan-estudiante",
+    name: "scan-estudiante",
+    component: scanEstudiante
   }
 ];
 
