@@ -1,75 +1,31 @@
 import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.entity';
 <template>
   <div class="d-flex justify-content-center">
-    <div class="col-md-10 infoEstudiante">
+    <div class="col-md-10 cssRegistro">
       <h2>Descripcion de la Asistencia</h2>
-      <hr />
-      <div class="panel-body">
-        <div class="form-group">
-          <h2>Datos de la Materia</h2>
-
-          <div class="card">
-            <div class="box">
-              <i class="far fa-calendar-check fa-4x" style="color:#bc0016"></i>
-              <h2>
-                Programación Web <br /> <br />
-                <span> Lunes 8 a 10 a.m </span> <br />
-                
-              </h2>
-              <!-- <i class="icono fas fa-user-edit fa-3x"></i> -->
+      <br />
+      <div class="centrar">
+        <div class="card">
+          <div class="box">
+            <h2>
+              Programación Web <br /><br />
+              <span> Lunes 8 a 10 a.m </span><br /><br />
               <h6>30/11/2020</h6>
-              <h5>Maria del Pilar Rojas Puentes</h5>
+            </h2>
+            <i class="far fa-calendar-check fa-4x" style="color: #bc0016"></i>
+            <br /><br />
+            <span>Docente:</span>
+            <h5>Maria del Pilar Rojas Puentes</h5>
+            <div>
+              <br />
+              <button type="button" class="btn btn-primary">
+                Marcar Asistencia
+              </button>
             </div>
           </div>
-          <!-- <div>
-            <label class="control-label">Nombre:</label>
-            <input
-              class="bordeInput"
-              disabled
-              placeholder="Nombre de la Matreria"
-            /><br />
-            <label class="control-label">Codigo:</label>
-            <input
-              class="bordeInput"
-              disabled
-              placeholder="Codigo de la Matreria"
-            /><br />
-            <label class="control-label">Horario:</label>
-            <input
-              class="bordeInput"
-              disabled
-              placeholder="Horario de la Matreria"
-            /><br />
-            <label class="control-label">Docente:</label>
-            <input
-              class="bordeInput"
-              disabled
-              placeholder="Docente Asignado"
-            /><br />
-          </div> -->
-        </div>
-        <div class="form-group">
-          <h2>Datos del Estudiante</h2>
-          <label class="control-label">Nombre:</label>
-          <input
-            class="bordeInput"
-            disabled
-            placeholder="Nombre del Estudiante"
-          /><br />
-          <label class="control-label">Codigo:</label>
-          <input
-            class="bordeInput"
-            disabled
-            placeholder="Codigo del Estudiante"
-          /><br />
-        </div>
-        <div>
-          <br />
-          <button type="button" class="btn btn-primary">
-            Marcar Asistencia
-          </button>
         </div>
       </div>
+      <br />
     </div>
   </div>
 </template>
@@ -83,14 +39,16 @@ import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.en
 .infoEstudiante {
   text-align: center;
 }
-
+.cssRegistro {
+  margin-top: 2%;
+}
+.centrar {
+  justify-content: center;
+  display: flex;
+}
 .card {
-  /* position:absolute; */
-  /* top:50%;
-    left:50%; */
-
   width: 300px;
-  min-height: 400px;
+  min-height: 450px;
   background: #fff;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -101,7 +59,7 @@ import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.en
 }
 .card .box {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 0;
   transform: translateY(-50%);
   text-align: center;
