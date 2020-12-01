@@ -7,6 +7,10 @@ import "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery/src/jquery.js";
 import "bootstrap/dist/js/bootstrap.min.js";
+window.swal = require("sweetalert2");
+
+require("dotenv").config();
+window.axios = require("axios");
 
 Vue.config.productionTip = false;
 
