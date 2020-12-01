@@ -7,14 +7,14 @@
         <div class="card">
           <div class="box">
             <h2>
-              Programación Web <br /><br />
-              <span> 30/11/2020 </span><br /><br />
+              {{ materia }} <br /><br />
+              <span> {{ fechaMateria }} </span><br /><br />
               <!-- <h6>30/11/2020</h6> -->
             </h2>
             <i class="far fa-calendar-check fa-4x" style="color: #bc0016"></i>
             <br /><br />
             <span>Docente:</span>
-            <h5>Maria del Pilar Rojas Puentes</h5>
+            <h5>{{ docente }}</h5>
             <div>
               <br />
               <button
@@ -36,12 +36,21 @@
 /* eslint-disable */
 import GoogleSignInButton from "vue-google-signin-button-directive";
 import axios from "axios";
-import { createURL } from "../../util/tools";
+import { createURL, formatDate } from "../../util/tools";
 import { fireToast } from "../../util/toast";
 export default {
   directives: {
     GoogleSignInButton,
   },
+
+  created(){
+
+    this.materia = this.$store.getters.getAsistencia.materia;
+    this.docente = this.$store.getters.getAsistencia.docente;
+    this.fechaMateria = formatDate(new Date());
+    
+  },
+
   data() {
     return {
       id: "",
@@ -53,8 +62,14 @@ export default {
       name: "",
       lastName: "",
       clientID: `${process.env.VUE_APP_GOOGLE_CLIENT_ID}`,
+
+      materia: '',
+      docente: '',
+      fechaMateria: ''
+
     };
   },
+
   methods: {
     test() {
       console.log("url", createURL(this.selected));

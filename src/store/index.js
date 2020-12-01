@@ -11,6 +11,7 @@ export default new Vuex.Store({
     infoUser: {},
     infoRole: {},
     infoMateria: {},
+    asistencia: {}
   },
   getters: {
     getInfoUser: (state) => {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     getInfoMateria: (state) => {
       return state.infoMateria;
+    },
+    getAsistencia: (state) => {
+      return state.asistencia;
     }
   },
   mutations: {
@@ -33,6 +37,9 @@ export default new Vuex.Store({
     SET_DATA_MATERIA: (state, data) => {
       state.infoMateria = data;
     },
+    SET_DATA_ASISTENCIA: (state, data) => {
+      state.asistencia = data;
+    },
   },
   actions: {
     loadInfoUser({ commit }, data) {
@@ -43,6 +50,10 @@ export default new Vuex.Store({
     },
     listarEstudianteMateria({ commit }, data) {
       commit("SET_DATA_MATERIA", data);
+    },
+
+    loadDataAsistencia({ commit }, data) {
+      commit("SET_DATA_ASISTENCIA", data);
     },
   },
   modules: {},

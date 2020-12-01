@@ -50,12 +50,13 @@ export default {
     onDecode(decodedString) {
 
         this.qrvalue = decodedString;
+        // alert(decodedString);
         this.redirectUrl(decodedString)
         // console.log(decodedString);
     },
 
     redirectUrl(decodedUrl){
-        window.open(decodedUrl)
+        window.location.href = decodedUrl
     } 
   },
 };

@@ -49,6 +49,7 @@
             </td>
             <td>
               <a
+                @click="assignIDMateria(index)"
                 href=""
                 type="button"
                 class="btn btn-light"
@@ -113,7 +114,7 @@ export default {
       id: 0,
       nombre: "",
       noestudiantes: "",
-      valueqr: 'https://840c83fbe51f.ngrok.io/asistencia-estudiante',
+      valueqr: 'https://17d231c53dff.ngrok.io/asistencia-estudiante',
       size: 300
     };
   },
@@ -125,10 +126,15 @@ export default {
   },
 
   methods: {
+    generarQR(){
+
+
+
+    },
     getAllDataDocente() {
       axios
-        .post(
-          `${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`
+        .get(
+          `${process.env.VUE_APP_API}/materias/docente/${this.$store.getters.getInfoRole.id}`
         )
         .then((res) => {
           this.materiasDocente = res.data.data;
@@ -144,6 +150,19 @@ export default {
       this.$router.replace({ name: "asistencia" });
       console.log("materia que envio de materia asistencia", materia);
     },
+
+    assignIDMateria(idMateria){
+
+       const materiaSelected =  this.materiasDocente[idMateria];
+
+       const infoAsistencia = { materia: materiaSelected.nombre, docente: this.$store.getters.getInfoUser.fullName }
+
+       this.$store.dispatch('loadDataAsistencia', infoAsistencia);
+
+       console.log(infoAsistencia);
+
+       
+    }
   },
   computed: {
     filtrarMateria() {

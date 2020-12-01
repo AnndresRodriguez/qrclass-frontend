@@ -8,7 +8,15 @@
           <p class="control-label">
             Seleccione el archivo con la lista de estudiantes a registrar:<br />
           </p>
-          <input type="file" id="archivoEstudiantes" accept=".csv" />
+          <!-- <input type="file" id="archivoEstudiantes" accept=".csv" /> -->
+          <input
+            type="file"
+            id="archivoEstudiantes"
+            ref="file"
+            @change="handleFileUpload()"
+            class="form-control-file"
+            required
+          />
           <p class="control-label">
             Nota: Solo se permiten archivos en formato .csv.<br />
           </p>
@@ -26,46 +34,36 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css';
+import XSLX from 'xlsx';
 export default {
+  components: {
+        vueDropzone: vue2Dropzone
+  },
   data() {
     return {
       estudiantes: [],
-      nombre: "",
-      codigo: "",
-      correo: "",
-      telefono: "",
+      file: ''
     };
   },
-  methods: {
-    registrarEstudiante() {
-      const estudiante = {
-        nombre: this.nombre,
-        codigo: this.codigo,
-        correo: this.correo,
-        telefono: this.telefono,
-      };
 
-      console.log(estudiante);
-      axios
-        .post(`${process.env.VUE_APP_API}/estudiantes`, estudiante)
-        .then((res) => {
-          fireToast(
-            "success",
-            "Registro Exitoso",
-            "El Nuevo estudiante ha sido creado"
-          );
-          console.log(res.data);
-        })
-        .catch((error) => {
-          fireToast(
-            "error",
-            "Error en el registro",
-            "Ha ocurrido un error al crear el nuevo estudiente, intente nuevamente"
-          );
-          console.log("registrarAdmin", error);
-        });
+  methods: {
+
+    registrarEstudiante(){
+
+      
+
+
+
     },
+
+    handleFileUpload(){
+        this.file = this.$refs.file.files[0];
+    }
+
+  
   },
-};
+}
 </script>
 <style scoped></style>

@@ -188,7 +188,7 @@ export default {
   methods: {
       getAllDataDocente(){
 
-        axios.post(`${process.env.VUE_APP_API}/materias/${this.$store.getters.getInfoRole.id}`)
+        axios.get(`${process.env.VUE_APP_API}/materias/docente/${this.$store.getters.getInfoRole.id}`)
         .then( res => {
           this.materiasDocente = res.data.data;
           console.log(this.materiasDocente)
