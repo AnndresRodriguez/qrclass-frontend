@@ -1,4 +1,3 @@
-import { Estudiante } from '../../../../qrclass-backend/src/models/estudiante.entity';
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
