@@ -83,7 +83,8 @@
               </button>
             </div>
             <div class="modal-body d-flex justify-content-center">
-              <img class="" src="/img/qr_img.png" />
+              <qrcode-vue :value="valueqr" :size="size"></qrcode-vue>
+              <!-- <img class="" src="/img/qr_img.png" /> -->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary">Imprimir</button>
@@ -96,7 +97,13 @@
 </template>
 <script>
 /* eslint-disable */
+import QrcodeVue from 'qrcode.vue';
 export default {
+
+  components: {
+    QrcodeVue,
+  },
+
   data() {
     return {
       materiasDocente: [],
@@ -106,6 +113,8 @@ export default {
       id: 0,
       nombre: "",
       noestudiantes: "",
+      valueqr: 'https://840c83fbe51f.ngrok.io/asistencia-estudiante',
+      size: 300
     };
   },
 

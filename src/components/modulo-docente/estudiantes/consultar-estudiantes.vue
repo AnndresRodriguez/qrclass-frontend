@@ -36,7 +36,9 @@
               <th scope="row">{{ materia.codigo }}</th>
               <td>{{ materia.nombre }}</td>
               <td>
-                <router-link class="btn btn-light" :to="{ name: 'estudiante' }">Ver</router-link>
+                <router-link class="btn btn-light" :to="{ name: 'estudiante' }"
+                  >Ver</router-link
+                >
               </td>
             </tr>
           </tbody>

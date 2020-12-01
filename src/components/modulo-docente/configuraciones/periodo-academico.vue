@@ -41,7 +41,10 @@
                 </div>
               </div>
             </div>
-            <label>Una vez definida la el periodo academico, recuerde que este no se puede  modificar.</label>
+            <label
+              >Una vez definida la el periodo academico, recuerde que este no se
+              puede modificar.</label
+            >
             <div class="boton form-group">
               <button type="submit" class="btn btn-info">Registrar</button>
             </div>
