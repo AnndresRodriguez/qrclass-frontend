@@ -130,6 +130,7 @@ export default {
 
 
 
+
     },
     getAllDataDocente() {
       axios
@@ -155,11 +156,14 @@ export default {
 
        const materiaSelected =  this.materiasDocente[idMateria];
 
-       const infoAsistencia = { materia: materiaSelected.nombre, docente: this.$store.getters.getInfoUser.fullName }
+        const infoAsistencia = {  materia: materiaSelected.nombre, docente: this.$store.getters.getInfoUser.fullName }
+
+        // this.valueqr = encodeURI(`?materia=${materiaSelected.nombre}&docente=${this.$store.getters.getInfoUser.fullName}`)
+      //  this.valueqr = JSON.stringify(infoAsistencia);
 
        this.$store.dispatch('loadDataAsistencia', infoAsistencia);
 
-       console.log(infoAsistencia);
+      //  console.log(infoAsistencia);
 
        
     }

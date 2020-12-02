@@ -132,46 +132,25 @@ export default {
   },
 
   created() {
-    this.getAllDataDocente();
-    this.verEstudiantesMateria();
-    this.getAllDataEstudiantes(this.id);
 
-    // axios.post()
+    this.getAllEstudiantesMateria(this.$store.getters.getInfoMateria.id)
+ 
   },
 
   methods: {
-    getAllDataDocente() {
+    getAllEstudiantesMateria(id) {
       axios
         .get(
-          `${process.env.VUE_APP_API}/materias/docente/${this.$store.getters.getInfoRole.id}`
+          `${process.env.VUE_APP_API}/materias/estudiantes/${id}`
         )
         .then((res) => {
-          this.materiasDocente = res.data.data;
-          console.log(this.materiasDocente);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    verEstudiantesMateria() {
-      let materia = this.$store.getters.getInfoMateria;
-      this.id = materia.id;
-      this.codigo = materia.codigo;
-      this.nombre = materia.nombre;
-      this.noestudiantes = materia.noestudiantes;
-      console.log("materia del stor", materia);
-    },
-    getAllDataEstudiantes(id) {
-      axios
-        .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
-        .then((res) => {
           this.estudiantes = res.data.data[0].estudiantes;
-          console.log("lista de estudiantess", this.estudiantes);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
     detalleAsistencia(estudiante){
       this.nombreE= estudiante.nombre;
       this.codigoE= estudiante.codigo;

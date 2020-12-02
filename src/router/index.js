@@ -52,7 +52,8 @@ const routes = [
   {
     path: "/scan-estudiante",
     name: "scan-estudiante",
-    component: scanEstudiante
+    component: scanEstudiante,
+    meta: { isValid: true }
   },
   {
     path: "*",

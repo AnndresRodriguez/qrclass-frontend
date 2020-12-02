@@ -45,9 +45,16 @@ export default {
 
   created(){
 
+    
+    // alert(this.$store.getters.getAsistencia.materia)
     this.materia = this.$store.getters.getAsistencia.materia;
     this.docente = this.$store.getters.getAsistencia.docente;
     this.fechaMateria = formatDate(new Date());
+
+  
+
+    // this.materia = this.$store.getters.getAsistencia.materia;
+    // this.docente = this.$store.getters.getAsistencia.docente;
     
   },
 

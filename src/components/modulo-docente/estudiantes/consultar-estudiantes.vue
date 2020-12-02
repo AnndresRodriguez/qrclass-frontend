@@ -36,9 +36,15 @@
               <th scope="row">{{ materia.codigo }}</th>
               <td>{{ materia.nombre }}</td>
               <td>
-                <router-link class="btn btn-light" :to="{ name: 'estudiante' }"
-                  >Ver</router-link
+                <button
+                  class="btn btn-light"
+                  @click="verEstudiantesMateria(materia)"
                 >
+                  Ver
+                </button>
+                <!-- <router-link class="btn btn-light" :to="{ name: 'estudiante' }"
+                  >Ver</router-link
+                > -->
               </td>
             </tr>
           </tbody>
@@ -89,6 +95,7 @@ export default {
         .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
         .then((res) => {
           this.estudiantes = res.data.data[0].estudiantes;
+
           console.log("lista de estudiantess", this.estudiantes);
         })
         .catch((err) => {
@@ -96,12 +103,18 @@ export default {
         });
     },
     verEstudiantesMateria(materia) {
-      this.id = materia.id;
-      this.codigo = materia.codigo;
-      this.nombre = materia.nombre;
-      this.noestudiantes = materia.noestudiantes;
 
-      this.getAllDataEstudiantes(this.id);
+      // console.log(materia);
+
+      this.$store.dispatch("listarEstudianteMateria", materia);
+      this.$router.replace({ name: "estudiante" });
+
+      // this.id = materia.id;
+      // this.codigo = materia.codigo;
+      // this.nombre = materia.nombre;
+      // this.noestudiantes = materia.noestudiantes;
+
+      
     },
   },
   computed: {

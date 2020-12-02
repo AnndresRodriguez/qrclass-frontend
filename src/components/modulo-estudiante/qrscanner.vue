@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+
 /* eslint-disable */
 import { QrcodeStream, QrcodeDropZone, QrcodeCapture } from "vue-qrcode-reader";
 export default {
@@ -50,13 +51,25 @@ export default {
     onDecode(decodedString) {
 
         this.qrvalue = decodedString;
+
         // alert(decodedString);
         this.redirectUrl(decodedString)
+
+        
+
         // console.log(decodedString);
     },
 
     redirectUrl(decodedUrl){
-        window.location.href = decodedUrl
+
+        window.location.href = decodedUrl; 
+
+        // infoMateria = JSON.parse(decodedUrl);
+        // this.$router.push({ path: 'asistencia-estudiante', query: { materia: infoMateria.materia, docente:infoMateria.docente } });
+        // this.$router.replace({ path })
+        // window.location.href = `${infoMateria.url}?materia=${infoMateria.materia}&docente=${infoMateria.docente}` 
+        // field1=value1&field2=value2
+        // decodedUrl
     } 
   },
 };
