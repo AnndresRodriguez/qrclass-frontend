@@ -28,7 +28,6 @@
               <i class="icono fas fa-id-card"></i>
             </div>
             <input
-              name="name"
               type="text"
               class="form-control"
               placeholder="Escriba el numero de documento de identidad"
@@ -47,6 +46,7 @@
             <input
               type="email"
               class="form-control"
+              placeholder="Escriba el corre institucional (example@ufps.edu.co)"
               pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
               title="Solo se permiten cuentas de ufps.edu.co"
               required
@@ -62,7 +62,7 @@
               <i class="icono fas fa-phone"></i>
             </div>
             <input
-              type="text"
+              type="textr"
               class="form-control"
               placeholder="Escriba el numero de celular."
               required
@@ -92,6 +92,7 @@ export default {
     };
   },
   methods: {
+    
     registrarAdmin() {
       const admin = {
         nombrecompleto: this.nombre,
@@ -110,6 +111,7 @@ export default {
             "El Nuevo administrador ha sido creado"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -119,7 +121,14 @@ export default {
           );
           console.log("registrarAdmin", error);
         });
+
     },
+    limpiarinput(){
+      this.nombre= "",
+      this.documento="",
+      this.correo="",
+      this.telefono=""
+    }
   },
 };
 </script>

@@ -111,6 +111,7 @@ export default {
             "El Nuevo estudiante ha sido creado"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -122,6 +123,12 @@ export default {
         });
     },
   },
+  limpiarinput(){
+      this.nombre= "",
+      this.codigo="",
+      this.correo="",
+      this.telefono=""
+    }
 };
 </script>
 <style scoped></style>

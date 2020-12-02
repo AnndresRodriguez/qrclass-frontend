@@ -93,6 +93,7 @@ export default {
     };
   },
   methods: {
+    
     registrarDirector() {
       const director = {
         nombre: this.nombre,
@@ -111,6 +112,7 @@ export default {
             "El nuevo director de programa ha sido creado"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -121,6 +123,12 @@ export default {
           console.log("registrarDirector", error);
         });
     },
+    limpiarinput(){
+      this.nombre= "",
+      this.codigo="",
+      this.correo="",
+      this.telefono=""
+    }
   },
 };
 </script>

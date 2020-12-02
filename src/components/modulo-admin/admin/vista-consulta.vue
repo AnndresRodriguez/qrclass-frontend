@@ -122,7 +122,7 @@
                 <div class="form-group">
                   <label class="control-label">Numero de Telefono</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     placeholder="Escriba el numero de celular."
                     maxlength="10"
@@ -138,6 +138,7 @@
                       class="form-control"
                       @change="setEstadoAdmin(estadoAdmin)"
                       v-model="estadoAdmin"
+                      required
                     >
                       <option value="1">Habilitar</option>
                       <option value="0">Deshabilitar</option>

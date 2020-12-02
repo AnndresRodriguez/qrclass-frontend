@@ -20,7 +20,6 @@
                 <span>
                   Bienvenido {{ name }}
                   <span class="user-level">Director</span>
-                  <span class="caret"></span>
                 </span>
               </a>
               <div class="clearfix"></div>

@@ -109,6 +109,7 @@ export default {
     this.getAllDirectores();
   },
   methods: {
+    
     getAllDirectores() {
       axios
         .get(`${process.env.VUE_APP_API}/directores`)
@@ -143,6 +144,7 @@ export default {
             "El nuevo programa academico ha sido creado"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -153,6 +155,11 @@ export default {
           console.log("registrarProgramaAcademico", error);
         });
     },
+    limpiarinput(){
+      this.nombre="",
+      this.codigo="",
+      this.correo=""
+    }
   },
 };
 </script>

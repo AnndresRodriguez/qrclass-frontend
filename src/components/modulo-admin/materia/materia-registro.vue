@@ -158,6 +158,7 @@ export default {
   },
 
   methods: {
+    
     getAllProgramas() {
       axios
         .get(`${process.env.VUE_APP_API}/programa-academicos`)
@@ -213,6 +214,7 @@ export default {
             "La nueva materia ha sido creada"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -223,6 +225,13 @@ export default {
           console.log("registrarMateria", error);
         });
     },
+    limpiarinput(){
+      this.idDocente= "",
+      this.nombre="",
+      this.codigo="",
+      this.noestudiantes=""
+      this.nocreditos=""
+    }
   },
   updated() {
       configLangSchedule();

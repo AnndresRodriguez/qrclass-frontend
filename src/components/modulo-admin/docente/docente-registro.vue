@@ -118,6 +118,7 @@ export default {
     this.getAllDepartamentos();
   },
   methods: {
+    
     getAllDepartamentos() {
       axios
         .get(`${process.env.VUE_APP_API}/departamentos`)
@@ -154,6 +155,7 @@ export default {
             "El Nuevo docente ha sido creado"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -165,6 +167,13 @@ export default {
         });
     },
   },
+   limpiarinput(){
+      this.nombre= "",
+      this.codigo="",
+      this.correo="",
+      this.telefono=""
+    },
+  
 };
 </script>
 
