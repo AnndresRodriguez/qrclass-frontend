@@ -31,7 +31,6 @@
   </div>
 </template>
 <script>
-
 /* eslint-disable */
 import { QrcodeStream, QrcodeDropZone, QrcodeCapture } from "vue-qrcode-reader";
 export default {

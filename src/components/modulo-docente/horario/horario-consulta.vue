@@ -82,7 +82,7 @@
                   <label class="control-label">Codigo: </label>
                   <input class="bordeInput" disabled v-model="codigo" /><br />
 
-                  <label class="control-label">Programa Academico:  </label>
+                  <label class="control-label">Programa Academico: </label>
                   <input class="bordeInput" disabled v-model="programa" /><br />
 
                   <label class="control-label">No. de Estudiantes: </label>
@@ -147,7 +147,6 @@ export default {
   },
 
   methods: {
-<<<<<<< HEAD
       getAllDataDocente(){
 
         axios.get(`${process.env.VUE_APP_API}/materias/docente/${this.$store.getters.getInfoRole.id}`)
@@ -164,21 +163,6 @@ export default {
   },  
 
 }
-=======
-    // detalleMateria() {
-    //   let materia = ;
-    //   this.id = materia.id;
-    //   this.codigo = materia.codigo;
-    //   this.nombre = materia.nombre;
-    //   this.noestudiantes = materia.noestudiantes;
-    //   this.nocreditos = materia.nocreditos;
-    //   this.programa=materia.programa.nombre;
-    //   this.horario= materia.horario;
-    //   console.log("materia del stor", materia);
-    // },
-  },
-};
->>>>>>> develop
 </script>
 
 <style scoped>
