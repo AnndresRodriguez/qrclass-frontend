@@ -14,7 +14,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Nombre del Programa Academico"
-                v-model="nombre"
+                v-model="nnombre"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -108,6 +108,9 @@
                   <input
                     type="email"
                     class="form-control"
+                    placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+                    title="Solo se permiten cuentas de ufps.edu.co"
                     required
                     v-model="correo"
                   />
@@ -132,20 +135,6 @@
                     </select>
                   </div>
                 </div>
-                <!-- <div class="form-group">
-                  <label class="control-label">Accion:</label>
-                  <div class="input-group">
-                    <select
-                      name="accionA"
-                      class="form-control"
-                      @change="setEstadoPrograma(estadoPrograma)"
-                      v-model="estadoPrograma"
-                    >
-                      <option value="1">Habilitar</option>
-                      <option value="0">Deshabilitar</option>
-                    </select>
-                  </div>
-                </div> -->
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">
                     Actualizar
@@ -174,6 +163,7 @@ export default {
       dirprograma: {},
       dirprogramas: [],
       idDirectorPrograma: "",
+      nnombre:"",
     };
   },
   created() {
@@ -260,12 +250,13 @@ export default {
         });
 
       console.log(programaNuevo);
+      this.getAllProgramas();
     },
   },
   computed: {
     filtrarPrograma() {
       return this.programas.filter((programa) =>
-        programa.nombre.toLowerCase().includes(this.nombre)
+        programa.nombre.toLowerCase().includes(this.nnombre)
       );
     },
   },

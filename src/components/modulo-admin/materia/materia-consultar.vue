@@ -329,12 +329,10 @@ export default {
       };
 
       
-
       const daysToStore = [];
 
       const horarioValues = Object.keys(this.schedule)
 
-      // { "0": [], "1": [], "2": [], "3": [], "4": [] }
 
       const daysFiltered = horarioValues.map(dia => {
          if(this.schedule[parseInt(dia)].length !== 0){
@@ -345,11 +343,6 @@ export default {
 
       console.log('-------------------------------------')
       console.log(daysToStore)
-
-
-      // ['0', '1', '2', '3', '4']
-
-      // console.log(dataToEndpoint);
 
       axios
         .post(`${process.env.VUE_APP_API}/clases`, {
@@ -488,6 +481,7 @@ export default {
       });
 
       console.log(docenteNuevo);
+      this.getAllMaterias();
     },
 
     resetData(){

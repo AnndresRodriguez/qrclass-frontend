@@ -115,23 +115,6 @@
             />
           </div>
         </div>
-        <!-- <div class="form-group">
-          <label class="control-label">
-            Seleccione el horario de la Materia
-          </label>
-          <VueSchedule
-            v-model="schedule"
-            :dayTable="daysSchedule"
-            :steps="240"
-            disableWeekSelect
-            disableDaySelect
-            bg="#bc0016"
-            bgHover="#818386"
-            bgActive="#ffc8ce"
-            textColor="transparent"
-          />
-        </div> -->
-        <!-- <pre>{{ schedule }}</pre> -->
         <div class="boton form-group">
           <button type="submit" class="btn btn-info">Registrar Materia</button>
         </div>

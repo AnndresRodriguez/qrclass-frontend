@@ -116,9 +116,11 @@
                     type="email"
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+                    title="Solo se permiten cuentas de ufps.edu.co"
                     required
                     maxlength="45"
-                    v-model="correo"
+                    v-model="ccorreo"
                   />
                 </div>
                 <div class="form-group">
@@ -173,6 +175,7 @@ export default {
       correo: "",
       telefono: "",
       estadoDirector: 1,
+      ccorreo:"",
     };
   },
   created() {
@@ -243,12 +246,13 @@ export default {
           }
         });
       console.log(actualizarDirector);
+      this.getAllDirector();
     },
   },
   computed: {
     filtrarDirector() {
       return this.directores.filter(director =>
-        director.correo.toLowerCase().includes(this.correo)
+        director.correo.toLowerCase().includes(this.ccorreo)
       );
     }
   }

@@ -48,6 +48,8 @@
               type="email"
               class="form-control"
               placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+              pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+              title="Solo se permiten cuentas de ufps.edu.co"
               required
               maxlength="45"
               v-model="correo"

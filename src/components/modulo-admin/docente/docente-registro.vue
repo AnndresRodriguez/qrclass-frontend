@@ -68,6 +68,8 @@
               type="email"
               class="form-control"
               placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+              pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+              title="Solo se permiten cuentas de ufps.edu.co"
               required
               v-model="correo"
             />
@@ -98,7 +100,7 @@
 
 <script>
 /* eslint-disable */
-import { fireToast } from '../../../util/toast'
+import { fireToast } from "../../../util/toast";
 export default {
   data() {
     return {
@@ -131,26 +133,37 @@ export default {
 
     listarDepartamentos(departamento) {
       this.iddepartamento = departamento.codigo;
-      console.log(this.codigo)
+      console.log(this.codigo);
     },
 
-    registrarDocente(){
+    registrarDocente() {
+      const docente = {
+        codigo: this.codigo,
+        nombre: this.nombre,
+        correo: this.correo,
+        telefono: this.telefono,
+        idDepartamento: this.iddepartamento,
+      };
 
-      const docente = { codigo: this.codigo, nombre: this.nombre, correo: this.correo, telefono: this.telefono, idDepartamento: this.iddepartamento }
-
-      axios.post(`${process.env.VUE_APP_API}/docentes`, docente)
-      .then( res => {
-
-         fireToast('success', 'Registro Exitoso', 'El Nuevo docente ha sido creado')
-         console.log(res.data);
-      })
-      .catch(error => {
-        fireToast('success', 'Error en el registro', 'Ha ocurrido un error al crear el nuevo docente, intente nuevamente');
-        console.log('registrarDocente', error)
-      })
-
-    }
-
+      axios
+        .post(`${process.env.VUE_APP_API}/docentes`, docente)
+        .then((res) => {
+          fireToast(
+            "success",
+            "Registro Exitoso",
+            "El Nuevo docente ha sido creado"
+          );
+          console.log(res.data);
+        })
+        .catch((error) => {
+          fireToast(
+            "success",
+            "Error en el registro",
+            "Ha ocurrido un error al crear el nuevo docente, intente nuevamente"
+          );
+          console.log("registrarDocente", error);
+        });
+    },
   },
 };
 </script>

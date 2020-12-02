@@ -12,7 +12,7 @@
                 type="email"
                 class="form-control"
                 placeholder="example@ufps.edu.co"
-                v-model="correo"
+                v-model="ccorreo"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -110,6 +110,8 @@
                     type="email"
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+                    title="Solo se permiten cuentas de ufps.edu.co"
                     required
                     v-model="correo"
                   />
@@ -165,7 +167,8 @@ export default {
       codigo: "",
       correo: "",
       telefono: "",
-      estadoE: 1
+      estadoE: 1,
+      ccorreo:"",
     };
   },
   created() {
@@ -204,7 +207,6 @@ export default {
     },
     actualizarEstudiante() {
       const estudiante = {
-        id: this.id,
         nombre: this.nombre,
         documento: this.documento,
         correo: this.correo,
@@ -212,7 +214,7 @@ export default {
         estado: this.estadoE
       };
       axios
-        .put(`${process.env.VUE_APP_API}/estudiantes`, estudiante)
+        .put(`${process.env.VUE_APP_API}/estudiantes`, {idEstudiante: this.id, estudiante})
 
         .then(res => {
           if (res.data.operation) {
@@ -236,12 +238,13 @@ export default {
           }
         });
       console.log(estudiante);
+      this.getAllEstudiantes();
     }
   },
   computed: {
     filtrarEstudiante() {
       return this.estudiantes.filter(estudiante =>
-        estudiante.correo.toLowerCase().includes(this.correo)
+        estudiante.correo.toLowerCase().includes(this.ccorreo)
       );
     }
   }

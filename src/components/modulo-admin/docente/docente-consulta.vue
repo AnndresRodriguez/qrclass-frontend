@@ -13,7 +13,7 @@
                 type="email"
                 class="form-control"
                 placeholder="example@ufps.edu.co"
-                v-model="correo"
+                v-model="ccorreo"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -138,6 +138,8 @@
                     type="email"
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+                    title="Solo se permiten cuentas de ufps.edu.co"
                     required
                     v-model="correo"
                   />
@@ -196,6 +198,7 @@ export default {
       departamentos: [],
       iddepartamento: "",
       estadoDocente: 1,
+      ccorreo:"",
     };
   },
   created() {
@@ -287,15 +290,16 @@ export default {
         });
 
       console.log(docenteNuevo);
+      this.getAllDocentes();
     },
   },
   computed: {
     filtrarDocente() {
-      return this.docentes.filter(docente =>
-        docente.correo.toLowerCase().includes(this.correo)
+      return this.docentes.filter((docente) =>
+        docente.correo.toLowerCase().includes(this.ccorreo)
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
