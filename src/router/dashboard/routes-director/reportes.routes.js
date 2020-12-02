@@ -11,7 +11,8 @@ export default [
         path: "/reportes",
         component: () =>
           import("../../../components/modulo-director/reportes/reportes.vue"),
-        name: "reportes"
+        name: "reportes",
+        meta: { requiredAuth: true }
       },
       {
         path: "/reporte-estudiante",
@@ -19,7 +20,8 @@ export default [
           import(
             "../../../components/modulo-director/reportes/reporte-estudiantes.vue"
           ),
-        name: "reporte-estudiante"
+        name: "reporte-estudiante",
+        meta: { requiredAuth: true }
       }
     ]
   }

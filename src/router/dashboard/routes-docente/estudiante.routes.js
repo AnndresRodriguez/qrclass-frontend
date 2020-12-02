@@ -13,7 +13,8 @@ export default [
           import(
             "../../../components/modulo-docente/estudiantes/consultar-estudiantes.vue"
           ),
-        name: "consulta-estudiantes"
+        name: "consulta-estudiantes",
+        meta: { requiredAuth: true }
       },
       {
         path: "/estudiante",
@@ -21,7 +22,8 @@ export default [
           import(
             "../../../components/modulo-docente/estudiantes/estudiante.vue"
           ),
-        name: "estudiante"
+        name: "estudiante",
+        meta: { requiredAuth: true }
       }
     ]
   }

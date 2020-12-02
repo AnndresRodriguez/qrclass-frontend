@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
+    login: false,
     infoUser: {},
     infoRole: {},
     infoMateria: {},
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    LOGIN_USER: (state, isLogged) => {
+      state.login = isLogged;
+    },
     SET_INFO_USER: (state, data) => {
       state.infoUser = data;
     },
@@ -44,6 +48,7 @@ export default new Vuex.Store({
     SET_DATA_ASISTENCIA: (state, data) => {
       state.asistencia = data;
     },
+    
   },
   actions: {
     loadInfoUser({ commit }, data) {
@@ -58,6 +63,10 @@ export default new Vuex.Store({
 
     loadDataAsistencia({ commit }, data) {
       commit("SET_DATA_ASISTENCIA", data);
+    },
+
+    loginUser: ({ commit }, isLogged) => {
+      commit('LOGIN_USER', isLogged)
     },
         
   },

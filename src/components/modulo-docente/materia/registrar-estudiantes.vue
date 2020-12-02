@@ -7,8 +7,14 @@
         <br />
         <p>
           Para realizar el registro de estudantes, por favor descargue el
-          siguiente formato <a href=""> aquí</a>, llenelo con la informacion
-          indicada y guardelo sin cambiar el formato.<br />
+          siguiente formato
+          <a
+            href="https://res.cloudinary.com/sigtam/raw/upload/v1606918539/formato-estudiantes-qrclass_gpexph.xlsx"
+            target="_blank"
+          >
+            aquí</a
+          >, llenelo con la informacion indicada y guardelo sin cambiar el
+          formato.<br />
         </p>
       </div>
       <form @submit.prevent="registrarEstudiante">
@@ -59,9 +65,6 @@ export default {
   methods: {
 
     registrarEstudiante(){
-
-      
-
 
 
     },

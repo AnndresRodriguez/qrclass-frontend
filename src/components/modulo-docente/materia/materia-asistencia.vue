@@ -156,7 +156,26 @@ export default {
 
        const materiaSelected =  this.materiasDocente[idMateria];
 
-        const infoAsistencia = {  materia: materiaSelected.nombre, docente: this.$store.getters.getInfoUser.fullName }
+       const infoAsistencia = {  materia: materiaSelected.nombre, docente: this.$store.getters.getInfoUser.fullName, idMateria: materiaSelected.id, idDia: materiaSelected.dias[0].id }
+
+       axios
+        .post(
+          `${process.env.VUE_APP_API}/qr`,  infoAsistencia
+        )
+        .then((res) => {
+          // this.materiasDocente = res.data.data;
+          console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+       console.log(materiaSelected);
+
+
+        
+
+      console.log(infoAsistencia);
 
         // this.valueqr = encodeURI(`?materia=${materiaSelected.nombre}&docente=${this.$store.getters.getInfoUser.fullName}`)
       //  this.valueqr = JSON.stringify(infoAsistencia);

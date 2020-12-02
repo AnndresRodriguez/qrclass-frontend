@@ -69,9 +69,12 @@
             <ul class="dropdown-menu dropdown-user animated fadeIn">
               <div class="dropdown-user-scroll scrollbar-outer">
                 <li>
-                  <router-link to="/" active-class="dropdown-item"
-                    >Cerrar Sesión</router-link
-                  >
+                  <a href="" class="dropdown-item" @click="cerrarSesion">
+                    Cerrar Sesión
+                  </a>
+                  <!-- <router-link to="/" active-class="dropdown-item"
+                    ></router-link
+                  > -->
                 </li>
               </div>
             </ul>
@@ -83,8 +86,15 @@
   </div>
 </template>
 <script>
+/* eslint-disable */
 import userMixin from "../../mixins/userMixin";
 export default {
-  mixins: [userMixin]
+  mixins: [userMixin],
+  methods: {
+    cerrarSesion() {
+      localStorage.clear();
+      this.$router.push({ name: "login" }).catch(()=>{});
+    }
+  }
 };
 </script>

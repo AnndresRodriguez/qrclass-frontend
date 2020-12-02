@@ -9,6 +9,7 @@ export default [
     path: "/consultar-materia",
     component: () =>
       import("../../../components/modulo-admin/materia/materia-consultar.vue"),
-    name: "consultar-materia"
+    name: "consultar-materia",
+    meta: { requiredAuth: true }
   }
 ];

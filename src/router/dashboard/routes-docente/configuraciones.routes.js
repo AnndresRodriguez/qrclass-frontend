@@ -5,7 +5,8 @@ export default [
       import(
         "../../../components/modulo-docente/configuraciones/periodo-academico.vue"
       ),
-    name: "periodo-academico"
+    name: "periodo-academico",
+    meta: { requiredAuth: true }
   },
   {
     path: "/notificaciones",
@@ -13,12 +14,14 @@ export default [
       import(
         "../../../components/modulo-docente/configuraciones/notificaciones.vue"
       ),
-    name: "notificaciones"
+    name: "notificaciones",
+    meta: { requiredAuth: true }
   },
   {
     path: "/codigoqr",
     component: () =>
       import("../../../components/modulo-docente/configuraciones/codigoqr.vue"),
-    name: "codigoqr"
+    name: "codigoqr",
+    meta: { requiredAuth: true }
   }
 ];

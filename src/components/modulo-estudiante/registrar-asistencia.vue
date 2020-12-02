@@ -45,11 +45,30 @@ export default {
 
   created(){
 
+    // axios.get(`${process.env.VUE_APP_API}/qr`)
+    axios.get(`${process.env.VUE_APP_API}/qr`)
+        .then((res) => {
+
+          console.log(res.data.data);
+
+          this.materia = res.data.data.materia;
+          this.docente = res.data.data.docente;
+          this.fechaMateria = formatDate(new Date());
+
+
+
+          // this.materiasDocente = res.data.data;
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
     
     // alert(this.$store.getters.getAsistencia.materia)
-    this.materia = this.$store.getters.getAsistencia.materia;
-    this.docente = this.$store.getters.getAsistencia.docente;
-    this.fechaMateria = formatDate(new Date());
+    // this.materia = this.$store.getters.getAsistencia.materia;
+    // this.docente = this.$store.getters.getAsistencia.docente;
+    // this.fechaMateria = formatDate(new Date());
 
   
 
@@ -72,7 +91,9 @@ export default {
 
       materia: '',
       docente: '',
-      fechaMateria: ''
+      fechaMateria: '',
+      idMateria: '',
+      idDia: ''
 
     };
   },
@@ -123,7 +144,13 @@ export default {
                 id: res.data.data.id,
               });
 
-              this.$router.replace("/dashboard");
+              fireToast(
+                "success",
+                "Asistecia registrada",
+                `Bienvenido a la clase ${this.materia}`
+              );
+
+              // this.$router.replace("/dashboard");
             } else {
               fireToast(
                 "error",

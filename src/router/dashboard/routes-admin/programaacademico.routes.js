@@ -5,7 +5,8 @@ export default [
       import(
         "../../../components/modulo-admin/programaacademico/programa-consultar.vue"
       ),
-    name: "consultar-programaaca"
+    name: "consultar-programaaca",
+    meta: { requiredAuth: true }
   },
   {
     path: "/registrar-programaaca",
@@ -13,6 +14,7 @@ export default [
       import(
         "../../../components/modulo-admin/programaacademico/programa-regristrar"
       ),
-    name: "registrar-programaaca"
+    name: "registrar-programaaca",
+    meta: { requiredAuth: true }
   }
 ];

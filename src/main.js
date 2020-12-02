@@ -4,6 +4,18 @@ import router from "./router";
 import store from "./store";
 // import "./registerServiceWorker";
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiredAuth) {
+    if (!store.state.login) {
+      next({ name: "login" });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery/src/jquery.js";
 import "bootstrap/dist/js/bootstrap.min.js";

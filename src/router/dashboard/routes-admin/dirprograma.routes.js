@@ -5,7 +5,8 @@ export default [
       import(
         "../../../components/modulo-admin/dirprograma/dirprograma-consulta.vue"
       ),
-    name: "consultar-dirprograma"
+    name: "consultar-dirprograma",
+    meta: { requiredAuth: true }
   },
   {
     path: "/registrar-director",
@@ -13,6 +14,7 @@ export default [
       import(
         "../../../components/modulo-admin/dirprograma/dirprograma-registro.vue"
       ),
-    name: "registrar-dirprograma"
+    name: "registrar-dirprograma",
+    meta: { requiredAuth: true }
   }
 ];

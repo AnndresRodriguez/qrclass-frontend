@@ -31,6 +31,7 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: Dashboard,
+    meta: { requiredAuth: true },
     children: []
       .concat(adminroutes)
       .concat(docentesroutes)
@@ -52,8 +53,7 @@ const routes = [
   {
     path: "/scan-estudiante",
     name: "scan-estudiante",
-    component: scanEstudiante,
-    meta: { isValid: true }
+    component: scanEstudiante
   },
   {
     path: "*",
