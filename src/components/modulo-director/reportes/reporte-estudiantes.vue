@@ -14,7 +14,12 @@
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="1151103" />
+              <input
+                type="email"
+                class="form-control"
+                placeholder="1151103"
+                v-model="ccodigo"
+              />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
                   <i class="iconob fas fa-search"></i>
@@ -78,7 +83,9 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Generar Reporte</button>
+                  <button type="button" class="btn btn-primary">
+                    Generar Reporte
+                  </button>
                 </div>
               </div>
             </div>

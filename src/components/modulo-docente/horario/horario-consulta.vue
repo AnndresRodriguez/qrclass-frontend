@@ -60,7 +60,7 @@
         role="dialog"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Detalle de la Materia</h4>
@@ -76,80 +76,36 @@
             <div class="modal-body">
               <form>
                 <div class="form-group">
-                  <label class="control-label">Nombre Completo</label>
-                  <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-user"></i>
-                    </div>
-                    <input
-                      name="name"
-                      type="text"
-                      class="form-control"
-                      placeholder="Escriba el nombre de la materia a registrar"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Codigo:</label>
-                  <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-id-card"></i>
-                    </div>
-                    <input
-                      name="name"
-                      type="text"
-                      class="form-control"
-                      placeholder="Escriba el codigo de la materia"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label"
-                    >Seleccione el Programa Academico</label
-                  >
-                  <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-check-square"></i>
-                    </div>
-                    <select name="departamento" class="form-control">
-                      <option value="ingsistemas">Ing. Sistemas</option>
-                      <option value="ingcivil">Ing. Civil</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Numero de Estudiantes</label>
-                  <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-users"></i>
-                    </div>
-                    <input
-                      type="number"
-                      class="form-control col-2"
-                      value="0"
-                      min="1"
-                    />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Numero de Credritos</label>
-                  <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono icono fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <input
-                      type="number"
-                      class="form-control col-2"
-                      value="0"
-                      min="1"
-                    />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Horario:</label>
-                  <div class="input-group"></div>
+                  <label class="control-label">Nombre:</label>
+                  <input class="bordeInput" disabled v-model="nombre" /><br />
+
+                  <label class="control-label">Codigo: </label>
+                  <input class="bordeInput" disabled v-model="codigo" /><br />
+
+                  <label class="control-label">Programa Academico:  </label>
+                  <input class="bordeInput" disabled v-model="programa" /><br />
+
+                  <label class="control-label">No. de Estudiantes: </label>
+                  <input
+                    class="bordeInput"
+                    disabled
+                    v-model="noestudiantes"
+                  /><br />
+
+                  <label class="control-label">No. de Creditos: </label>
+                  <input
+                    class="bordeInput"
+                    disabled
+                    v-model="nocreditos"
+                  /><br />
+
+                  <label class="control-label">Horario: </label>
+                  <input
+                    class="bordeInput"
+                    disabled
+                    v-model="nombre"
+                    placeholder="horaio de a materia"
+                  /><br />
                 </div>
                 <div class="modal-footer">
                   <a
@@ -173,19 +129,25 @@
 export default {
   data() {
     return {
-       materiasDocente: []
-    }
+      materiasDocente: [],
+      materia: {},
+      codigo: "",
+      id: 0,
+      nombre: "",
+      ccodigo: "",
+      programa: "",
+      nocreditos: "",
+      noestudiantes: "",
+      horario: "",
+    };
   },
 
   created() {
-      this.getAllDataDocente();
-
-   
-      
-   // axios.post()
+    this.getAllDataDocente();
   },
 
   methods: {
+<<<<<<< HEAD
       getAllDataDocente(){
 
         axios.get(`${process.env.VUE_APP_API}/materias/docente/${this.$store.getters.getInfoRole.id}`)
@@ -202,6 +164,34 @@ export default {
   },  
 
 }
+=======
+    // detalleMateria() {
+    //   let materia = ;
+    //   this.id = materia.id;
+    //   this.codigo = materia.codigo;
+    //   this.nombre = materia.nombre;
+    //   this.noestudiantes = materia.noestudiantes;
+    //   this.nocreditos = materia.nocreditos;
+    //   this.programa=materia.programa.nombre;
+    //   this.horario= materia.horario;
+    //   console.log("materia del stor", materia);
+    // },
+  },
+};
+>>>>>>> develop
 </script>
 
-<style scoped></style>
+<style scoped>
+.bordeInput {
+  background: white;
+  border: white;
+  width: 60%;
+}
+.cssRegistro .modal-title {
+  text-align: center;
+  color: rgb(188, 0, 22);
+}
+.cssRegistro .form-group {
+  margin-bottom: 0rem;
+}
+</style>

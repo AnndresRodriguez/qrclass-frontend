@@ -8,7 +8,7 @@
           <label class="control-label">Nombre Completo</label>
           <div class="input-group">
             <div class="input-group-addon">
-              <i class=" icono fas fa-user"></i>
+              <i class="icono fas fa-user"></i>
             </div>
             <input
               name="name"
@@ -28,7 +28,6 @@
               <i class="icono fas fa-id-card"></i>
             </div>
             <input
-              name="name"
               type="text"
               class="form-control"
               placeholder="Escriba el numero de documento de identidad"
@@ -42,12 +41,14 @@
           <label class="control-label">Correo Electronico</label>
           <div class="input-group">
             <div class="input-group-addon">
-              <i class=" icono fas fa-at"></i>
+              <i class="icono fas fa-at"></i>
             </div>
             <input
               type="email"
               class="form-control"
               placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+              pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+              title="Solo se permiten cuentas de ufps.edu.co"
               required
               maxlength="45"
               v-model="correo"
@@ -61,7 +62,7 @@
               <i class="icono fas fa-phone"></i>
             </div>
             <input
-              type="text"
+              type="textr"
               class="form-control"
               placeholder="Escriba el numero de celular."
               required
@@ -71,7 +72,7 @@
           </div>
         </div>
         <div class="boton form-group">
-          <button type="submit" class=" btn btn-info">Registrarse</button>
+          <button type="submit" class="btn btn-info">Registrarse</button>
         </div>
       </form>
     </div>
@@ -79,7 +80,7 @@
 </template>
 <script>
 /* eslint-disable */
-import { fireToast } from '../../../util/toast'
+import { fireToast } from "../../../util/toast";
 export default {
   data() {
     return {
@@ -87,28 +88,47 @@ export default {
       nombre: "",
       documento: "",
       correo: "",
-      telefono: ""
+      telefono: "",
     };
   },
   methods: {
-    registrarAdmin(){
-
-      const admin = { nombrecompleto: this.nombre, documento: this.documento, correo: this.correo, telefono: this.telefono }
+    
+    registrarAdmin() {
+      const admin = {
+        nombrecompleto: this.nombre,
+        documento: this.documento,
+        correo: this.correo,
+        telefono: this.telefono,
+      };
 
       console.log(admin);
-      axios.post(`${process.env.VUE_APP_API}/admin`, admin)
-      .then( res => {
+      axios
+        .post(`${process.env.VUE_APP_API}/admin`, admin)
+        .then((res) => {
+          fireToast(
+            "success",
+            "Registro Exitoso",
+            "El Nuevo administrador ha sido creado"
+          );
+          console.log(res.data);
+          this.limpiarinput();
+        })
+        .catch((error) => {
+          fireToast(
+            "error",
+            "Error en el registro",
+            "Ha ocurrido un error al crear el nuevo administrador, intente nuevamente"
+          );
+          console.log("registrarAdmin", error);
+        });
 
-         fireToast('success', 'Registro Exitoso', 'El Nuevo administrador ha sido creado')
-         console.log(res.data);
-      })
-      .catch(error => {
-        fireToast('error', 'Error en el registro', 'Ha ocurrido un error al crear el nuevo administrador, intente nuevamente');
-        console.log('registrarAdmin', error)
-      })
-
+    },
+    limpiarinput(){
+      this.nombre= "",
+      this.documento="",
+      this.correo="",
+      this.telefono=""
     }
-
   },
 };
 </script>

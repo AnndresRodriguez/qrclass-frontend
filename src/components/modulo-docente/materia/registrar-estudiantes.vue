@@ -3,6 +3,14 @@
     <div class="col-md-10 cssRegistro">
       <h2>Registrar Estudiante</h2>
       <hr />
+      <div>
+        <br />
+        <p>
+          Para realizar el registro de estudantes, por favor descargue el
+          siguiente formato <a href=""> aquí</a>, llenelo con la informacion
+          indicada y guardelo sin cambiar el formato.<br />
+        </p>
+      </div>
       <form @submit.prevent="registrarEstudiante">
         <div for="archivoEstudiantes" class="form-group">
           <p class="control-label">

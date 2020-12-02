@@ -48,6 +48,8 @@
               type="email"
               class="form-control"
               placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+              pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+              title="Solo se permiten cuentas de ufps.edu.co"
               required
               maxlength="45"
               v-model="correo"
@@ -91,6 +93,7 @@ export default {
     };
   },
   methods: {
+    
     registrarDirector() {
       const director = {
         nombre: this.nombre,
@@ -109,6 +112,7 @@ export default {
             "El nuevo director de programa ha sido creado"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -119,6 +123,12 @@ export default {
           console.log("registrarDirector", error);
         });
     },
+    limpiarinput(){
+      this.nombre= "",
+      this.codigo="",
+      this.correo="",
+      this.telefono=""
+    }
   },
 };
 </script>

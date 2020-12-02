@@ -12,7 +12,7 @@
                 type="email"
                 class="form-control"
                 placeholder="example@ufps.edu.co"
-                v-model="correo"
+                v-model="ccorreo"
               />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
@@ -112,6 +112,8 @@
                     type="email"
                     class="form-control"
                     placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
+                    title="Solo se permiten cuentas de ufps.edu.co"
                     maxlength="45"
                     required
                     v-model="correo"
@@ -120,7 +122,7 @@
                 <div class="form-group">
                   <label class="control-label">Numero de Telefono</label>
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     placeholder="Escriba el numero de celular."
                     maxlength="10"
@@ -136,6 +138,7 @@
                       class="form-control"
                       @change="setEstadoAdmin(estadoAdmin)"
                       v-model="estadoAdmin"
+                      required
                     >
                       <option value="1">Habilitar</option>
                       <option value="0">Deshabilitar</option>
@@ -169,6 +172,7 @@ export default {
       correo: "",
       telefono: "",
       estadoAdmin: 1,
+      ccorreo:"",
     };
   },
   created() {
@@ -177,7 +181,7 @@ export default {
   methods: {
     validarEstado(estado) {
       let msn = "";
-      estado ==1 ? msn = "Activo": msn = "Inactivo"
+      estado == 1 ? (msn = "Activo") : (msn = "Inactivo");
       return msn;
     },
     getAllAdmin() {
@@ -239,15 +243,16 @@ export default {
           }
         });
       console.log(actualizarAdmmin);
+      this.getAllAdmin();
     },
   },
   computed: {
     filtrarAdministrador() {
-      return this.administradores.filter(admin =>
-        admin.correo.includes(this.correo)
+      return this.administradores.filter((admin) =>
+        admin.correo.includes(this.ccorreo)
       );
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

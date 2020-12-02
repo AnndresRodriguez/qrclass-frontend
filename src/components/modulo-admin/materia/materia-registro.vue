@@ -115,23 +115,6 @@
             />
           </div>
         </div>
-        <!-- <div class="form-group">
-          <label class="control-label">
-            Seleccione el horario de la Materia
-          </label>
-          <VueSchedule
-            v-model="schedule"
-            :dayTable="daysSchedule"
-            :steps="240"
-            disableWeekSelect
-            disableDaySelect
-            bg="#bc0016"
-            bgHover="#818386"
-            bgActive="#ffc8ce"
-            textColor="transparent"
-          />
-        </div> -->
-        <!-- <pre>{{ schedule }}</pre> -->
         <div class="boton form-group">
           <button type="submit" class="btn btn-info">Registrar Materia</button>
         </div>
@@ -175,6 +158,7 @@ export default {
   },
 
   methods: {
+    
     getAllProgramas() {
       axios
         .get(`${process.env.VUE_APP_API}/programa-academicos`)
@@ -230,6 +214,7 @@ export default {
             "La nueva materia ha sido creada"
           );
           console.log(res.data);
+          this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
@@ -240,6 +225,13 @@ export default {
           console.log("registrarMateria", error);
         });
     },
+    limpiarinput(){
+      this.idDocente= "",
+      this.nombre="",
+      this.codigo="",
+      this.noestudiantes=""
+      this.nocreditos=""
+    }
   },
   updated() {
       configLangSchedule();
