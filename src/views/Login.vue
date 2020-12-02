@@ -16,10 +16,6 @@
                   <option disabled value="">Seleccione un Rol</option>
                   <option id="Admin" value="1">Administrador</option>
                   <option id="Docente" value="2">Docente</option>
-                  <option id="DirPrograma" value="3">
-                    Director de Programa
-                  </option>
-                  <option id="Estudiante" value="4">Estudiante</option>
                 </select>
                 <br />
                 <br />

@@ -12,7 +12,7 @@
             href="https://res.cloudinary.com/sigtam/raw/upload/v1606918539/formato-estudiantes-qrclass_gpexph.xlsx"
             target="_blank"
           >
-            aquí</a
+            Formato QR CLASS UFPS</a
           >, llenelo con la informacion indicada y guardelo sin cambiar el
           formato.<br />
         </p>
