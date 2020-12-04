@@ -14,7 +14,7 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el nombre completo del adminitrador a registrar"
+              placeholder="Escriba el nombre completo del administrador a registrar"
               required
               maxlength="100"
               v-model="nombre"
@@ -28,11 +28,14 @@
               <i class="icono fas fa-id-card"></i>
             </div>
             <input
+              name="name"
               type="text"
+              @keypress="validateNumber"
               class="form-control"
-              placeholder="Escriba el numero de documento de identidad"
-              required
+              placeholder="Escriba el numero de documento del Admin"
               maxlength="10"
+              minlength="6"
+              required
               v-model="documento"
             />
           </div>
@@ -46,11 +49,12 @@
             <input
               type="email"
               class="form-control"
-              placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+              placeholder="Escriba el correo institucional (misnombres@ufps.edu.co)"
               pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
               title="Solo se permiten cuentas de ufps.edu.co"
-              required
               maxlength="45"
+              minlength="12"
+              required
               v-model="correo"
             />
           </div>
@@ -62,11 +66,13 @@
               <i class="icono fas fa-phone"></i>
             </div>
             <input
-              type="textr"
+              type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el numero de celular."
-              required
               maxlength="10"
+              minlength="10"
+              required
               v-model="telefono"
             />
           </div>
@@ -81,6 +87,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from "../../../util/tools";
 export default {
   data() {
     return {
@@ -92,7 +99,6 @@ export default {
     };
   },
   methods: {
-    
     registrarAdmin() {
       const admin = {
         nombrecompleto: this.nombre,
@@ -110,25 +116,27 @@ export default {
             "Registro Exitoso",
             "El Nuevo administrador ha sido creado"
           );
-          console.log(res.data);
+          this.$router.replace("consultar-admin");
           this.limpiarinput();
         })
         .catch((error) => {
           fireToast(
             "error",
             "Error en el registro",
-            "Ha ocurrido un error al crear el nuevo administrador, intente nuevamente"
+            "Ha ocurrido un error en el registro, verifique si el documento o correo pertenece a un administrador registrado previamente"
           );
           console.log("registrarAdmin", error);
         });
-
     },
-    limpiarinput(){
-      this.nombre= "",
-      this.documento="",
-      this.correo="",
-      this.telefono=""
-    }
+    limpiarinput() {
+      (this.nombre = ""),
+        (this.documento = ""),
+        (this.correo = ""),
+        (this.telefono = "");
+    },
+    validateNumber($event) {
+      onlyNumbers($event);
+    },
   },
 };
 </script>

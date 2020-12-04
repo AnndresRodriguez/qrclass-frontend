@@ -184,6 +184,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from '../../../util/tools';
 import $ from "jquery";
 export default {
   data() {
@@ -293,6 +294,10 @@ export default {
       console.log(docenteNuevo);
       this.getAllDocentes();
     },
+
+    validateNumber($event){
+      onlyNumbers($event)
+    }
   },
   computed: {
     filtrarDocente() {

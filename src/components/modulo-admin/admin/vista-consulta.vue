@@ -4,7 +4,7 @@
       <h2>Consultar Administrador</h2>
       <hr />
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Correo Electrico: </label>
+        <label class="col-sm-2 col-form-label">Correo Electrónico: </label>
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
@@ -87,7 +87,7 @@
                     name="name"
                     type="text"
                     class="form-control"
-                    placeholder="Escriba el nombre completo del docente a registrar"
+                    placeholder="Escriba el nombre completo del Admin a registrar"
                     maxlength="100"
                     required
                     v-model="nombre"
@@ -98,10 +98,11 @@
                   <input
                     name="name"
                     type="text"
+                    @keypress="validateNumber"
                     class="form-control"
-                    placeholder="Escriba el numero de codigo del docente"
+                    placeholder="Escriba el numero de documento del Admin"
                     maxlength="10"
-                    disabled
+                    minlength="6"
                     required
                     v-model="documento"
                   />
@@ -111,10 +112,11 @@
                   <input
                     type="email"
                     class="form-control"
-                    placeholder="Escriba el corre institucional (example@ufps.edu.co)"
+                    placeholder="Escriba el correo institucional (misnombres@ufps.edu.co)"
                     pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
                     title="Solo se permiten cuentas de ufps.edu.co"
                     maxlength="45"
+                    minlength="12"
                     required
                     v-model="correo"
                   />
@@ -122,10 +124,12 @@
                 <div class="form-group">
                   <label class="control-label">Numero de Telefono</label>
                   <input
-                    type="number"
+                    type="text"
                     class="form-control"
+                    @keypress="validateNumber"
                     placeholder="Escriba el numero de celular."
                     maxlength="10"
+                    minlength="10"
                     required
                     v-model="telefono"
                   />
@@ -138,7 +142,6 @@
                       class="form-control"
                       @change="setEstadoAdmin(estadoAdmin)"
                       v-model="estadoAdmin"
-                      required
                     >
                       <option value="1">Habilitar</option>
                       <option value="0">Deshabilitar</option>
@@ -162,6 +165,7 @@
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
 import $ from "jquery";
+import { onlyNumbers } from '../../../util/tools';
 export default {
   data() {
     return {
@@ -211,7 +215,7 @@ export default {
     },
 
     actualizarAdmin() {
-      const actualizarAdmmin = {
+      const dataNuevaAdmin= {
         id: this.id,
         nombrecompleto: this.nombre,
         documento: this.documento,
@@ -219,8 +223,10 @@ export default {
         telefono: this.telefono,
         estado: this.estadoAdmin,
       };
+
+    
       axios
-        .put(`${process.env.VUE_APP_API}/admin`, actualizarAdmmin)
+        .put(`${process.env.VUE_APP_API}/admin`, dataNuevaAdmin)
         .then((res) => {
           if (res.data.operation) {
             console.log(res.data);
@@ -238,13 +244,17 @@ export default {
             fireToast(
               "error",
               "Error en la actualización",
-              "Ha ocurrido un error al actualizar los datos del administrador, intente nuevamente"
+              "Ha ocurrido un error al actualizar, verifique si el documento o correo ya pertenece a un administrador registrado previamente"
             );
           }
         });
-      console.log(actualizarAdmmin);
-      this.getAllAdmin();
+      
     },
+
+    validateNumber($event){
+      onlyNumbers($event)
+    }
+
   },
   computed: {
     filtrarAdministrador() {
