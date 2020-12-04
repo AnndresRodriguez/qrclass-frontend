@@ -278,6 +278,7 @@ export default {
               "Actualización Exitosa",
               "Los datos del docente han sido actualizado"
             );
+            this.getAllDocentes();
           } else {
             console.log(res.data);
 

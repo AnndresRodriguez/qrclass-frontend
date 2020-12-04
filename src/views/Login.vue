@@ -91,15 +91,15 @@ export default {
             this.lastName = res.data.family_name;
           });
 
-        let alert = swal.fire({
-                    title: "Iniciando Sesión, por favor espere....",
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    onOpen: () => {
-                        swal.showLoading();
-                    }
-                });
+        // let alert = swal.fire({
+        //             title: "Iniciando Sesión, por favor espere....",
+        //             allowEscapeKey: false,
+        //             allowOutsideClick: false,
+        //             showConfirmButton: false,
+        //             onOpen: () => {
+        //                 swal.showLoading();
+        //             }
+        //         });
 
         axios
           .post(
@@ -108,7 +108,7 @@ export default {
           )
           .then((res) => {
             // console.log(res.data);
-            alert.close();
+            // alert.close();
             if (res.data.operation) {
               this.$store.dispatch("loadInfoUser", {
                 fullName: this.fullName,
