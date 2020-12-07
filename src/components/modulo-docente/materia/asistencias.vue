@@ -16,28 +16,36 @@
         <input class="bordeInput" disabled v-model="noestudiantes" />
       </div>
       <button type="" class="btn btn-info">Imprimir</button>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Codigo</th>
-            <th scope="col">Nombre Estudiante</th>
-            <th scope="col">fecha1</th>
-            <th scope="col">fecha2</th>
-            <th scope="col">fecha3</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(estudiante, index) in estudiantes" :key="index">
-            <th scope="row">{{ estudiante.codigo }}</th>
-            <td>{{ estudiante.nombre }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="scroll-div">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nombre Estudiante</th>
+              <template v-for="(estudiante, idx) in estudiantes[0].asistencias">
+                <th scope="col" :key="idx">
+                  {{ formatAssistance(estudiante.createdAt) }}
+                </th>
+              </template>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(estudiante, index) in estudiantes" :key="index">
+              <th scope="row">{{ estudiante.codigo }}</th>
+              <td>{{ estudiante.nombre }}</td>
+              <template v-for="(asistencia, indice) in estudiante.asistencias">
+                <th scope="row" :key="indice">{{ asistencia.asistio }}</th>
+              </template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
+import { formatAssistance } from "../../../util/tools";
 export default {
   data() {
     return {
@@ -46,7 +54,7 @@ export default {
       estudiantes: [],
       estudiante: {},
       codigo: "",
-      ccodigo:"",
+      ccodigo: "",
       id: 0,
       nombre: "",
       noestudiantes: "",
@@ -85,19 +93,20 @@ export default {
     },
     getAllDataEstudiantes(id) {
       axios
-        .get(
-          `${process.env.VUE_APP_API}/materias/estudiantes/${id}`
-        )
+        .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
         .then((res) => {
           this.estudiantes = res.data.data[0].estudiantes;
-          console.log("lista de estudiantess",this.estudiantes);
+          console.log("lista de estudiantess", this.estudiantes);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
+    formatAssistance(formatDate) {
+      return formatAssistance(new Date(formatDate));
+    },
   },
-  
 };
 </script>
 <style scoped>
@@ -118,5 +127,10 @@ export default {
 .icono:hover {
   background-color: rgb(188, 0, 22);
   color: #ffffff;
+}
+
+.scroll-div {
+  width: 100% !important;
+  overflow-x: scroll;
 }
 </style>

@@ -57,6 +57,10 @@ export function formatDate(date) {
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
+export function formatAssistance(date) {
+  return `${date.getDate()}/${date.getMonth() + 1}`;
+}
+
 export function onlyNumbers($event) {
   let keyCode = $event.keyCode ? $event.keyCode : $event.which;
   if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {

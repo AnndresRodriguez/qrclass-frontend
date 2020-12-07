@@ -114,7 +114,7 @@ export default {
       id: 0,
       nombre: "",
       noestudiantes: "",
-      valueqr: 'https://17d231c53dff.ngrok.io/asistencia-estudiante',
+      valueqr: 'https://qrclass-ufps.web.app/asistencia-estudiante',
       size: 300
     };
   },
