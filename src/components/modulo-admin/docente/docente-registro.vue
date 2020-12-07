@@ -118,7 +118,6 @@ export default {
     this.getAllDepartamentos();
   },
   methods: {
-    
     getAllDepartamentos() {
       axios
         .get(`${process.env.VUE_APP_API}/departamentos`)
@@ -146,9 +145,9 @@ export default {
         idDepartamento: this.iddepartamento,
       };
 
-      axios
-        .post(`${process.env.VUE_APP_API}/docentes`, docente)
-        .then((res) => {
+      axios.post(`${process.env.VUE_APP_API}/docentes`, docente).then((res) => {
+        if (res.data.operation) {
+          console.log(res.data);
           fireToast(
             "success",
             "Registro Exitoso",
@@ -156,24 +155,25 @@ export default {
           );
           console.log(res.data);
           this.limpiarinput();
-        })
-        .catch((error) => {
+        } else {
+          console.log(res.data);
+
           fireToast(
-            "success",
+            "error",
             "Error en el registro",
             "Ha ocurrido un error al crear el nuevo docente, intente nuevamente"
           );
           console.log("registrarDocente", error);
-        });
+        }
+      });
+    },
+    limpiarinput() {
+      (this.nombre = ""),
+        (this.codigo = ""),
+        (this.correo = ""),
+        (this.telefono = "");
     },
   },
-   limpiarinput(){
-      this.nombre= "",
-      this.codigo="",
-      this.correo="",
-      this.telefono=""
-    },
-  
 };
 </script>
 
