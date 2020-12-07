@@ -42,7 +42,7 @@
             <th scope="row">{{ materia.codigo }}</th>
             <td>{{ materia.nombre }}</td>
             <td>{{ materia.noestudiantes }}</td>
-            <td>horario</td>
+            <td>-</td>
             <td>
               <a
                 data-toggle="modal"
@@ -128,19 +128,18 @@ export default {
     return {
       materiasDocente: [],
       materia: {},
-      estudiantes:[],
-      estudiante :{},
+      estudiantes: [],
+      estudiante: {},
       codigo: "",
       id: 0,
       nombre: "",
       noestudiantes: "",
-      consultac:"",
+      consultac: "",
     };
   },
 
   created() {
     this.getAllDataDocente();
-    
 
     // axios.post()
   },
@@ -161,12 +160,10 @@ export default {
     },
     getAllDataEstudiantes(id) {
       axios
-        .get(
-          `${process.env.VUE_APP_API}/materias/estudiantes/${id}`
-        )
+        .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
         .then((res) => {
           this.estudiantes = res.data.data[0].estudiantes;
-          console.log("lista de estudiantess",this.estudiantes);
+          console.log("lista de estudiantess", this.estudiantes);
         })
         .catch((err) => {
           console.log(err);
@@ -178,7 +175,7 @@ export default {
       this.nombre = materia.nombre;
       this.noestudiantes = materia.noestudiantes;
 
-      this.getAllDataEstudiantes(this.id)
+      this.getAllDataEstudiantes(this.id);
     },
   },
   computed: {

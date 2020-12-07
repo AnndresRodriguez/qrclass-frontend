@@ -105,30 +105,34 @@ export default {
       axios
         .post(`${process.env.VUE_APP_API}/estudiantes`, estudiante)
         .then((res) => {
-          fireToast(
-            "success",
-            "Registro Exitoso",
-            "El Nuevo estudiante ha sido creado"
-          );
-          console.log(res.data);
-          this.limpiarinput();
-        })
-        .catch((error) => {
-          fireToast(
-            "error",
-            "Error en el registro",
-            "Ha ocurrido un error al crear el nuevo estudiente, intente nuevamente"
-          );
-          console.log("registrarAdmin", error);
+          if (res.data.operation) {
+            console.log(res.data);
+            fireToast(
+              "success",
+              "Registro Exitoso",
+              "El Nuevo estudiante ha sido creado"
+            );
+            console.log(res.data);
+            this.limpiarinput();
+          } else {
+            console.log(res.data);
+
+            fireToast(
+              "error",
+              "Error en el registro",
+              "Ha ocurrido un error al crear el nuevo estudiante, intente nuevamente"
+            );
+            console.log("registrarEstudiante", error);
+          }
         });
     },
+    limpiarinput() {
+      (this.nombre = ""),
+        (this.codigo = ""),
+        (this.correo = ""),
+        (this.telefono = "");
+    },
   },
-  limpiarinput(){
-      this.nombre= "",
-      this.codigo="",
-      this.correo="",
-      this.telefono=""
-    }
 };
 </script>
 <style scoped></style>
