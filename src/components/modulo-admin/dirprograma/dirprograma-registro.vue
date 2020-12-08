@@ -31,9 +31,11 @@
               name="name"
               type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el numero de codigo del director"
               required
               maxlength="10"
+              minlength="5"
               v-model="codigo"
             />
           </div>
@@ -52,6 +54,7 @@
               title="Solo se permiten cuentas de ufps.edu.co"
               required
               maxlength="45"
+              minlength="12"
               v-model="correo"
             />
           </div>
@@ -65,9 +68,11 @@
             <input
               type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el numero de celular."
               required
               maxlength="10"
+              minlength="7"
               v-model="telefono"
             />
           </div>
@@ -82,6 +87,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from "../../../util/tools";
 export default {
   data() {
     return {
@@ -103,32 +109,37 @@ export default {
       };
 
       console.log(director);
-      axios
-        .post(`${process.env.VUE_APP_API}/directores`, director)
-        .then((res) => {
+      axios.post(`${process.env.VUE_APP_API}/directores`, director).then((res) => {
+        if (res.data.operation) {
+          console.log(res.data);
           fireToast(
             "success",
             "Registro Exitoso",
-            "El nuevo director de programa ha sido creado"
+            "El Nuevo director de programa ha sido creado"
           );
           console.log(res.data);
           this.limpiarinput();
-        })
-        .catch((error) => {
+        } else {
+          console.log(res.data);
+
           fireToast(
             "error",
             "Error en el registro",
-            "Ha ocurrido un error al crear el nuevo director de programa, intente nuevamente"
+            "Ha ocurrido un error en el registro, el documento o correo pertenece a un director de programa registrado previamente"
           );
           console.log("registrarDirector", error);
-        });
+        }
+      });
     },
     limpiarinput(){
       this.nombre= "",
       this.codigo="",
       this.correo="",
       this.telefono=""
-    }
+    },
+    validateNumber($event) {
+      onlyNumbers($event);
+    },
   },
 };
 </script>

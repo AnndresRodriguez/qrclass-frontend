@@ -32,7 +32,6 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">No.</th>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
@@ -42,8 +41,7 @@
         </thead>
         <tbody>
           <tr v-for="(programa, index) in filtrarPrograma" :key="index">
-            <th scope="row">{{ programa.id }}</th>
-            <th>{{ programa.codigo }}</th>
+            <th scope="row">{{ programa.codigo }}</th>
             <td>{{ programa.nombre }}</td>
             <td>{{ programa.correo }}</td>
             <td>{{ programa.dirPrograma.nombre }}</td>
@@ -112,6 +110,7 @@
                     pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
                     title="Solo se permiten cuentas de ufps.edu.co"
                     required
+                    disabled
                     v-model="correo"
                   />
                 </div>
