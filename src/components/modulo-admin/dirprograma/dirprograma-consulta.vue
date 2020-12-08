@@ -30,7 +30,6 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">No.</th>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
@@ -41,8 +40,7 @@
         </thead>
         <tbody>
           <tr v-for="(director, index) in filtrarDirector" :key="index">
-            <th scope="row">{{ director.id }}</th>
-            <th>{{ director.codigo }}</th>
+            <th scope="row">{{ director.codigo }}</th>
             <td>{{ director.nombre }}</td>
             <td>{{ director.correo }}</td>
             <td>{{ director.telefono }}</td>
@@ -105,7 +103,6 @@
                     class="form-control"
                     placeholder="Escriba el numero de codigo del directos"
                     required
-                    maxlength="10"
                     disabled
                     v-model="codigo"
                   />
@@ -119,8 +116,8 @@
                     pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
                     title="Solo se permiten cuentas de ufps.edu.co"
                     required
-                    maxlength="45"
-                    v-model="ccorreo"
+                    disabled
+                    v-model="correo"
                   />
                 </div>
                 <div class="form-group">
@@ -128,9 +125,11 @@
                   <input
                     type="text"
                     class="form-control"
+                    @keypress="validateNumber"
                     placeholder="Escriba el numero de celular."
                     required
                     maxlength="10"
+                    minlength="7"
                     v-model="telefono"
                   />
                 </div>
@@ -164,6 +163,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from "../../../util/tools";
 import $ from "jquery";
 export default {
   data() {
@@ -247,6 +247,9 @@ export default {
         });
       console.log(actualizarDirector);
       this.getAllDirector();
+    },
+    validateNumber($event) {
+      onlyNumbers($event);
     },
   },
   computed: {

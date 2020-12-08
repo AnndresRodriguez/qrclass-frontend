@@ -88,6 +88,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Escriba el nombre completo"
+                    maxlength="100"
                     required
                     v-model="nombre"
                   />
@@ -113,6 +114,7 @@
                     pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
                     title="Solo se permiten cuentas de ufps.edu.co"
                     required
+                    disabled
                     v-model="correo"
                   />
                 </div>
@@ -121,7 +123,10 @@
                   <input
                     type="text"
                     class="form-control"
+                    @keypress="validateNumber"
                     placeholder="Escriba el numero de celular."
+                    maxlength="10"
+                    minlength="7"
                     required
                     v-model="telefono"
                   />
@@ -157,6 +162,7 @@
 /* eslint-disable */
 
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from "../../../util/tools";
 import $ from "jquery";
 export default {
   data() {
@@ -239,7 +245,10 @@ export default {
         });
       console.log(estudiante);
       this.getAllEstudiantes();
-    }
+    },
+    validateNumber($event) {
+      onlyNumbers($event);
+    },
   },
   computed: {
     filtrarEstudiante() {

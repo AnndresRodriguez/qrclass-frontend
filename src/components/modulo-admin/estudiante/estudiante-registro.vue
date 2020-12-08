@@ -31,9 +31,11 @@
               name="name"
               type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el codigo del estudiante"
               required
               maxlength="10"
+              minlength="5"
               v-model="codigo"
             />
           </div>
@@ -52,6 +54,7 @@
               title="Solo se permiten cuentas de ufps.edu.co"
               required
               maxlength="45"
+              minlength="12"
               v-model="correo"
             />
           </div>
@@ -65,9 +68,11 @@
             <input
               type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el numero de celular."
               required
               maxlength="10"
+              minlength="7"
               v-model="telefono"
             />
           </div>
@@ -82,6 +87,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from "../../../util/tools";
 export default {
   data() {
     return {
@@ -120,7 +126,7 @@ export default {
             fireToast(
               "error",
               "Error en el registro",
-              "Ha ocurrido un error al crear el nuevo estudiante, intente nuevamente"
+              "Ha ocurrido un error en el registro, el codigo o correo pertenece a un estudiante registrado previamente"
             );
             console.log("registrarEstudiante", error);
           }
@@ -132,6 +138,10 @@ export default {
         (this.correo = ""),
         (this.telefono = "");
     },
+    validateNumber($event) {
+      onlyNumbers($event);
+    },
+
   },
 };
 </script>

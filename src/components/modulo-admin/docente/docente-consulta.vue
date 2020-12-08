@@ -32,7 +32,6 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">No.</th>
               <th scope="col">Documento</th>
               <th scope="col">Nombre</th>
               <th scope="col">Correo</th>
@@ -44,8 +43,7 @@
           </thead>
           <tbody>
             <tr v-for="(docente, index) in filtrarDocente" :key="index">
-              <th scope="row">{{ docente.id }}</th>
-              <th>{{ docente.codigo }}</th>
+              <th scope="row">{{ docente.codigo }}</th>
               <td>{{ docente.nombre }}</td>
               <td>{{ docente.correo }}</td>
               <td>{{ docente.departamento.nombre }}</td>
@@ -112,10 +110,17 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label class="control-label"
-                    >Selecciona el departamento</label
-                  >
-                  <div class="input-group">
+                  <label class="control-label">Departamento: </label>
+                  <input
+                    name="departamento"
+                    type="text"
+                    class="form-control"
+                    placeholder=""
+                    required
+                    disabled
+                    v-model="dpto"
+                  />
+                  <!-- <div class="input-group">
                     <select
                       @change="listarDepartamentos(departamento)"
                       v-model="departamento"
@@ -129,7 +134,7 @@
                         </option>
                       </template>
                     </select>
-                  </div>
+                  </div> -->
                 </div>
 
                 <div class="form-group">
@@ -141,6 +146,7 @@
                     pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
                     title="Solo se permiten cuentas de ufps.edu.co"
                     required
+                    disabled
                     v-model="correo"
                   />
                 </div>
@@ -150,6 +156,9 @@
                     type="text"
                     class="form-control"
                     placeholder="Escriba el numero de celular."
+                    @keypress="validateNumber"
+                    maxlength="10"
+                    minlength="7"
                     required
                     v-model="telefono"
                   />
@@ -184,7 +193,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
-import { onlyNumbers } from '../../../util/tools';
+import { onlyNumbers } from "../../../util/tools";
 import $ from "jquery";
 export default {
   data() {
@@ -199,7 +208,7 @@ export default {
       departamentos: [],
       iddepartamento: "",
       estadoDocente: 1,
-      ccorreo:"",
+      ccorreo: "",
     };
   },
   created() {
@@ -236,25 +245,27 @@ export default {
       this.nombre = docente.nombre;
       this.correo = docente.correo;
       this.telefono = docente.telefono;
+      this.dpto = docente.departamento.nombre;
+      this.iddepartamento = docente.departamento.codigo;
     },
-    getAllDepartamentos() {
-      axios
-        .get(`${process.env.VUE_APP_API}/departamentos`)
-        .then((res) => {
-          console.log(res.data.operation);
-          this.departamentos = res.data.data;
-          console.log("departamentos -->", this.departamentos);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+    // getAllDepartamentos() {
+    //   axios
+    //     .get(`${process.env.VUE_APP_API}/departamentos`)
+    //     .then((res) => {
+    //       console.log(res.data.operation);
+    //       this.departamentos = res.data.data;
+    //       console.log("departamentos -->", this.departamentos);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
 
-    listarDepartamentos(departamento) {
-      this.departamento = departamento;
-      console.log(this.departamento);
-      this.iddepartamento = departamento.codigo;
-    },
+    // listarDepartamentos(departamento) {
+    //   this.departamento = departamento;
+    //   console.log(this.departamento);
+    //   this.iddepartamento = departamento.codigo;
+    // },
 
     actualizarDocente() {
       const docenteNuevo = {
@@ -295,9 +306,9 @@ export default {
       this.getAllDocentes();
     },
 
-    validateNumber($event){
-      onlyNumbers($event)
-    }
+    validateNumber($event) {
+      onlyNumbers($event);
+    },
   },
   computed: {
     filtrarDocente() {

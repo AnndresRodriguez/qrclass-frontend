@@ -46,15 +46,15 @@
             >
             </item>
             <item
-              title="Gestor de Programas Academicos"
-              :items="itemsProgramaAcademico"
-              href="dashboard-programaacademico"
-            >
-            </item>
-            <item
               title="Gestor de Director de Programa"
               :items="itemsDirPrograma"
               href="dashboard-dirprograma"
+            >
+            </item>
+            <item
+              title="Gestor de Programas Academicos"
+              :items="itemsProgramaAcademico"
+              href="dashboard-programaacademico"
             >
             </item>
             <item

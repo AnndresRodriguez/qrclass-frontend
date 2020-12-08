@@ -102,8 +102,9 @@
                     class="form-control"
                     placeholder="Escriba el numero de documento del Admin"
                     maxlength="10"
-                    minlength="6"
+                    minlength="5"
                     required
+                    disabled
                     v-model="documento"
                   />
                 </div>
@@ -118,6 +119,7 @@
                     maxlength="45"
                     minlength="12"
                     required
+                    disabled
                     v-model="correo"
                   />
                 </div>
@@ -129,7 +131,7 @@
                     @keypress="validateNumber"
                     placeholder="Escriba el numero de celular."
                     maxlength="10"
-                    minlength="10"
+                    minlength="7"
                     required
                     v-model="telefono"
                   />
@@ -225,9 +227,7 @@ export default {
       };
 
     
-      axios
-        .put(`${process.env.VUE_APP_API}/admin`, dataNuevaAdmin)
-        .then((res) => {
+      axios.put(`${process.env.VUE_APP_API}/admin`, dataNuevaAdmin).then((res) => {
           if (res.data.operation) {
             console.log(res.data);
             $("#EditarAdmin").modal("hide");

@@ -16,6 +16,7 @@
               class="form-control"
               placeholder="Escriba el nombre completo del docente a registrar"
               v-model="nombre"
+              maxlength="100"
               required
             />
           </div>
@@ -30,7 +31,10 @@
               name="name"
               type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el numero de codigo del docente"
+              maxlength="10"
+              minlength="5"
               required
               v-model="codigo"
             />
@@ -47,6 +51,7 @@
               v-model="departamento"
               name="departamento"
               class="form-control"
+              required
             >
               <template v-for="(departamento, index) in departamentos">
                 <option :key="index" :value="departamento">
@@ -71,6 +76,8 @@
               pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
               title="Solo se permiten cuentas de ufps.edu.co"
               required
+              maxlength="45"
+              minlength="12"
               v-model="correo"
             />
           </div>
@@ -84,8 +91,11 @@
             <input
               type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el numero de celular."
               required
+              maxlength="10"
+              minlength="7"
               v-model="telefono"
             />
           </div>
@@ -101,6 +111,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from "../../../util/tools";
 export default {
   data() {
     return {
@@ -161,7 +172,7 @@ export default {
           fireToast(
             "error",
             "Error en el registro",
-            "Ha ocurrido un error al crear el nuevo docente, intente nuevamente"
+            "Ha ocurrido un error en el registro, el codigo o correo pertenece a un docente registrado previamente"
           );
           console.log("registrarDocente", error);
         }
@@ -172,6 +183,9 @@ export default {
         (this.codigo = ""),
         (this.correo = ""),
         (this.telefono = "");
+    },
+    validateNumber($event) {
+      onlyNumbers($event);
     },
   },
 };

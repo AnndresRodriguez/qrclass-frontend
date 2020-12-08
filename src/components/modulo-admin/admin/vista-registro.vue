@@ -34,7 +34,7 @@
               class="form-control"
               placeholder="Escriba el numero de documento del Admin"
               maxlength="10"
-              minlength="6"
+              minlength="5"
               required
               v-model="documento"
             />
@@ -71,7 +71,7 @@
               @keypress="validateNumber"
               placeholder="Escriba el numero de celular."
               maxlength="10"
-              minlength="10"
+              minlength="7"
               required
               v-model="telefono"
             />
@@ -108,25 +108,28 @@ export default {
       };
 
       console.log(admin);
-      axios
-        .post(`${process.env.VUE_APP_API}/admin`, admin)
-        .then((res) => {
+
+      axios.post(`${process.env.VUE_APP_API}/admin`, admin).then((res) => {
+        if (res.data.operation) {
+          console.log(res.data);
           fireToast(
-            "success",
+             "success",
             "Registro Exitoso",
             "El Nuevo administrador ha sido creado"
           );
-          this.$router.replace("consultar-admin");
+          console.log(res.data);
           this.limpiarinput();
-        })
-        .catch((error) => {
+        } else {
+          console.log(res.data);
+
           fireToast(
             "error",
             "Error en el registro",
-            "Ha ocurrido un error en el registro, verifique si el documento o correo pertenece a un administrador registrado previamente"
+            "Ha ocurrido un error en el registro, el documento o correo pertenece a un administrador registrado previamente"
           );
           console.log("registrarAdmin", error);
-        });
+        }
+      });
     },
     limpiarinput() {
       (this.nombre = ""),

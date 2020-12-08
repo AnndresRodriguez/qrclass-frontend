@@ -31,9 +31,11 @@
               name="name"
               type="text"
               class="form-control"
+              @keypress="validateNumber"
               placeholder="Escriba el codigo del programa academico"
               required
               maxlength="10"
+              minlength="3"
               v-model="codigo"
             />
           </div>
@@ -93,6 +95,7 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+import { onlyNumbers } from "../../../util/tools";
 export default {
   data() {
     return {
@@ -135,31 +138,39 @@ export default {
         idDirector: this.iddirector,
       };
       console.log(programa);
-      axios
-        .post(`${process.env.VUE_APP_API}/programa-academicos`, programa)
-        .then((res) => {
+
+      axios.post(`${process.env.VUE_APP_API}/programa-academicos`, programa).then((res) => {
+        console.log("a registrar:", res.data.operation);
+        if (res.data.operation) {
+          console.log(res.data);
           fireToast(
             "success",
             "Registro Exitoso",
-            "El nuevo programa academico ha sido creado"
+            "El Nuevo director de programa ha sido creado"
           );
           console.log(res.data);
           this.limpiarinput();
-        })
-        .catch((error) => {
+        } else {
+          console.log(res.data);
+
           fireToast(
             "error",
             "Error en el registro",
-            "Ha ocurrido un error al crear el nuevo programa academico, intente nuevamente"
+            "Ha ocurrido un error en el registro, el codigo o correo pertenece a un programa academico registrado previamente"
           );
-          console.log("registrarProgramaAcademico", error);
-        });
+          // console.log("registrarProgramaAcademico", error);
+        }
+      });
+
     },
     limpiarinput(){
       this.nombre="",
       this.codigo="",
       this.correo=""
-    }
+    },
+    validateNumber($event) {
+      onlyNumbers($event);
+    },
   },
 };
 </script>
