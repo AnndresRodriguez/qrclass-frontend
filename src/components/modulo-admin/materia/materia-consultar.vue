@@ -46,7 +46,7 @@
             <td>{{ materia.programaAcademico.nombre }}</td>
             <!-- <td>{{ materia.noestudiantes }}</td> -->
 
-            <template v-if="materia.dias.length == 0">
+            <template v-if="materia.horarios[0].dia == null">
               <td>
                 <a
                   href=""
@@ -55,16 +55,17 @@
                   data-toggle="modal"
                   data-target="#registrarHorario"
                   :key="materia.id"
-                  @click="asignarHorarioMateria(materia.id)"
+                  @click="asignarHorarioMateria(materia.id, materia.docente.id)"
                   >Asignar Horario</a
                 >
               </td>
             </template>
             <template v-else>
               <td>
-                <template v-for="dia in materia.dias">
-                  {{ dia.dia }} - {{ getNameHoras(dia.horas) }}
-                </template>
+                <!--  //  {"idDia": 1, "dia": "Martes" } - { "idDia": 1, "dia": "Martes" }  -->
+                <!-- <template v-for="horario in materia.horarios"> -->
+                {{ getNameHoras(materia.horarios) }}
+                <!-- </template> -->
               </td>
             </template>
 
@@ -188,13 +189,13 @@
                   </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label class="control-label"
                     >Seleccione el horaro de la materia:<br
                   /></label>
-                </div>
+                </div> -->
 
-                <VueSchedule
+                <!-- <VueSchedule
                   v-model="schedule"
                   :dayTable="daysSchedule"
                   :steps="240"
@@ -204,7 +205,7 @@
                   bgHover="#818386"
                   bgActive="#ffc8ce"
                   textColor="transparent"
-                />
+                /> -->
 
                 <!-- <pre>{{ schedule }}</pre> -->
 
@@ -308,6 +309,7 @@ export default {
       schedule: { 0: [], 1: [], 2: [], 3: [], 4: [] },
       daysSchedule: daysOfWeek,
       idMateriaHorario: 0,
+      idDocente: 0,
     };
   },
   created() {
@@ -318,9 +320,10 @@ export default {
   },
 
   methods: {
-    asignarHorarioMateria(idMateriaHorario) {
+    asignarHorarioMateria(idMateriaHorario, idDocente) {
       configLangSchedule();
       this.idMateriaHorario = idMateriaHorario;
+      this.idDocente = idDocente
     },
     asignarNuevoHorario() {
       const dataToEndpoint = {
@@ -328,7 +331,10 @@ export default {
         horario: this.schedule,
       };
 
-      
+      const dataHorario = [];
+
+      // { idMateria: this.idMateriaHorario, idDocente: this.idDocente, idDia: this.dia, idHora: }
+
       const daysToStore = [];
 
       const horarioValues = Object.keys(this.schedule)
@@ -336,19 +342,22 @@ export default {
 
       const daysFiltered = horarioValues.map(dia => {
          if(this.schedule[parseInt(dia)].length !== 0){
-           daysToStore.push({ dia: dia, horas: this.schedule[parseInt(dia)] })  
+          //  daysToStore.push({ dia: dia, horas: this.schedule[parseInt(dia)] }) 
+            this.schedule[parseInt(dia)].map( hora => {
+               daysToStore.push({ idMateria: this.idMateriaHorario, idDocente: this.idDocente, idDia: parseInt(dia), idHora: hora})  
+            })
+          
          }
          return {}
       })
 
-      console.log('-------------------------------------')
-      console.log(daysToStore)
+      // console.log('-------------------------------------')
+      // console.log(daysToStore)
+
+      // console.log('dataAxios', { idMateria: this.idMateriaHorario, idDocente: this.idDocente, dataHorario: daysToStore });
 
       axios
-        .post(`${process.env.VUE_APP_API}/clases`, {
-          idMateria: this.idMateriaHorario,
-          horario: daysToStore,
-        })
+        .post(`${process.env.VUE_APP_API}/clases`, { idMateria: this.idMateriaHorario, idDocente: this.idDocente, dataHorario: daysToStore })
         .then((res) => {
           if (res.data.operation) {
             console.log(res.data);
@@ -374,15 +383,15 @@ export default {
         });
     },
     getNameHoras(horas) {
-      const limit = horas.length;
 
-      if (limit > 0) {
-        const horaInicio = horas[0].horainicio;
-        const horaFinal = horas[limit - 1].horafinal;
-        return `${formatNameHour(horaInicio)} - ${formatNameHour(horaFinal)}`;
-      }
+      console.log('horasTotales', horas);
 
-      return "";
+      const nameDay = horas[0].dia.dia;
+      const initHour = horas[0].hora.horainicio;
+      const finalDay = horas.length - 1;
+      const finalHour = horas[finalDay].hora.horafinal;
+
+      return `${ formatNameDay(nameDay)}: ${formatNameHour(initHour)} - ${formatNameHour(finalHour)}`;
     },
 
     getAllDocentes() {
