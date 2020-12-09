@@ -90,7 +90,7 @@
         role="dialog"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Actualizar Datos de la Materia</h4>
@@ -108,15 +108,10 @@
                 <div class="form-group">
                   <label class="control-label">Nombre Completo</label>
                   <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-user"></i>
-                    </div>
                     <input
                       name="name"
                       type="text"
-                      class="form-control"
-                      placeholder="Escriba el nombre de la materia a registrar"
-                      required
+                      class="form-control bordeInput"
                       disabled
                       v-model="nombre"
                     />
@@ -125,15 +120,10 @@
                 <div class="form-group">
                   <label class="control-label">Codigo:</label>
                   <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-id-card"></i>
-                    </div>
                     <input
                       name="name"
                       type="text"
-                      class="form-control"
-                      placeholder="Escriba el codigo de la materia"
-                      required
+                      class="form-control bordeInput"
                       disabled
                       v-model="codigo"
                     />
@@ -142,15 +132,10 @@
                 <div class="form-group">
                   <label class="control-label">Programa Academico:</label>
                   <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-id-card"></i>
-                    </div>
                     <input
                       name="name"
                       type="text"
-                      class="form-control"
-                      placeholder="Programa Academico"
-                      required
+                      class="form-control bordeInput"
                       disabled
                       v-model="idPrograma"
                     />
@@ -159,9 +144,6 @@
                 <div class="form-group">
                   <label class="control-label">Numero de Estudiantes</label>
                   <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono fas fa-users"></i>
-                    </div>
                     <input
                       type="number"
                       class="form-control col-2"
@@ -175,16 +157,22 @@
                 <div class="form-group">
                   <label class="control-label">Numero de Créditos</label>
                   <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="icono icono fas fa-chalkboard-teacher"></i>
-                    </div>
                     <input
                       type="number"
-                      class="form-control col-2"
-                      value="0"
-                      min="1"
+                      class="form-control col-2 bordeInput"
                       disabled
                       v-model="nocreditos"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Horario de la Materia</label>
+                  <div class="input-group">
+                    <input
+                      type="number"
+                      class="form-control bordeInput"
+                      placeholder="Aca va el horario de la materia M 06-08 - J 06-08"
+                      disabled
                     />
                   </div>
                 </div>
@@ -310,6 +298,7 @@ export default {
       daysSchedule: daysOfWeek,
       idMateriaHorario: 0,
       idDocente: 0,
+      horarioM:"",
     };
   },
   created() {
@@ -452,6 +441,7 @@ export default {
       this.codigo = materia.codigo;
       this.noestudiantes = materia.noestudiantes;
       this.nocreditos = materia.nocreditos;
+      this.horarioM = materia.horarios;
 
       console.log(materia);
     },
@@ -510,6 +500,10 @@ export default {
 };
 </script>
 <style scoped>
+.bordeInput {
+  background: white !important;
+  border: white !important;
+}
 .horama {
   display: flex;
 }

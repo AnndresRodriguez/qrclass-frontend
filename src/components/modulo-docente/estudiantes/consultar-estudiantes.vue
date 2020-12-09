@@ -4,11 +4,16 @@
       <h2>Consultar Estudiantes</h2>
       <hr />
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Codigo Materia: </label>
+        <label class="col-sm-2 col-form-label">Codigo: </label>
         <div class="col-sm-10">
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="1151103" />
+              <input
+                v-model="ccodigo"
+                type="email"
+                class="form-control"
+                placeholder="Escriba el codigo de la materia consultar"
+              />
               <div class="input-group-btn">
                 <button class="btn btn-info" type="submit">
                   <i class="iconob fas fa-search"></i>
@@ -22,37 +27,33 @@
       <br />
       <h5 class="h5L">Lista de Materias</h5>
       <hr />
-      <div class="cssRegistro">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Codigo</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Lista de Estudiantes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(materia, index) in filtrarMateria" :key="index">
-              <th scope="row">{{ materia.codigo }}</th>
-              <td>{{ materia.nombre }}</td>
-              <td>
-                <button
-                  class="btn btn-light"
-                  @click="verEstudiantesMateria(materia)"
-                >
-                  Ver
-                </button>
-                <!-- <router-link class="btn btn-light" :to="{ name: 'estudiante' }"
-                  >Ver</router-link
-                > -->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Lista Estudiantes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(materia, index) in filtrarMateria" :key="index">
+            <th scope="row">{{ materia.codigo }}</th>
+            <td>{{ materia.nombre }}</td>
+            <td>
+              <button
+                class="btn btn-light"
+                @click="verEstudiantesMateria(materia)"
+              >
+                Ver
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
+
 <script>
 /* eslint-disable */
 export default {
@@ -60,19 +61,15 @@ export default {
     return {
       materiasDocente: [],
       materia: {},
-      estudiantes: [],
-      estudiante: {},
       codigo: "",
       id: 0,
       nombre: "",
-      noestudiantes: "",
-      consultac: "",
+      ccodigo: "",
     };
   },
 
   created() {
     this.getAllDataDocente();
-
     // axios.post()
   },
 
@@ -90,43 +87,28 @@ export default {
           console.log(err);
         });
     },
-    getAllDataEstudiantes(id) {
-      axios
-        .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
-        .then((res) => {
-          this.estudiantes = res.data.data[0].estudiantes;
-
-          console.log("lista de estudiantess", this.estudiantes);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     verEstudiantesMateria(materia) {
-
-      // console.log(materia);
-
       this.$store.dispatch("listarEstudianteMateria", materia);
-      this.$router.replace({ name: "estudiante" });
-
-      // this.id = materia.id;
-      // this.codigo = materia.codigo;
-      // this.nombre = materia.nombre;
-      // this.noestudiantes = materia.noestudiantes;
-
-      
+       this.$router.replace({ name: "estudiante" });
+      console.log("materia que envio de materia asistencia", materia);
     },
   },
   computed: {
     filtrarMateria() {
       return this.materiasDocente.filter((materia) =>
-        materia.codigo.toLowerCase().includes(this.consultac)
+        materia.codigo.toLowerCase().includes(this.ccodigo)
       );
     },
   },
 };
 </script>
+
 <style scoped>
+.bordeInput {
+  background: white;
+  border: white;
+  width: 60%;
+}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);

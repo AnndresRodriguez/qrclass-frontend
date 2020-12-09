@@ -71,7 +71,7 @@
         role="dialog"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Actualizar Datos del Docente</h4>
@@ -102,9 +102,7 @@
                   <input
                     name="name"
                     type="text"
-                    class="form-control"
-                    placeholder=""
-                    required
+                    class="form-control bordeInput"
                     disabled
                     v-model="codigo"
                   />
@@ -114,38 +112,17 @@
                   <input
                     name="departamento"
                     type="text"
-                    class="form-control"
-                    placeholder=""
-                    required
+                    class="form-control bordeInput"
                     disabled
                     v-model="dpto"
                   />
-                  <!-- <div class="input-group">
-                    <select
-                      @change="listarDepartamentos(departamento)"
-                      v-model="departamento"
-                      name="departamento"
-                      class="form-control"
-                    >
-                      <template v-for="(departamento, index) in departamentos">
-                        <option :key="index" :value="departamento">
-                          {{ departamento.codigo }} -
-                          {{ departamento.nombre }}
-                        </option>
-                      </template>
-                    </select>
-                  </div> -->
                 </div>
 
                 <div class="form-group">
                   <label class="control-label">Correo Electronico</label>
                   <input
                     type="email"
-                    class="form-control"
-                    placeholder="Escriba el corre institucional (example@ufps.edu.co)"
-                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
-                    title="Solo se permiten cuentas de ufps.edu.co"
-                    required
+                    class="form-control bordeInput"
                     disabled
                     v-model="correo"
                   />
@@ -321,6 +298,10 @@ export default {
 </script>
 
 <style scoped>
+.bordeInput {
+  background: white !important;
+  border: white !important;
+}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);
