@@ -11,67 +11,72 @@
           </li>
           <li>Una ve generado el codigo QR, se le envia una copia al correo</li>
         </ul>
-        <div>
+        <div class="espacio">
+          <br />
           <form>
-            <div class="form-check">
+            <!-- <div>
               <input
                 class="form-check-input"
                 type="radio"
-                name="exampleRadios"
-                id="exampleRadios1"
-                value="option1"
+                name="radios"
+                id="1"
+                value="1"
                 checked
               />
-              <label class="form-check-label" for="exampleRadios1">
+              <label for="1">
                 Al principio de la clase, se envia por correo electronico
                 (Automatico).
               </label>
             </div>
-            <div class="form-check">
+            <div>
               <input
                 class="form-check-input"
                 type="radio"
-                name="exampleRadios"
-                id="exampleRadios2"
-                value="option2"
+                name="radios"
+                id="2"
+                value="2"
                 checked
               />
-              <label class="form-check-label" for="exampleRadios2">
+              <label for="2">
                 Al finalizar de la clase, se envia por correo electronico
                 (Automatico).
               </label>
-            </div>
-            <div class="form-check">
+            </div> -->
+            <div>
               <input
                 class="form-check-input"
                 type="radio"
-                name="exampleRadios"
-                id="exampleRadios3"
-                value="option3"
+                name="radios"
+                id="3"
+                value="3"
                 checked
               />
-              <label class="form-check-label" for="exampleRadios3">
+              <label for="3">
                 Cuando el docente lo habilite, se envia por correo*.
               </label>
             </div>
-            <div class="form-check">
+            <div>
               <input
                 class="form-check-input"
                 type="radio"
-                name="exampleRadios"
-                id="exampleRadios4"
-                value="option4"
+                name="radios"
+                id="4"
+                value="4"
                 checked
               />
-              <label class="form-check-label" for="exampleRadios4">
+              <label for="4">
                 Cuando el docente lo habilite, no se envia por correo*.
               </label>
             </div>
-            <label
-              >* Si selecciona una de estas opciones, recuerde que para generar
-              el codigo QR, debe realizar esta accion con el boton "Generar QR"
-              en la lista de asistencias por materia.</label
-            >
+            <div>
+              <br />
+              <p>
+                * Si selecciona una de estas opciones, recuerde que para generar
+                el codigo QR, debe realizar esta accion con el boton "Generar
+                QR" en la lista de asistencias por materia.
+              </p>
+            </div>
+
             <div class="boton form-group">
               <button type="submit" class="btn btn-info">Registrar</button>
             </div>
@@ -82,4 +87,8 @@
   </div>
 </template>
 <script></script>
-<style scoped></style>
+<style scoped>
+.espacio {
+  margin-left: 7%;
+}
+</style>
