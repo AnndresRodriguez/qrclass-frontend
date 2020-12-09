@@ -53,6 +53,8 @@ export default {
 
           this.materia = res.data.data.materia;
           this.docente = res.data.data.docente;
+          this.idMateria = res.data.data.idMateria;
+          this.idDocente = res.data.data.idDocente;
           this.fechaMateria = formatDate(new Date());
 
 
@@ -91,9 +93,11 @@ export default {
 
       materia: '',
       docente: '',
-      fechaMateria: '',
       idMateria: '',
-      idDia: ''
+      idDocente: '',
+      idEstudiante: '',
+      fechaMateria: '',
+      estudianteValido: false
 
     };
   },
@@ -122,7 +126,7 @@ export default {
             this.lastName = res.data.family_name;
           });
 
-        axios
+        await axios
           .post(
             `${process.env.VUE_APP_API}/estudiantes/email`,
             { email: this.emailToFind, id: this.selected }
@@ -131,26 +135,8 @@ export default {
             console.log(res.data);
 
             if (res.data.operation) {
-              this.$store.dispatch("loadInfoUser", {
-                fullName: this.fullName,
-                photo: this.photo,
-                email: this.email,
-                name: this.name,
-                lastName: this.lastName,
-              });
-
-              this.$store.dispatch("loadRoleID", {
-                idRole: this.selected,
-                id: res.data.data.id,
-              });
-
-              fireToast(
-                "success",
-                "Asistecia registrada",
-                `Bienvenido a la clase ${this.materia}`
-              );
-
-              // this.$router.replace("/dashboard");
+                this.idEstudiante = res.data.data.id
+                this.estudianteValido = true;
             } else {
               fireToast(
                 "error",
@@ -158,24 +144,42 @@ export default {
                 "El usuario ingresado no tiene acceso al sistema, ingrese con una cuenta autorizada"
               );
 
-              this.$router.replace("/");
-              this.selected = "";
+              // this.$router.replace("/");
+              // this.selected = "";
             }
           })
           .catch((err) => {
             console.log(err);
           });
+
+          if(this.estudianteValido){
+
+            axios.post(`${process.env.VUE_APP_API}/asistencias`,
+            { idEstudiante: this.idEstudiante, idMateria:this.idMateria, idDocente: this.idDocente, asistio: 1 })
+            .then(res => {
+
+                if(res.data.operation){
+                  fireToast(
+                  "success",
+                  "Asistecia registrada",
+                  `${this.name} se ha registrado su asistencia a la materia ${this.materia} correctamente`);
+                }else{
+
+                  fireToast(
+                  "error",
+                  "Asistencia no registrada",
+                  `No se ha registrado su asistencia a la materia ${this.materia} correctamente, intente nuevamente`);
+              }
+
+          })
+
+          }   
       }
     },
     OnGoogleAuthFail(error) {
       console.log(error);
     },
-  },
-  computed: {
-    habilitarboton() {
-      return this.selected == "";
-    },
-  },
+  }
 };
 </script>
 <style scoped>
