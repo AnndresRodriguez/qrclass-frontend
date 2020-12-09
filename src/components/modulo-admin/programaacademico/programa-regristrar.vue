@@ -146,7 +146,7 @@ export default {
           fireToast(
             "success",
             "Registro Exitoso",
-            "El Nuevo director de programa ha sido creado"
+            "El Nuevo programa academico ha sido creado"
           );
           console.log(res.data);
           this.limpiarinput();

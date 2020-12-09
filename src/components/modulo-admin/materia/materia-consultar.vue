@@ -476,7 +476,7 @@ export default {
           fireToast(
             "success",
             "Actualización Exitosa",
-            "Los datos del docente han sido actualizado"
+            "Los datos de la materia han sido actualizados"
           );
         } else {
           console.log(res.data);
@@ -484,7 +484,7 @@ export default {
           fireToast(
             "error",
             "Error en la actualización",
-            "Ha ocurrido un error al actualizar los datos del docente, intente nuevamente"
+            "Ha ocurrido un error al actualizar los datos de la materia, intente nuevamente"
           );
         }
       });
