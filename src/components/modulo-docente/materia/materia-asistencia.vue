@@ -160,17 +160,17 @@ export default {
 
        const infoAsistencia = {  materia: materiaSelected.nombre, docente: this.$store.getters.getInfoUser.fullName, idMateria: materiaSelected.id, idDocente:  this.$store.getters.getInfoRole.id }
 
-      //  axios
-      //   .post(
-      //     `${process.env.VUE_APP_API}/qr`,  infoAsistencia
-      //   )
-      //   .then((res) => {
-      //     // this.materiasDocente = res.data.data;
-      //     console.log(res.data.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+       axios
+        .post(
+          `${process.env.VUE_APP_API}/qr`,  infoAsistencia
+        )
+        .then((res) => {
+          // this.materiasDocente = res.data.data;
+          console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       //  console.log(materiaSelected);
 
