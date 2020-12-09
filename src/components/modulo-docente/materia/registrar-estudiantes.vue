@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Registrar Estudiante</h2>
+      <h2>Registrar Estudiantes</h2>
       <hr />
       <div>
         <br />
@@ -17,64 +17,129 @@
           formato.<br />
         </p>
       </div>
-      <form @submit.prevent="registrarEstudiante">
-        <div for="archivoEstudiantes" class="form-group">
-          <p class="control-label">
-            Seleccione el archivo con la lista de estudiantes a registrar:<br />
-          </p>
-          <!-- <input type="file" id="archivoEstudiantes" accept=".csv" /> -->
-          <input
-            type="file"
-            id="archivoEstudiantes"
-            ref="file"
-            @change="handleFileUpload()"
-            class="form-control-file"
-            required
-          />
-          <p class="control-label">
-            Nota: Solo se permiten archivos en formato .csv.<br />
-          </p>
-        </div>
-        <div class="modal-footer">
-          <router-link class="btn btn-info" :to="{ name: 'consulta' }"
-            >Volver</router-link
+
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            id="drop"
+            @drop="handleDrop"
+            @dragover="handleDragover"
+            @dragenter="handleDragover"
           >
-          <button type="submit" class="btn btn-primary">Registrar</button>
+            Arrastre aquí su archivo excel
+          </div>
         </div>
-      </form>
+      </div>
+      <div class="mt-4">
+        <h4>Estudiantes a matricular</h4>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <table class="table table-striped table-hover table-condensed">
+            <thead>
+              <tr>
+                <th v-for="(item, index) in headers" :key="index">
+                  {{ item }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, idx) in tickets" :key="idx">
+                <td v-for="(key, indice) in item" :key="indice">
+                  <label>{{ key }}</label>
+                  <p>{{ item.key }}</p>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
-import vue2Dropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css';
-import XSLX from 'xlsx';
+import vue2Dropzone from "vue2-dropzone";
+import "vue2-dropzone/dist/vue2Dropzone.min.css";
+import XLSX from "xlsx";
+import { fixdata, get_header_row } from '../../../util/xslx'
+
+var state={
+    tickets:[{ name: "Información acerca de los Estudiantes" }],
+    headers:["Campos de estudiantes"],
+    nombreMateria: ''
+}
+
 export default {
   components: {
-        vueDropzone: vue2Dropzone
+    vueDropzone: vue2Dropzone,
   },
   data() {
-    return {
-      estudiantes: [],
-      file: ''
-    };
+    return state
   },
 
   methods: {
+    registrarEstudiante() {},
 
-    registrarEstudiante(){
-
-
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
     },
 
-    handleFileUpload(){
-        this.file = this.$refs.file.files[0];
-    }
+    workbook_to_json(workbook) {
+      var result = {};
+      workbook.SheetNames.forEach(function(sheetName) {
+        var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+        if(roa.length > 0){
+          result[sheetName] = roa;
+        }
+      });
+      return result;
+    },
 
   
-  },
+    handleDragover(e) {
+	    e.stopPropagation();
+	    e.preventDefault();
+	    e.dataTransfer.dropEffect = 'copy';
+    },
+
+    handleDrop(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      console.log("DROPPED");
+      var files = e.dataTransfer.files, i, f;
+      for (i = 0, f = files[i]; i != files.length; ++i) {
+          var reader = new FileReader(),
+          name = f.name;
+          reader.onload = function(e) {
+            var results, 
+                data = e.target.result, 
+                fixedData = fixdata(data), 
+                workbook= XLSX.read(btoa(fixedData), {type: 'base64'}), 
+                firstSheetName = workbook.SheetNames[0], 
+                worksheet = workbook.Sheets[firstSheetName];
+            state.headers= get_header_row(worksheet);
+            results= XLSX.utils.sheet_to_json(worksheet);
+            state.tickets=results;
+          };
+          reader.readAsArrayBuffer(f);
+    }
 }
+
+  },
+};
 </script>
-<style scoped></style>
+<style scoped>
+  #drop{
+  border: 2px dashed #bbb;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      padding: 25px;
+      text-align: center;
+      font: 20pt bold,"Vollkorn";
+      color: #bbb;
+  }
+</style>
