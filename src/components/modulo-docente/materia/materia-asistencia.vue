@@ -73,7 +73,7 @@
         <div class="modal-dialog modal-pq" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Codigo QR</h4>
+              <h4 class="modal-title">Codigo QR-</h4>
               <button
                 type="button"
                 class="close"
@@ -85,7 +85,6 @@
             </div>
             <div class="modal-body d-flex justify-content-center">
               <qrcode-vue :value="valueqr" :size="size"></qrcode-vue>
-              <!-- <img class="" src="/img/qr_img.png" /> -->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary">Imprimir</button>

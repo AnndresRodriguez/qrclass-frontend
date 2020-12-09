@@ -66,7 +66,7 @@
         role="dialog"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Actualizar Datos Programa Academico</h4>
@@ -86,7 +86,7 @@
                   <input
                     name="name"
                     type="text"
-                    class="form-control"
+                    class="form-control bordeInput"
                     disabled
                     v-model="nombre"
                   />
@@ -96,7 +96,7 @@
                   <input
                     name="name"
                     type="text"
-                    class="form-control"
+                    class="form-control bordeInput"
                     disabled
                     v-model="codigo"
                   />
@@ -105,11 +105,7 @@
                   <label class="control-label">Correo Electronico</label>
                   <input
                     type="email"
-                    class="form-control"
-                    placeholder="Escriba el corre institucional (example@ufps.edu.co)"
-                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
-                    title="Solo se permiten cuentas de ufps.edu.co"
-                    required
+                    class="form-control bordeInput"
                     disabled
                     v-model="correo"
                   />
@@ -251,6 +247,10 @@ export default {
       console.log(programaNuevo);
       this.getAllProgramas();
     },
+    setDirector(estadoEstudiante) {
+      console.log(estadoEstudiante);
+      this.estadoE = estadoEstudiante;
+    },
   },
   computed: {
     filtrarPrograma() {
@@ -263,6 +263,10 @@ export default {
 </script>
 
 <style scoped>
+.bordeInput {
+  background: white !important;
+  border: white !important;
+}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);

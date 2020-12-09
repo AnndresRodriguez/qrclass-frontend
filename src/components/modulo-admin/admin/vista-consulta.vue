@@ -66,7 +66,7 @@
         role="dialog"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">Actualizar Datos del Administrador</h4>
@@ -96,13 +96,7 @@
                 <div class="form-group">
                   <label class="control-label">Documento:</label>
                   <input
-                    name="name"
-                    type="text"
-                    @keypress="validateNumber"
-                    class="form-control"
-                    placeholder="Escriba el numero de documento del Admin"
-                    maxlength="10"
-                    minlength="5"
+                    class="form-control bordeInput"
                     required
                     disabled
                     v-model="documento"
@@ -112,10 +106,9 @@
                   <label class="control-label">Correo Electronico</label>
                   <input
                     type="email"
-                    class="form-control"
+                    class="form-control bordeInput"
                     placeholder="Escriba el correo institucional (misnombres@ufps.edu.co)"
                     pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
-                    title="Solo se permiten cuentas de ufps.edu.co"
                     maxlength="45"
                     minlength="12"
                     required
@@ -266,6 +259,10 @@ export default {
 };
 </script>
 <style scoped>
+.bordeInput {
+  background: white !important;
+  border: white !important;
+}
 .cssRegistro .modal-title h4 {
   text-align: center;
 }

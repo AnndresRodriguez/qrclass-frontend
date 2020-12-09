@@ -66,7 +66,7 @@
         role="dialog"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title pl-2">Actualizar Datos del Estudiante</h4>
@@ -98,9 +98,7 @@
                   <input
                     name="name"
                     type="text"
-                    class="form-control"
-                    placeholder="Escriba el numero de codigo"
-                    required
+                    class="form-control bordeInput"
                     disabled
                     v-model="codigo"
                   />
@@ -109,11 +107,7 @@
                   <label class="control-label">Correo Electronico</label>
                   <input
                     type="email"
-                    class="form-control"
-                    placeholder="Escriba el corre institucional (example@ufps.edu.co)"
-                    pattern=".+@[uU][fF][pP][sS][.][eE][dD][uU][.][cC][oO]"
-                    title="Solo se permiten cuentas de ufps.edu.co"
-                    required
+                    class="form-control bordeInput"
                     disabled
                     v-model="correo"
                   />
@@ -261,6 +255,10 @@ export default {
 </script>
 
 <style scoped>
+.bordeInput {
+  background: white !important;
+  border: white !important;
+}
 .cssRegistro .modal-title {
   text-align: center;
   color: rgb(188, 0, 22);

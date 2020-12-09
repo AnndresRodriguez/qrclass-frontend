@@ -15,7 +15,6 @@
         <label class="col-form-label">No. de Estudiante: </label>
         <input class="bordeInput" disabled v-model="noestudiantes" />
       </div>
-      <button type="" class="btn btn-info">Imprimir</button>
       <div class="scroll-div">
         <table class="table table-hover">
           <thead>

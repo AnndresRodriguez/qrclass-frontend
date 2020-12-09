@@ -8,7 +8,7 @@
       <hr />
       <div>
         <label class="col-sm-2 col-form-label">Materia: </label>
-        <input v-model="nombre" class="bordeInput" disabled />
+        <input class="bordeInput" disabled v-model="nombre" /><br />
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Codigo Estudiante: </label>
@@ -29,7 +29,7 @@
           </form>
           <br />
         </div>
-        <br />
+
         <table class="table table-hover">
           <thead>
             <tr>
@@ -76,7 +76,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div>
+                  <div class="form-group">
                     <label class="control-label">Codigo:</label>
                     <input
                       class="bordeInput"
@@ -121,10 +121,10 @@ export default {
       materia: {},
       estudiantes: [],
       estudiante: {},
-      nombreE: "",
-      codigoE: "",
       codigo: "",
       ccodigo: "",
+      nombreE: "",
+      codigoE: "",
       id: 0,
       nombre: "",
       noestudiantes: "",
@@ -132,28 +132,49 @@ export default {
   },
 
   created() {
+    this.getAllDataDocente();
+    this.verEstudiantesMateria();
+    this.getAllDataEstudiantes(this.id);
 
-    this.getAllEstudiantesMateria(this.$store.getters.getInfoMateria.id)
- 
+    // axios.post()
   },
 
   methods: {
-    getAllEstudiantesMateria(id) {
+    getAllDataDocente() {
       axios
         .get(
-          `${process.env.VUE_APP_API}/materias/estudiantes/${id}`
+          `${process.env.VUE_APP_API}/materias/docente/${this.$store.getters.getInfoRole.id}`
         )
         .then((res) => {
-          this.estudiantes = res.data.data[0].estudiantes;
+          this.materiasDocente = res.data.data;
+          console.log(this.materiasDocente);
         })
         .catch((err) => {
           console.log(err);
         });
     },
-
-    detalleAsistencia(estudiante){
-      this.nombreE= estudiante.nombre;
-      this.codigoE= estudiante.codigo;
+    verEstudiantesMateria() {
+      let materia = this.$store.getters.getInfoMateria;
+      this.id = materia.id;
+      this.codigo = materia.codigo;
+      this.nombre = materia.nombre;
+      this.noestudiantes = materia.noestudiantes;
+      console.log("materia del stor", materia);
+    },
+    getAllDataEstudiantes(id) {
+      axios
+        .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
+        .then((res) => {
+          this.estudiantes = res.data.data[0].estudiantes;
+          console.log("lista de estudiantess", this.estudiantes);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    detalleAsistencia(estudiante) {
+      this.nombreE = estudiante.nombre;
+      this.codigoE = estudiante.codigo;
     },
   },
   computed: {
