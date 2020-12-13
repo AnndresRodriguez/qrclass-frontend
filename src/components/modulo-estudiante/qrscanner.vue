@@ -1,7 +1,8 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Descripcion de la Asistencia</h2>
+      <h2>Registro de Asistencia QR-Class UFPS</h2>
+      <!-- <h4>Estudiante </h4> -->
       <br />
 
       <pre>{{ qrvalue }}</pre>

@@ -33,7 +33,7 @@
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
             <th scope="col">No.Est.</th>
-            <th scope="col">Horario</th>
+            <!-- <th scope="col">Horario</th> -->
             <th scope="col">Lista Estudiantes</th>
           </tr>
         </thead>
@@ -42,7 +42,7 @@
             <th scope="row">{{ materia.codigo }}</th>
             <td>{{ materia.nombre }}</td>
             <td>{{ materia.noestudiantes }}</td>
-            <td>-</td>
+            <!-- <td>{{ getNameHoras(materia.horarios) }}</td> -->
             <td>
               <a
                 data-toggle="modal"
@@ -122,6 +122,7 @@
 </template>
 
 <script>
+import { formatNameDay, formatNameHour } from "../../../util/formatHorario";
 /* eslint-disable */
 export default {
   data() {
@@ -145,6 +146,19 @@ export default {
   },
 
   methods: {
+
+    getNameHoras(horas) {
+
+      console.log('horasTotales', horas);
+
+      const nameDay = horas[0].dia.dia;
+      const initHour = horas[0].hora.horainicio;
+      const finalDay = horas.length - 1;
+      const finalHour = horas[finalDay].hora.horafinal;
+
+      return `${ formatNameDay(nameDay)}: ${formatNameHour(initHour)} - ${formatNameHour(finalHour)}`;
+    },
+
     getAllDataDocente() {
       axios
         .get(
@@ -162,8 +176,8 @@ export default {
       axios
         .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
         .then((res) => {
-          this.estudiantes = res.data.data[0].estudiantes;
-          console.log("lista de estudiantess", this.estudiantes);
+            this.estudiantes = res.data.data[0].estudiantes;
+            console.log("lista de estudiantess", this.estudiantes);
         })
         .catch((err) => {
           console.log(err);

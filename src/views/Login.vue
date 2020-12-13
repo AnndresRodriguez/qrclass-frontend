@@ -11,13 +11,51 @@
               <h6>Identifiquese usando su cuenta institucional</h6>
               <br />
               <div>
+                <div class="d-flex justify-content-around" style="width: 400px">
+                  <div
+                    class="d-flex flex-column justify-content-center align-items-center"
+                    @click="activate('1')"
+                  >
+                    <div
+                      id="botonAdmin"
+                      class="d-flex justify-content-center align-items-center container-icono"
+                      style="cursor:pointer"
+                    >
+                      <i class="fas fa-user-lock fa-2x" style="margin:0"></i>
+                    </div>
+                    <h6>Administrador</h6>
+                  </div>
+                  <div @click="activate('2')">
+                    <div
+                      id="botonDocente"
+                      class="d-flex justify-content-center align-items-center container-icono"
+                      style="cursor:pointer"
+                    >
+                      <i
+                        class="fas fa-chalkboard-teacher fa-2x"
+                        style="margin:0"
+                      ></i>
+                    </div>
+                    <h6>Docente</h6>
+                  </div>
+                  <div @click="redirectScan()">
+                    <div
+                      id="botonEstudiante"
+                      class="d-flex justify-content-center align-items-center container-icono"
+                      style="cursor:pointer"
+                    >
+                      <i class="fas fa-user fa-2x" style="margin:0"></i>
+                    </div>
+                    <h6>Estudiante</h6>
+                  </div>
+                </div>
                 <!-- <form @submit.prevent="test"> -->
-                <select class="select" v-model="selected" required>
+                <!-- <select class="select" v-model="selected" required>
                   <option disabled value="">Seleccione un Rol</option>
                   <option id="Admin" value="1">Administrador</option>
                   <option id="Docente" value="2">Docente</option>
-                </select>
-                <br />
+                </select> -->
+                <!-- <br /> -->
                 <br />
                 <button
                   :disabled="habilitarboton"
@@ -65,9 +103,30 @@ export default {
       name: "",
       lastName: "",
       clientID: `${process.env.VUE_APP_GOOGLE_CLIENT_ID}`,
+      botonAdmin: false,
+      botonDocente: false
     };
   },
   methods: {
+
+    redirectScan(){
+      window.open('https://qrclass-ufps.web.app/scan-estudiante', '_blank');
+    },
+
+    
+    activate(value){
+      this.selected = value;
+        if(value === "1"){
+
+          document.getElementById("botonAdmin").classList.add('container-icono-selected', 'icono-selected');
+          document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
+        }else{
+
+          document.getElementById("botonDocente").classList.add('container-icono-selected', 'icono-selected');
+          document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
+        }
+    },
+
     test() {
       console.log("url", createURL(this.selected));
       console.log(
@@ -150,6 +209,11 @@ export default {
     habilitarboton() {
       return this.selected == "";
     },
+
+    resaltarBoton(){
+      return ' .container-icono-selected .icono-selected'
+
+    }
   },
 };
 </script>
@@ -247,6 +311,27 @@ export default {
 .card .box ul li:hover a {
   color: #e91e63;
   transform: rotateY(360deg);
+}
+
+.container-icono{
+
+  border: solid red 1px;
+  border-radius:50%;
+  width: 70px;
+  height:70px;
+  background: #fff;
+  color:#d31024
+
+}
+
+.icono{
+  color:#d31024
+}
+
+
+.container-icono-selected{
+  background: #d31024;
+  color:#fff
 }
 </style>
 

@@ -55,6 +55,11 @@
           </table>
         </div>
       </div>
+      <div>
+        <button class="btn btn-info" @click="matricularEstudiantes">
+          Matricular Estudiantes
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -96,6 +101,22 @@ export default {
         }
       });
       return result;
+    },
+
+    matricularEstudiantes(){
+
+        swal.fire({
+              title: 'Martriculando Estudiantes...',
+              timer: 3000,
+              allowOutsideClick: false,
+              showConfirmButton: false,
+              willOpen: () => {
+                swal.showLoading()
+              }
+            }).then((result) => {
+
+              fireToast('success', 'Matricula Exitosa', 'Se ha matriculado los estudiantes satisfactoriamente en la materia');      
+            })
     },
 
   

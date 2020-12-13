@@ -165,17 +165,17 @@
                     />
                   </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label class="control-label">Horario de la Materia</label>
                   <div class="input-group">
                     <input
                       type="number"
                       class="form-control bordeInput"
-                      placeholder="Aca va el horario de la materia M 06-08 - J 06-08"
+                      v-model="horarioM"
                       disabled
                     />
                   </div>
-                </div>
+                </div> -->
 
                 <!-- <div class="form-group">
                   <label class="control-label"
@@ -433,6 +433,7 @@ export default {
     },
     editarMateria(materia) {
       configLangSchedule();
+      console.log('Materia',materia);
 
       this.idmateria = materia.id;
       this.idDocente = materia.idDocente;
@@ -441,9 +442,8 @@ export default {
       this.codigo = materia.codigo;
       this.noestudiantes = materia.noestudiantes;
       this.nocreditos = materia.nocreditos;
-      this.horarioM = materia.horarios;
+      // this.horarioM = this.getNameHoras(materia.horarios);
 
-      console.log(materia);
     },
     actualizarMateria() {
       const materia = {
