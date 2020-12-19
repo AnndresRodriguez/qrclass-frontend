@@ -19,6 +19,10 @@ import docenteEstudianteroutes from "./dashboard/routes-docente/estudiante.route
 import docenteConfiguracionesroutes from "./dashboard/routes-docente/configuraciones.routes";
 import docenteReportesroutes from "./dashboard/routes-docente/reportes.routes";
 
+import estudiantedatosroutes from "./dashboard/routes-estudiante/datos.routes";
+import estudianteasistenciaroutes from "./dashboard/routes-estudiante/asistencias.routes";
+import estudianteScanroutes from "./dashboard/routes-estudiante/registro-asistencias.routes";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -44,6 +48,9 @@ const routes = [
       .concat(docenteEstudianteroutes)
       .concat(docenteConfiguracionesroutes)
       .concat(docenteReportesroutes)
+      .concat(estudiantedatosroutes)
+      .concat(estudianteasistenciaroutes)
+      .concat(estudianteScanroutes)
   },
   {
     path: "/asistencia-estudiante",

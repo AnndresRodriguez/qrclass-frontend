@@ -16,10 +16,17 @@ import Navbar from "../components/dashboard/Navbar";
 import Sidebaradmin from "../components/dashboard/SidebarAdmin";
 import SidebarDocente from "../components/dashboard/SidebarDocente";
 import SidebarDirector from "../components/dashboard/SidebarDirector";
+import SidebarEstudiante from "../components/dashboard/SidebarEstudiante";
 import { dashboardRole } from "../util/tools";
 
 export default {
-  components: { Navbar, Sidebaradmin, SidebarDocente, SidebarDirector },
+  components: {
+    Navbar,
+    Sidebaradmin,
+    SidebarDocente,
+    SidebarDirector,
+    SidebarEstudiante
+  },
 
   created() {
     this.menuSidebar = dashboardRole(this.$store.getters.getInfoRole.idRole);

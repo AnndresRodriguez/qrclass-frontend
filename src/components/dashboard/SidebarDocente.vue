@@ -39,12 +39,12 @@
               href="dashboard-materia"
             >
             </item>
-            <item
+            <!-- <item
               title="Estudiantes"
               :items="itemsEstudiantes"
               href="dashboard-estudiante"
             >
-            </item>
+            </item> -->
             <item
               title="Configuraciones"
               :items="itemsconfiguraciones"
@@ -73,7 +73,7 @@ import userMixin from "../../mixins/userMixin";
 // import optionsDirprograma from "../modulo-admin/options/dirprograma";
 import opcionesHorario from "../modulo-docente/options/horario";
 import opcionesMateria from "../modulo-docente/options/materia";
-import optionsEstudiante from "../modulo-docente/options/estudiante";
+//import optionsEstudiante from "../modulo-docente/options/estudiante";
 import optionsConfiguraciones from "../modulo-docente/options/configuraciones";
 import optionsReportes from "../modulo-docente/options/reportes";
 
@@ -84,7 +84,7 @@ export default {
     return {
       itemsHorario: opcionesHorario,
       itemsMateria: opcionesMateria,
-      itemsEstudiantes: optionsEstudiante,
+      //itemsEstudiantes: optionsEstudiante,
       itemsconfiguraciones: optionsConfiguraciones,
       itemsReportes: optionsReportes
     };
