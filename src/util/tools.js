@@ -28,6 +28,9 @@ export function dashboardRole(roleID) {
     case "3":
       roleID = "SidebarDirector";
       break;
+    case "4":
+      roleID = "SidebarEstudiante";
+      break;
   }
 
   return roleID;

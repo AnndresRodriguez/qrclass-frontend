@@ -38,7 +38,7 @@
                     </div>
                     <h6>Docente</h6>
                   </div>
-                  <div @click="redirectScan()">
+                  <div @click="activate('4')">
                     <div
                       id="botonEstudiante"
                       class="d-flex justify-content-center align-items-center container-icono"
@@ -48,6 +48,16 @@
                     </div>
                     <h6>Estudiante</h6>
                   </div>
+                  <!-- <div @click="redirectScan()">
+                    <div
+                      id="botonEstudiante"
+                      class="d-flex justify-content-center align-items-center container-icono"
+                      style="cursor:pointer"
+                    >
+                      <i class="fas fa-user fa-2x" style="margin:0"></i>
+                    </div>
+                    <h6>Estudiante</h6>
+                  </div> -->
                 </div>
                 <!-- <form @submit.prevent="test"> -->
                 <!-- <select class="select" v-model="selected" required>
@@ -62,11 +72,6 @@
                   class="btn btn-light"
                   v-google-signin-button="clientID"
                 >
-                  <!-- <button
-              :disabled="habilitarboton"
-              class="btn btn-light"
-              type="submit"
-            > -->
                   <img
                     src="https://accounts.google.com/favicon.ico"
                     alt=""
@@ -120,10 +125,18 @@ export default {
 
           document.getElementById("botonAdmin").classList.add('container-icono-selected', 'icono-selected');
           document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
-        }else{
+          document.getElementById("botonEstudiante").classList.remove('container-icono-selected', 'icono-selected');
+        }else if(value === "2"){
 
           document.getElementById("botonDocente").classList.add('container-icono-selected', 'icono-selected');
           document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
+          document.getElementById("botonEstudiante").classList.remove('container-icono-selected', 'icono-selected');
+        }else {
+
+          document.getElementById("botonEstudiante").classList.add('container-icono-selected', 'icono-selected');
+          document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
+          document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
+
         }
     },
 

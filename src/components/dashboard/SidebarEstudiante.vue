@@ -35,12 +35,14 @@
               href="dashboard-materia"
             >
             </item>
-            <item
-              title="Scan QR"
-              :items="itemsSCan"
-              href="dashboard-estudiante"
-            >
-            </item>
+            <li class="nav-item active">
+              <a
+                href="https://qrclass-ufps.web.app/scan-estudiante"
+                target="_blank"
+              >
+                <p>Marcar Asistencia</p>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -52,7 +54,6 @@ import item from "./sidebar/item";
 import userMixin from "../../mixins/userMixin";
 import opcionesDatos from "../modulo-estudiante/options/datos";
 import opcionesAsistencias from "../modulo-estudiante/options/asistencias";
-import optionsSCan from "../modulo-docente/options/estudiante";
 
 export default {
   components: { item },
@@ -60,8 +61,7 @@ export default {
   data() {
     return {
       itemsDatos: opcionesDatos,
-      itemsAsistencias: opcionesAsistencias,
-      itemsSCan: optionsSCan
+      itemsAsistencias: opcionesAsistencias
     };
   }
 };

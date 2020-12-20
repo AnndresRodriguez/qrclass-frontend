@@ -1,7 +1,7 @@
 let optionsSCan = [
   {
     text: "Registrar Asistencia",
-    name: "qrscanner"
+    name: "scan-estudiante"
   }
 ];
 export default optionsSCan;
