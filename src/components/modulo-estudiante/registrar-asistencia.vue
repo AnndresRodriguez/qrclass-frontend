@@ -56,6 +56,8 @@ export default {
           this.idMateria = res.data.data.idMateria;
           this.idDocente = res.data.data.idDocente;
           this.fechaMateria = formatDate(new Date(res.data.data.createdAt));
+          this.idScan = res.data.data.id
+          this.fechaRaw = res.data.data.createdAt;
 
 
 
@@ -97,6 +99,8 @@ export default {
       idDocente: '',
       idEstudiante: '',
       fechaMateria: '',
+      fechaRaw: '',
+      idScan: '',
       estudianteValido: false
 
     };
@@ -154,8 +158,8 @@ export default {
 
           if(this.estudianteValido){
 
-            axios.post(`${process.env.VUE_APP_API}/asistencias`,
-            { idEstudiante: this.idEstudiante, idMateria:this.idMateria, idDocente: this.idDocente, asistio: 1, fecha: this.fechaMateria })
+            axios.put(`${process.env.VUE_APP_API}/asistencias`,
+            { idScan: this.idScan, idEstudiante: this.idEstudiante, idMateria:this.idMateria, idDocente: this.idDocente, asistio: 1, fecha: this.fechaRaw })
             .then(res => {
 
                 if(res.data.operation){
