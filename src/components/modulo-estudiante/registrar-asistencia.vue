@@ -55,7 +55,7 @@ export default {
           this.docente = res.data.data.docente;
           this.idMateria = res.data.data.idMateria;
           this.idDocente = res.data.data.idDocente;
-          this.fechaMateria = formatDate(new Date());
+          this.fechaMateria = formatDate(new Date(res.data.data.createdAt));
 
 
 
@@ -155,7 +155,7 @@ export default {
           if(this.estudianteValido){
 
             axios.post(`${process.env.VUE_APP_API}/asistencias`,
-            { idEstudiante: this.idEstudiante, idMateria:this.idMateria, idDocente: this.idDocente, asistio: 1 })
+            { idEstudiante: this.idEstudiante, idMateria:this.idMateria, idDocente: this.idDocente, asistio: 1, fecha: this.fechaMateria })
             .then(res => {
 
                 if(res.data.operation){
