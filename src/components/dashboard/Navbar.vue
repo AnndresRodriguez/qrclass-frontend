@@ -1,16 +1,11 @@
 <template>
   <div class="main-header">
     <div class="logo-header" style="background-color:#bc0016 ">
-      <div class="nav-toggle">
-        <button class="btn btn-toggle toggle-sidebar">
-          <i class="icon-menu"></i>
-        </button>
-      </div>
       <button
         class="navbar-toggler sidenav-toggler ml-auto"
         type="button"
         data-toggle="collapse"
-        data-target="collapse"
+        data-target="#collapse"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >

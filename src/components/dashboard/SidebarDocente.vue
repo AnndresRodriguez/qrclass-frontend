@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="sidebar sidebar-style-2">
-      <div class="sidebar-wrapper scrollbar scrollbar-inner">
-        <div class="sidebar-content">
+      <div class="sidebar-wrapper">
+        <div class="sidebar-content" id="collapse">
           <div class="user">
             <div class="avatar-sm float-left mr-2">
               <img

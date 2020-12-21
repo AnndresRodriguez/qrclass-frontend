@@ -52,6 +52,7 @@
                 @click="assignIDMateria(index)"
                 href=""
                 type="button"
+                disabled
                 class="btn btn-light"
                 data-toggle="modal"
                 data-target="#codigoQR"
@@ -97,9 +98,8 @@
 </template>
 <script>
 /* eslint-disable */
-import QrcodeVue from 'qrcode.vue';
+import QrcodeVue from "qrcode.vue";
 export default {
-
   components: {
     QrcodeVue,
   },
@@ -113,8 +113,8 @@ export default {
       id: 0,
       nombre: "",
       noestudiantes: "",
-      valueqr: 'https://qrclass-ufps.web.app/asistencia-estudiante',
-      size: 300
+      valueqr: "https://qrclass-ufps.web.app/asistencia-estudiante",
+      size: 300,
     };
   },
 
@@ -125,12 +125,7 @@ export default {
   },
 
   methods: {
-    generarQR(){
-
-
-
-
-    },
+    generarQR() {},
     getAllDataDocente() {
       axios
         .get(
@@ -151,18 +146,20 @@ export default {
       console.log("materia que envio de materia asistencia", materia);
     },
 
-    assignIDMateria(idMateria){
+    assignIDMateria(idMateria) {
+      const materiaSelected = this.materiasDocente[idMateria];
 
-       const materiaSelected =  this.materiasDocente[idMateria];
+      console.log("materiaSelected", materiaSelected);
 
-       console.log('materiaSelected', materiaSelected);
+      const infoAsistencia = {
+        materia: materiaSelected.nombre,
+        docente: this.$store.getters.getInfoUser.fullName,
+        idMateria: materiaSelected.id,
+        idDocente: this.$store.getters.getInfoRole.id,
+      };
 
-       const infoAsistencia = {  materia: materiaSelected.nombre, docente: this.$store.getters.getInfoUser.fullName, idMateria: materiaSelected.id, idDocente:  this.$store.getters.getInfoRole.id }
-
-       axios
-        .post(
-          `${process.env.VUE_APP_API}/qr`,  infoAsistencia
-        )
+      axios
+        .post(`${process.env.VUE_APP_API}/qr`, infoAsistencia)
         .then((res) => {
           // this.materiasDocente = res.data.data;
           console.log(res.data.data);
@@ -171,24 +168,17 @@ export default {
           console.log(err);
         });
 
-        
-
       //  console.log(materiaSelected);
-
-
-        
 
       console.log(infoAsistencia);
 
-        // this.valueqr = encodeURI(`?materia=${materiaSelected.nombre}&docente=${this.$store.getters.getInfoUser.fullName}`)
+      // this.valueqr = encodeURI(`?materia=${materiaSelected.nombre}&docente=${this.$store.getters.getInfoUser.fullName}`)
       //  this.valueqr = JSON.stringify(infoAsistencia);
 
-       this.$store.dispatch('loadDataAsistencia', infoAsistencia);
+      this.$store.dispatch("loadDataAsistencia", infoAsistencia);
 
       //  console.log(infoAsistencia);
-
-       
-    }
+    },
   },
   computed: {
     filtrarMateria() {
