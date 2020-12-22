@@ -19,6 +19,7 @@
           Crear Reporte
         </button>
       </div>
+      <br />
       <div class="scroll-div">
         <table class="table table-hover" id="mytable">
           <thead>
@@ -52,14 +53,40 @@
           </tbody>
         </table>
       </div>
+      <div class="tablaReporte">
+        <table class="table table-hover tablaReporte" id="mytable2">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nombre Estudiante</th>
+              <template v-for="(estudiante, idx) in estudiantes[0].asistencias">
+                <th scope="col" :key="idx">
+                  {{ formatAssistance(estudiante.createdAt) }}
+                </th>
+              </template>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(estudiante, index) in estudiantes" :key="index">
+              <td>{{ estudiante.codigo }}</td>
+              <td>{{ estudiante.nombre }}</td>
+              <template v-for="(asistencia, indice) in estudiante.asistencias">
+                <td :key="indice">{{ asistencia.asistio }}</td>
+              </template>
+              <td>{{ calculateAsistencias(estudiante.asistencias) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import { formatAssistance } from "../../../util/tools";
-import XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+import XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 export default {
   data() {
@@ -132,25 +159,34 @@ export default {
       return formatAssistance(new Date(formatDate));
     },
 
-    generateReporte(){
+    generateReporte() {
+      var wb = XLSX.utils.table_to_book(document.getElementById("mytable2"), {
+        sheet: `Asistencias`,
+      });
+      var wbout = XLSX.write(wb, {
+        bookType: "xlsx",
+        bookSST: true,
+        type: "binary",
+      });
+      function s2ab(s) {
+        var buf = new ArrayBuffer(s.length);
+        var view = new Uint8Array(buf);
+        for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
+        return buf;
+      }
 
-      var wb = XLSX.utils.table_to_book(document.getElementById('mytable'), {sheet:`Asistencias`});
-        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
-        function s2ab(s) {
-                        var buf = new ArrayBuffer(s.length);
-                        var view = new Uint8Array(buf);
-                        for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-                        return buf;
-        }
-        
-        saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'asistencias.xlsx');
-      
-
-    }
+      saveAs(
+        new Blob([s2ab(wbout)], { type: "application/octet-stream" }),
+        "asistencias.xlsx"
+      );
+    },
   },
 };
 </script>
 <style scoped>
+.tablaReporte {
+  display: none;
+}
 .bordeInput {
   background: white;
   border: white;
