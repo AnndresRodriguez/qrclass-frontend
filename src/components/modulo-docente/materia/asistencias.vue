@@ -61,10 +61,11 @@
               <th scope="col">Nombre Estudiante</th>
               <template v-for="(estudiante, idx) in estudiantes[0].asistencias">
                 <th scope="col" :key="idx">
-                  {{ formatAssistance(estudiante.createdAt) }}
+                  {{ formatNewAssistanceDate(estudiante.createdAt) }}
                 </th>
               </template>
-              <th>Total</th>
+              <th>Asistencias</th>
+              <th>Clases</th>
             </tr>
           </thead>
           <tbody>
@@ -72,9 +73,17 @@
               <td>{{ estudiante.codigo }}</td>
               <td>{{ estudiante.nombre }}</td>
               <template v-for="(asistencia, indice) in estudiante.asistencias">
-                <td :key="indice">{{ asistencia.asistio }}</td>
+                <td :key="indice">
+                  <template v-if="asistencia.asistio === 1">
+                    Asistio
+                  </template>
+                  <template v-else>
+                    Inasistio
+                  </template>
+                </td>
               </template>
-              <td>{{ calculateAsistencias(estudiante.asistencias) }}</td>
+              <td>{{ calculateAsistencias2(estudiante.asistencias) }}</td>
+              <td>{{ estudiante.asistencias.length }}</td>
             </tr>
           </tbody>
         </table>
@@ -84,9 +93,10 @@
 </template>
 <script>
 /* eslint-disable */
-import { formatAssistance } from "../../../util/tools";
+import { formatAssistance, formatNewAssistance } from "../../../util/tools";
 import XLSX from "xlsx";
 import { saveAs } from "file-saver";
+
 
 export default {
   data() {
@@ -112,6 +122,19 @@ export default {
   },
 
   methods: {
+
+    calculateAsistencias2(asistencias) {
+      console.log("calculateAsistencias", asistencias);
+      let asistenciasTotales = 0;
+
+      asistenciasTotales = asistencias.reduce(function (acc, asistencia) {
+        return acc + asistencia.asistio;
+      }, 0);
+
+      return asistenciasTotales;
+    },
+
+    
     calculateAsistencias(asistencias) {
       console.log("calculateAsistencias", asistencias);
       let asistenciasTotales = 0;
@@ -159,6 +182,10 @@ export default {
       return formatAssistance(new Date(formatDate));
     },
 
+    formatNewAssistanceDate(formatDate) {
+      return formatNewAssistance(new Date(formatDate));
+    },
+
     generateReporte() {
       var wb = XLSX.utils.table_to_book(document.getElementById("mytable2"), {
         sheet: `Asistencias`,
@@ -171,6 +198,7 @@ export default {
       function s2ab(s) {
         var buf = new ArrayBuffer(s.length);
         var view = new Uint8Array(buf);
+       
         for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
         return buf;
       }

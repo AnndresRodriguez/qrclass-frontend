@@ -64,10 +64,58 @@ export function formatAssistance(date) {
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
+export function formatNewAssistance(date) {
+  let fecha = date;
+  let dia = fecha.getDate();
+  console.log("dia", dia);
+  console.log("fecha", fecha);
+  // const formatDay = formatNumber(date.getDate());
+  // const formatMonth = formatNumber(`${date.getMonth() + 1}`);
+  return `${dia + 1}/${getNameMonth(
+    `${date.getMonth() + 1}`
+  )}/${date.getFullYear()}`;
+}
+
+// function formatNumber(numero) {
+//   const format = numero < 10 ? `0${numero}` : numero;
+//   return format;
+// }
+
 export function onlyNumbers($event) {
   let keyCode = $event.keyCode ? $event.keyCode : $event.which;
   if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
     // 46 is dot
     $event.preventDefault();
+  }
+}
+
+function getNameMonth(month) {
+  switch (parseInt(month)) {
+    case 1:
+      return "Ene";
+    case 2:
+      return "Feb";
+    case 3:
+      return "Mar";
+    case 4:
+      return "Abr";
+    case 5:
+      return "May";
+    case 6:
+      return "Jun";
+    case 7:
+      return "Jul";
+    case 8:
+      return "Ago";
+    case 9:
+      return "Sep";
+    case 10:
+      return "Oct";
+    case 11:
+      return "Nov";
+    case 12:
+      return "Dic";
+    default:
+      return month;
   }
 }
