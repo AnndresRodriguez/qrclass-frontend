@@ -1,0 +1,3 @@
+codigo,nombre,correo,telefono
+000000,nombrecompletoestudiante,correoinstitucional,300000000
+

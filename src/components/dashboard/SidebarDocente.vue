@@ -51,12 +51,12 @@
               href="dashboard-configuraciones"
             >
             </item>
-            <item
+            <!-- <item
               title="Reportes"
               :items="itemsReportes"
               href="dashboard-reportes"
             >
-            </item>
+            </item> -->
           </ul>
         </div>
       </div>

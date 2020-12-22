@@ -1,0 +1,11 @@
+codigo,nombre,correo,telefono
+1151401,Marco Adarme Jaimes,madarme@ufps.edu.co,3216410890
+1151402,Juan Andres Amaya Hernandez,juanandresah@ufps.edu.co,3216410891
+1151403,Geraldine Andrea Rincon,geraldinear@ufps.edu.co,3216410892
+1151404,Lizeth Diomaris Pasto Calderon,lizethdiomarispc@ufps.edu.co,3216410893
+1151405,Jhorbey Dubian Ortega,jhorbeydo@ufps.edu.co,3216410894
+1151406,Sara Coromoto Jaimes Contreras,saracoromotojc@ufps.edu.co,3216410895
+1151407,Mayra Isabel Bermudez Cardenas,mayraisabelbc@ufps.edu.co,3216410896
+1151408,Diego Alejandro Meneses Urbina,diegoalejandromu@ufps.edu.co,3216410897
+1151409,Angie Rocio Peña Duarte,angierociopd@ufps.edu.co,3216410898
+1151410,AnaMaria Diaz Daza,anamariadd@ufps.edu.co,3216410899

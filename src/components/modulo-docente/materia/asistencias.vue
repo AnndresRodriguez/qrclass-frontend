@@ -14,9 +14,13 @@
         <input class="bordeInput" disabled v-model="codigo" /><br />
         <label class="col-form-label">No. de Estudiante: </label>
         <input class="bordeInput" disabled v-model="noestudiantes" />
+
+        <button class="btn btn-info" @click="generateReporte">
+          Crear Reporte
+        </button>
       </div>
       <div class="scroll-div">
-        <table class="table table-hover">
+        <table class="table table-hover" id="mytable">
           <thead>
             <tr>
               <th scope="col">Codigo</th>
@@ -31,19 +35,19 @@
           </thead>
           <tbody>
             <tr v-for="(estudiante, index) in estudiantes" :key="index">
-              <th scope="row">{{ estudiante.codigo }}</th>
+              <td>{{ estudiante.codigo }}</td>
               <td>{{ estudiante.nombre }}</td>
               <template v-for="(asistencia, indice) in estudiante.asistencias">
-                <th scope="row" :key="indice">
+                <td :key="indice">
                   <template v-if="asistencia.asistio === 1">
-                    <i class="fas fa-check fa-2x" style="color:#69E243"></i>
+                    <i class="fas fa-check fa-2x" style="color: #69e243"></i>
                   </template>
                   <template v-else>
-                    <i class="fas fa-minus fa-2x" style="color:red"></i>
+                    <i class="fas fa-minus fa-2x" style="color: red"></i>
                   </template>
-                </th>
+                </td>
               </template>
-              <th>{{ calculateAsistencias(estudiante.asistencias) }}</th>
+              <td>{{ calculateAsistencias(estudiante.asistencias) }}</td>
             </tr>
           </tbody>
         </table>
@@ -54,6 +58,9 @@
 <script>
 /* eslint-disable */
 import { formatAssistance } from "../../../util/tools";
+import XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
 export default {
   data() {
     return {
@@ -78,17 +85,15 @@ export default {
   },
 
   methods: {
-    calculateAsistencias(asistencias){
-
-      console.log('calculateAsistencias', asistencias);
+    calculateAsistencias(asistencias) {
+      console.log("calculateAsistencias", asistencias);
       let asistenciasTotales = 0;
 
       asistenciasTotales = asistencias.reduce(function (acc, asistencia) {
-          return acc + asistencia.asistio;
-      },0);
+        return acc + asistencia.asistio;
+      }, 0);
 
-      return `${asistenciasTotales}/${asistencias.length}`
-
+      return `${asistenciasTotales}/${asistencias.length}`;
     },
     getAllDataDocente() {
       axios
@@ -126,6 +131,22 @@ export default {
     formatAssistance(formatDate) {
       return formatAssistance(new Date(formatDate));
     },
+
+    generateReporte(){
+
+      var wb = XLSX.utils.table_to_book(document.getElementById('mytable'), {sheet:`Asistencias`});
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+        function s2ab(s) {
+                        var buf = new ArrayBuffer(s.length);
+                        var view = new Uint8Array(buf);
+                        for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                        return buf;
+        }
+        
+        saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'asistencias.xlsx');
+      
+
+    }
   },
 };
 </script>

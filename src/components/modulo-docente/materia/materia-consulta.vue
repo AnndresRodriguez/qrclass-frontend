@@ -188,7 +188,7 @@ export default {
       this.codigo = materia.codigo;
       this.nombre = materia.nombre;
       this.noestudiantes = materia.noestudiantes;
-
+      this.$store.dispatch("listarEstudianteMateria", materia);
       this.getAllDataEstudiantes(this.id);
     },
   },

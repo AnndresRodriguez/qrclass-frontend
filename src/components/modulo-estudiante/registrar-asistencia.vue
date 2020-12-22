@@ -167,6 +167,11 @@ export default {
                   "success",
                   "Asistecia registrada",
                   `${this.name} se ha registrado su asistencia a la materia ${this.materia} correctamente`);
+
+                  // this.$store.dispatch("loadRoleID", { idRole: 4, id: this.idEstudiante });
+                  // this.$store.dispatch("loginUser", true);
+                  // this.$router.replace("/dashboard").catch(()=>{});
+
                 }else{
 
                   fireToast(
