@@ -20,7 +20,7 @@
             <td>Programacion I</td>
             <td>Generar</td>
             <td>
-              <router-link :to="{ name: 'reporte-estudiante' }"
+              <router-link :to="{ name: 'dreporte-estudiante' }"
                 >Ver</router-link
               >
             </td>

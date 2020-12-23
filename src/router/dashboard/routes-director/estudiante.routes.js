@@ -18,12 +18,12 @@ export default [
     meta: { requiredAuth: true }
   },
   {
-    path: "/registrar-estudiantes",
+    path: "/dregistrar-estudiantes",
     component: () =>
       import(
         "../../../components/modulo-director/estudiantes/registrar-estudiantes.vue"
       ),
-    name: "registrar-estudiantes",
+    name: "dregistrar-estudiantes",
     meta: { requiredAuth: true }
   }
 ];

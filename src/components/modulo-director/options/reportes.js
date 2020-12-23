@@ -1,7 +1,7 @@
 let optionsReportes = [
   {
     text: "Reportes",
-    name: "reportes"
+    name: "dreportes"
   }
 ];
 export default optionsReportes;

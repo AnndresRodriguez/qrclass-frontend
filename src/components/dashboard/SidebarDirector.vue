@@ -53,6 +53,18 @@
             >
             </item>
             <item
+              title="Gestor de Docentes"
+              :items="itemsDocente"
+              href="dashboard-docentes"
+            >
+            </item>
+            <item
+              title="Gestor de Materias"
+              :items="itemsMaterias"
+              href="dashboard-materias"
+            >
+            </item>
+            <item
               title="Reportes"
               :items="itemsReportes"
               href="dashboard-reportes"
@@ -69,6 +81,8 @@ import item from "./sidebar/item";
 import userMixin from "../../mixins/userMixin";
 import optionsReportes from "../modulo-director/options/reportes";
 import optionsEstudiantes from "../modulo-director/options/estudiantes";
+import optionsDocentes from "../modulo-director/options/docentes";
+import optionsMaterias from "../modulo-director/options/materias";
 
 export default {
   components: { item },
@@ -76,7 +90,9 @@ export default {
   data() {
     return {
       itemsReportes: optionsReportes,
-      itemsEstudiantes: optionsEstudiantes
+      itemsEstudiantes: optionsEstudiantes,
+      itemsDocente: optionsDocentes,
+      itemsMaterias: optionsMaterias
     };
   }
 };
