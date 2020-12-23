@@ -141,6 +141,9 @@ export default {
     },
 
     verEstudiantesMateria(materia) {
+
+      
+
       this.$store.dispatch("listarEstudianteMateria", materia);
       this.$router.replace({ name: "asistencia" });
       console.log("materia que envio de materia asistencia", materia);

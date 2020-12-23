@@ -15,90 +15,121 @@
         <label class="col-form-label">No. de Estudiante: </label>
         <input class="bordeInput" disabled v-model="noestudiantes" />
 
-        <button class="btn btn-info" @click="generateReporte">
-          Crear Reporte
-        </button>
+        <template v-if="estudiantes[0] !== undefined">
+          <button class="btn btn-info" @click="generateReporte">
+            Crear Reporte
+          </button>
+        </template>
       </div>
       <br />
-      <div class="scroll-div">
-        <table class="table table-hover" id="mytable">
-          <thead>
-            <tr>
-              <th scope="col">Codigo</th>
-              <th scope="col">Nombre Estudiante</th>
-              <template v-for="(estudiante, idx) in estudiantes[0].asistencias">
-                <th scope="col" :key="idx">
-                  {{ formatAssistance(estudiante.createdAt) }}
-                </th>
-              </template>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(estudiante, index) in estudiantes" :key="index">
-              <td>{{ estudiante.codigo }}</td>
-              <td>{{ estudiante.nombre }}</td>
-              <template v-for="(asistencia, indice) in estudiante.asistencias">
-                <td :key="indice">
-                  <template v-if="asistencia.asistio === 1">
-                    <i class="fas fa-check fa-2x" style="color: #69e243"></i>
+      <template v-if="estudiantes[0] !== undefined">
+        <div class="scroll-div">
+          <div>
+            <table class="table table-hover" id="mytable">
+              <thead>
+                <tr>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Nombre Estudiante</th>
+                  <template
+                    v-for="(estudiante, idx) in estudiantes[0].asistencias"
+                  >
+                    <th scope="col" :key="idx">
+                      {{ formatAssistance(estudiante.createdAt) }}
+                    </th>
                   </template>
-                  <template v-else>
-                    <i class="fas fa-minus fa-2x" style="color: red"></i>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(estudiante, index) in estudiantes" :key="index">
+                  <td>{{ estudiante.codigo }}</td>
+                  <td>{{ estudiante.nombre }}</td>
+                  <template
+                    v-for="(asistencia, indice) in estudiante.asistencias"
+                  >
+                    <td :key="indice">
+                      <template v-if="asistencia.asistio === 1">
+                        <i
+                          class="fas fa-check fa-2x"
+                          style="color: #69e243"
+                        ></i>
+                      </template>
+                      <template v-else>
+                        <i class="fas fa-minus fa-2x" style="color: red"></i>
+                      </template>
+                    </td>
                   </template>
-                </td>
-              </template>
-              <td>{{ calculateAsistencias(estudiante.asistencias) }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="tablaReporte">
-        <table class="table table-hover tablaReporte" id="mytable2">
-          <thead>
-            <tr>
-              <th scope="col">Codigo</th>
-              <th scope="col">Nombre Estudiante</th>
-              <template v-for="(estudiante, idx) in estudiantes[0].asistencias">
-                <th scope="col" :key="idx">
-                  {{ formatNewAssistanceDate(estudiante.createdAt) }}
-                </th>
-              </template>
-              <th>Asistencias</th>
-              <th>Clases</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(estudiante, index) in estudiantes" :key="index">
-              <td>{{ estudiante.codigo }}</td>
-              <td>{{ estudiante.nombre }}</td>
-              <template v-for="(asistencia, indice) in estudiante.asistencias">
-                <td :key="indice">
-                  <template v-if="asistencia.asistio === 1">
-                    Asistio
+                  <td>{{ calculateAsistencias(estudiante.asistencias) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tablaReporte">
+            <table class="table table-hover tablaReporte" id="mytable2">
+              <thead>
+                <tr>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Nombre Estudiante</th>
+                  <template
+                    v-for="(estudiante, idx) in estudiantes[0].asistencias"
+                  >
+                    <th scope="col" :key="idx">
+                      {{ formatNewAssistanceDate(estudiante.createdAt) }}
+                    </th>
                   </template>
-                  <template v-else>
-                    Inasistio
+                  <th>Asistencias</th>
+                  <th>Clases</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(estudiante, index) in estudiantes" :key="index">
+                  <td>{{ estudiante.codigo }}</td>
+                  <td>{{ estudiante.nombre }}</td>
+                  <template
+                    v-for="(asistencia, indice) in estudiante.asistencias"
+                  >
+                    <td :key="indice">
+                      <template v-if="asistencia.asistio === 1">
+                        Asistio
+                      </template>
+                      <template v-else> Inasistio </template>
+                    </td>
                   </template>
-                </td>
-              </template>
-              <td>{{ calculateAsistencias2(estudiante.asistencias) }}</td>
-              <td>{{ estudiante.asistencias.length }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                  <td>{{ calculateAsistencias2(estudiante.asistencias) }}</td>
+                  <td>{{ estudiante.asistencias.length }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <template v-if="loading">
+          <spinner />
+        </template>
+        <template v-else>
+          <div>
+            <label class="col-form-label"
+              >No hay alumnos registrados en la materia</label
+            >
+            <router-link :to="{ name: 'registrar-estudiantes' }"
+              >Registrar Estudiantes</router-link
+            >
+          </div>
+        </template>
+      </template>
     </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import { formatAssistance, formatNewAssistance } from "../../../util/tools";
+import spinner from "../../widgets/spinner";
 import XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-
 export default {
+  components: { spinner },
   data() {
     return {
       materiasDocente: [],
@@ -110,6 +141,7 @@ export default {
       id: 0,
       nombre: "",
       noestudiantes: "",
+      loading: true
     };
   },
 
@@ -118,11 +150,14 @@ export default {
     this.verEstudiantesMateria();
     this.getAllDataEstudiantes(this.id);
 
+    setTimeout(() => {
+      this.loading = false;
+    }, 2500);
+
     // axios.post()
   },
 
   methods: {
-
     calculateAsistencias2(asistencias) {
       console.log("calculateAsistencias", asistencias);
       let asistenciasTotales = 0;
@@ -134,7 +169,6 @@ export default {
       return asistenciasTotales;
     },
 
-    
     calculateAsistencias(asistencias) {
       console.log("calculateAsistencias", asistencias);
       let asistenciasTotales = 0;
@@ -198,7 +232,7 @@ export default {
       function s2ab(s) {
         var buf = new ArrayBuffer(s.length);
         var view = new Uint8Array(buf);
-       
+
         for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
         return buf;
       }

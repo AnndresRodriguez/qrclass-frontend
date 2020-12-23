@@ -122,6 +122,8 @@ export default {
              "Matricula exitosa",
              "Los estudiantes han sido matriculados correctamente"
           );
+          this.$router.replace({ name: "materia-asistencia" });
+          
           console.log(res.data);
         
         } else {

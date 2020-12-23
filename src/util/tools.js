@@ -71,7 +71,7 @@ export function formatNewAssistance(date) {
   console.log("fecha", fecha);
   // const formatDay = formatNumber(date.getDate());
   // const formatMonth = formatNumber(`${date.getMonth() + 1}`);
-  return `${dia + 1}/${getNameMonth(
+  return `${dia}/${getNameMonth(
     `${date.getMonth() + 1}`
   )}/${date.getFullYear()}`;
 }
