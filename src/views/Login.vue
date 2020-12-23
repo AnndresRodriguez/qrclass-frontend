@@ -19,9 +19,9 @@
                     <div
                       id="botonAdmin"
                       class="d-flex justify-content-center align-items-center container-icono"
-                      style="cursor:pointer"
+                      style="cursor: pointer"
                     >
-                      <i class="fas fa-user-lock fa-2x" style="margin:0"></i>
+                      <i class="fas fa-user-lock fa-2x" style="margin: 0"></i>
                     </div>
                     <h6>Administrador</h6>
                   </div>
@@ -29,11 +29,11 @@
                     <div
                       id="botonDocente"
                       class="d-flex justify-content-center align-items-center container-icono"
-                      style="cursor:pointer"
+                      style="cursor: pointer"
                     >
                       <i
                         class="fas fa-chalkboard-teacher fa-2x"
-                        style="margin:0"
+                        style="margin: 0"
                       ></i>
                     </div>
                     <h6>Docente</h6>
@@ -42,12 +42,9 @@
                     <div
                       id="botonDirPrograma"
                       class="d-flex justify-content-center align-items-center container-icono"
-                      style="cursor:pointer"
+                      style="cursor: pointer"
                     >
-                      <i
-                        class="fas fa-chalkboard-teacher fa-2x"
-                        style="margin:0"
-                      ></i>
+                      <i class="fas fa-user-tie fa-2x" style="margin: 0"></i>
                     </div>
                     <h6>Dir. Programa</h6>
                   </div>
@@ -55,9 +52,9 @@
                     <div
                       id="botonEstudiante"
                       class="d-flex justify-content-center align-items-center container-icono"
-                      style="cursor:pointer"
+                      style="cursor: pointer"
                     >
-                      <i class="fas fa-user fa-2x" style="margin:0"></i>
+                      <i class="fas fa-user fa-2x" style="margin: 0"></i>
                     </div>
                     <h6>Estudiante</h6>
                   </div>
@@ -122,46 +119,69 @@ export default {
       lastName: "",
       clientID: `${process.env.VUE_APP_GOOGLE_CLIENT_ID}`,
       botonAdmin: false,
-      botonDocente: false
+      botonDocente: false,
     };
   },
   methods: {
-
-    redirectScan(){
-      window.open('https://qrclass-ufps.web.app/scan-estudiante', '_blank');
+    redirectScan() {
+      window.open("https://qrclass-ufps.web.app/scan-estudiante", "_blank");
     },
 
-    
-    activate(value){
+    activate(value) {
       this.selected = value;
-        if(value === "1"){
-botonDirPrograma
-          document.getElementById("botonAdmin").classList.add('container-icono-selected', 'icono-selected');
-          document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonEstudiante").classList.remove('container-icono-selected', 'icono-selected');
-        }else if(value === "2"){
-
-          document.getElementById("botonDocente").classList.add('container-icono-selected', 'icono-selected');
-          document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonEstudiante").classList.remove('container-icono-selected', 'icono-selected');
-          
-        }else if(value === "3"){
-
-          document.getElementById("botonEstudiante").classList.add('container-icono-selected', 'icono-selected');
-          document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
-
-        }else{
-
-          document.getElementById("botonEstudiante").classList.add('container-icono-selected', 'icono-selected');
-          document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
-          document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
-
-        }
+      if (value === "1") {
+        document
+          .getElementById("botonAdmin")
+          .classList.add("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonDocente")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonDirPrograma")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonEstudiante")
+          .classList.remove("container-icono-selected", "icono-selected");
+      } else if (value === "2") {
+        document
+          .getElementById("botonDocente")
+          .classList.add("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonAdmin")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonDirPrograma")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonEstudiante")
+          .classList.remove("container-icono-selected", "icono-selected");
+      } else if (value === "3") {
+        document
+          .getElementById("botonDirPrograma")
+          .classList.add("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonDocente")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonEstudiante")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonAdmin")
+          .classList.remove("container-icono-selected", "icono-selected");
+      } else {
+        document
+          .getElementById("botonEstudiante")
+          .classList.add("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonDocente")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonDirPrograma")
+          .classList.remove("container-icono-selected", "icono-selected");
+        document
+          .getElementById("botonAdmin")
+          .classList.remove("container-icono-selected", "icono-selected");
+      }
     },
 
     test() {
@@ -219,8 +239,8 @@ botonDirPrograma
                 id: res.data.data.id,
               });
               this.$store.dispatch("loginUser", true);
-              
-              this.$router.replace("/dashboard").catch(()=>{});
+
+              this.$router.replace("/dashboard").catch(() => {});
             } else {
               fireToast(
                 "error",
@@ -228,7 +248,6 @@ botonDirPrograma
                 "El usuario ingresado no tiene acceso al sistema, ingrese con una cuenta autorizada"
               );
 
-              
               this.$router.replace("/");
               this.selected = "";
             }
@@ -247,10 +266,9 @@ botonDirPrograma
       return this.selected == "";
     },
 
-    resaltarBoton(){
-      return ' .container-icono-selected .icono-selected'
-
-    }
+    resaltarBoton() {
+      return " .container-icono-selected .icono-selected";
+    },
   },
 };
 </script>
@@ -350,25 +368,22 @@ botonDirPrograma
   transform: rotateY(360deg);
 }
 
-.container-icono{
-
+.container-icono {
   border: solid red 1px;
-  border-radius:50%;
+  border-radius: 50%;
   width: 70px;
-  height:70px;
+  height: 70px;
   background: #fff;
-  color:#d31024
-
+  color: #d31024;
 }
 
-.icono{
-  color:#d31024
+.icono {
+  color: #d31024;
 }
 
-
-.container-icono-selected{
+.container-icono-selected {
   background: #d31024;
-  color:#fff
+  color: #fff;
 }
 </style>
 

@@ -4,8 +4,12 @@
       <h2>Registrar Estudiante</h2>
       <hr />
       <div>
-        <label>Para registrar estudiantes de forma masiva, de clic</label
-        ><router-link :to="{ name: 'registrar-estudiantes' }">aqui</router-link>
+        <label
+          >Para registrar estudiantes de forma masiva, de clic
+          &nbsp;&nbsp;&nbsp;&nbsp; </label
+        ><router-link :to="{ name: 'registrar-estudiantes' }">
+          &nbsp;&nbsp;&nbsp;&nbsp; aqui</router-link
+        >
       </div>
       <form @submit.prevent="registrarEstudiante">
         <div class="form-group">
