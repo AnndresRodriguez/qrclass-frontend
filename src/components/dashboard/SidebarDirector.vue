@@ -47,6 +47,12 @@
           </div>
           <ul class="nav nav-danger">
             <item
+              title="Gestor de Estudiantes"
+              :items="itemsEstudiantes"
+              href="dashboard-estudiantes"
+            >
+            </item>
+            <item
               title="Reportes"
               :items="itemsReportes"
               href="dashboard-reportes"
@@ -62,13 +68,15 @@
 import item from "./sidebar/item";
 import userMixin from "../../mixins/userMixin";
 import optionsReportes from "../modulo-director/options/reportes";
+import optionsEstudiantes from "../modulo-director/options/estudiantes";
 
 export default {
   components: { item },
   mixins: [userMixin],
   data() {
     return {
-      itemsReportes: optionsReportes
+      itemsReportes: optionsReportes,
+      itemsEstudiantes: optionsEstudiantes
     };
   }
 };

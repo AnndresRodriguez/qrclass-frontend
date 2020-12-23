@@ -38,6 +38,19 @@
                     </div>
                     <h6>Docente</h6>
                   </div>
+                  <div @click="activate('3')">
+                    <div
+                      id="botonDirPrograma"
+                      class="d-flex justify-content-center align-items-center container-icono"
+                      style="cursor:pointer"
+                    >
+                      <i
+                        class="fas fa-chalkboard-teacher fa-2x"
+                        style="margin:0"
+                      ></i>
+                    </div>
+                    <h6>Dir. Programa</h6>
+                  </div>
                   <div @click="activate('4')">
                     <div
                       id="botonEstudiante"
@@ -122,19 +135,30 @@ export default {
     activate(value){
       this.selected = value;
         if(value === "1"){
-
+botonDirPrograma
           document.getElementById("botonAdmin").classList.add('container-icono-selected', 'icono-selected');
           document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
+          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
           document.getElementById("botonEstudiante").classList.remove('container-icono-selected', 'icono-selected');
         }else if(value === "2"){
 
           document.getElementById("botonDocente").classList.add('container-icono-selected', 'icono-selected');
           document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
+          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
           document.getElementById("botonEstudiante").classList.remove('container-icono-selected', 'icono-selected');
-        }else {
+          
+        }else if(value === "3"){
 
           document.getElementById("botonEstudiante").classList.add('container-icono-selected', 'icono-selected');
           document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
+          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
+          document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
+
+        }else{
+
+          document.getElementById("botonEstudiante").classList.add('container-icono-selected', 'icono-selected');
+          document.getElementById("botonDocente").classList.remove('container-icono-selected', 'icono-selected');
+          document.getElementById("botonDirPrograma").classList.remove('container-icono-selected', 'icono-selected');
           document.getElementById("botonAdmin").classList.remove('container-icono-selected', 'icono-selected');
 
         }
