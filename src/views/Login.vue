@@ -10,8 +10,9 @@
               <br />
               <h6>Identifiquese usando su cuenta institucional</h6>
               <br />
-              <div>
-                <div class="d-flex justify-content-around" style="width: 400px">
+
+              <div class="container-roles">
+                <div class="container-rol">
                   <div
                     class="d-flex flex-column justify-content-center align-items-center"
                     @click="activate('1')"
@@ -25,7 +26,10 @@
                     </div>
                     <h6>Administrador</h6>
                   </div>
-                  <div @click="activate('2')">
+                  <div
+                    class="d-flex flex-column justify-content-center align-items-center"
+                    @click="activate('2')"
+                  >
                     <div
                       id="botonDocente"
                       class="d-flex justify-content-center align-items-center container-icono"
@@ -38,7 +42,13 @@
                     </div>
                     <h6>Docente</h6>
                   </div>
-                  <div @click="activate('3')">
+                </div>
+
+                <div class="container-rol">
+                  <div
+                    @click="activate('3')"
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
                     <div
                       id="botonDirPrograma"
                       class="d-flex justify-content-center align-items-center container-icono"
@@ -48,7 +58,10 @@
                     </div>
                     <h6>Dir. Programa</h6>
                   </div>
-                  <div @click="activate('4')">
+                  <div
+                    class="d-flex flex-column justify-content-center align-items-center"
+                    @click="activate('4')"
+                  >
                     <div
                       id="botonEstudiante"
                       class="d-flex justify-content-center align-items-center container-icono"
@@ -58,7 +71,9 @@
                     </div>
                     <h6>Estudiante</h6>
                   </div>
-                  <!-- <div @click="redirectScan()">
+                </div>
+
+                <!-- <div @click="redirectScan()">
                     <div
                       id="botonEstudiante"
                       class="d-flex justify-content-center align-items-center container-icono"
@@ -68,28 +83,20 @@
                     </div>
                     <h6>Estudiante</h6>
                   </div> -->
-                </div>
-                <!-- <form @submit.prevent="test"> -->
-                <!-- <select class="select" v-model="selected" required>
-                  <option disabled value="">Seleccione un Rol</option>
-                  <option id="Admin" value="1">Administrador</option>
-                  <option id="Docente" value="2">Docente</option>
-                </select> -->
-                <!-- <br /> -->
-                <br />
-                <button
-                  :disabled="habilitarboton"
-                  class="btn btn-light"
-                  v-google-signin-button="clientID"
-                >
-                  <img
-                    src="https://accounts.google.com/favicon.ico"
-                    alt=""
-                    width="24"
-                    height="24"
-                  />Login with Google
-                </button>
               </div>
+              <br />
+              <button
+                :disabled="habilitarboton"
+                class="btn btn-light"
+                v-google-signin-button="clientID"
+              >
+                <img
+                  src="https://accounts.google.com/favicon.ico"
+                  alt=""
+                  width="24"
+                  height="24"
+                />Login with Google
+              </button>
             </div>
           </div>
         </div>
@@ -385,5 +392,38 @@ export default {
   background: #d31024;
   color: #fff;
 }
+
+.container-roles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 400px;
+}
+
+.container-rol{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 200px;
+
+}
+
+/** MEDIA QUERIES */
+
+@media screen and (max-width: 375px) {
+
+  .container-roles {
+      flex-direction: column; 
+      align-items: center;
+   }
+
+  .card{
+      min-height: 700px;
+  }
+  
+}
+
 </style>
 
