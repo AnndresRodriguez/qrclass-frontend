@@ -135,60 +135,38 @@ export default {
     },
 
     activate(value) {
+
       this.selected = value;
-      if (value === "1") {
-        document
-          .getElementById("botonAdmin")
-          .classList.add("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonDocente")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonDirPrograma")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonEstudiante")
-          .classList.remove("container-icono-selected", "icono-selected");
-      } else if (value === "2") {
-        document
-          .getElementById("botonDocente")
-          .classList.add("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonAdmin")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonDirPrograma")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonEstudiante")
-          .classList.remove("container-icono-selected", "icono-selected");
-      } else if (value === "3") {
-        document
-          .getElementById("botonDirPrograma")
-          .classList.add("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonDocente")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonEstudiante")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonAdmin")
-          .classList.remove("container-icono-selected", "icono-selected");
-      } else {
-        document
-          .getElementById("botonEstudiante")
-          .classList.add("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonDocente")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonDirPrograma")
-          .classList.remove("container-icono-selected", "icono-selected");
-        document
-          .getElementById("botonAdmin")
-          .classList.remove("container-icono-selected", "icono-selected");
+      switch (value) {
+        case "1":
+          this.changeHighlightButton("botonAdmin")
+          break;
+        case "2":
+          this.changeHighlightButton("botonDocente")
+          break;
+        case "3":
+          this.changeHighlightButton("botonDirPrograma")
+          break;
+        default:
+          this.changeHighlightButton("botonEstudiante")
+          break;
       }
+    },
+
+    changeHighlightButton(buttonToEnable){
+
+     const buttons = [ "botonEstudiante", "botonDocente", "botonDirPrograma", "botonAdmin" ];
+
+     buttons.map(button => {
+
+       button == buttonToEnable ? 
+       document.getElementById(button).classList.add("container-icono-selected", "icono-selected"):
+       document.getElementById(button).classList.remove("container-icono-selected", "icono-selected");
+
+     });
+
+
+
     },
 
     test() {
@@ -412,6 +390,11 @@ export default {
 
 /** MEDIA QUERIES */
 
+@media screen and (max-width: 425px) {
+  .card{
+      min-height: 600px;
+  }
+}
 @media screen and (max-width: 375px) {
 
   .container-roles {
