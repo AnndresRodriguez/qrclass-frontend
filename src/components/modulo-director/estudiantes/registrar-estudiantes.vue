@@ -1,64 +1,69 @@
 <template>
-  <div class="col-md-10 cssRegistro">
-    <h2>Registrar Estudiantes</h2>
-    <hr />
-    <div>
-      <br />
-      <p>
-        Para realizar el registro de estudiantes, por favor descargue el
-        siguiente formato EXCEL
-        <a href="/files/formato-estudiantes-qrclass.xlsx" download>
-          Formato Excel QR CLASS UFPS</a
-        >, o el formato en texto plano (txt)
-        <a href="/files/formato-qrclass.txt" download>
-          Formato Txt QR CLASS UFPS</a
-        >
-        llenelo con la informacion indicada y guardelo sin cambiar el formato.
+  <div class="d-flex justify-content-center">
+    <div class="col-md-10 cssRegistro">
+      <h2>Registrar Estudiantes</h2>
+      <hr />
+      <div>
         <br />
-      </p>
-    </div>
+        <p>
+          Para realizar el registro de estudiantes, por favor descargue el
+          siguiente formato EXCEL
+          <a href="/files/formato-qrclass-estudiantes.xlsx" download>
+            Formato Excel QR CLASS UFPS</a
+          >, o el formato en texto plano (txt)
+          <a href="/files/formato-qrclass-estudiantes.txt" download>
+            Formato Txt QR CLASS UFPS</a
+          >
+          llenelo con la informacion indicada y guardelo sin cambiar el formato.
+          <br />
+        </p>
+      </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div
-          id="drop"
-          @drop="handleDrop"
-          @dragover="handleDragover"
-          @dragenter="handleDragover"
-        >
-          Arrastre aquí su archivo excel o txt
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            id="drop"
+            @drop="handleDrop"
+            @dragover="handleDragover"
+            @dragenter="handleDragover"
+          >
+            Arrastre aquí su archivo excel o txt
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mt-4">
-      <h4>Estudiantes a matricular</h4>
-    </div>
-    <div class="row mt-4">
-      <div class="col-md-12">
-        <table class="table table-striped table-hover table-condensed">
-          <thead>
-            <tr>
-              <th v-for="(item, index) in headers" :key="index">
-                {{ item }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, idx) in tickets" :key="idx">
-              <td v-for="(key, indice) in item" :key="indice">
-                <label>{{ key }}</label>
-                <p>{{ item.key }}</p>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot></tfoot>
-        </table>
+      <div class="mt-4">
+        <h4>Estudiantes a Registrar</h4>
       </div>
-    </div>
-    <div>
-      <button class="btn btn-info" @click="matricularEstudiantes">
-        Matricular Estudiantes
-      </button>
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <table class="table table-striped table-hover table-condensed">
+            <thead>
+              <tr>
+                <th v-for="(item, index) in headers" :key="index">
+                  {{ item }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, idx) in tickets" :key="idx">
+                <td v-for="(key, indice) in item" :key="indice">
+                  <label>{{ key }}</label>
+                  <p>{{ item.key }}</p>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+      <div>
+        <!-- <button class="btn btn-info" @click="registrarEstudiantesExcel">
+        Registrar Estudiantes
+      </button> -->
+        <router-link class="btn btn-info" :to="{ name: 'estudiante-registro' }"
+          >Volver</router-link
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -105,34 +110,34 @@ export default {
       return result;
     },
 
-    matricularEstudiantes() {
-      let estudiantesAMatricular = state.tickets;
+    registrarEstudiantesExcel() {
+      let estudiantesARegistrar = state.tickets;
 
-      console.log("axios to api", estudiantesAMatricular);
+      console.log("axios to api", estudiantesARegistrar);
 
       axios
         .post(`${process.env.VUE_APP_API}/materias/matriculas`, {
-          estudiantes: estudiantesAMatricular,
-          idMateria: this.$store.getters.getInfoMateria.id,
+          estudiantes: estudiantesARegistrar,
         })
         .then((res) => {
           if (res.data.operation) {
             console.log(res.data);
             fireToast(
               "success",
-              "Matricula exitosa",
-              "Los estudiantes han sido matriculados correctamente"
+              "Registro exitoso",
+              "Los estudiantes han sido registrados correctamente"
             );
+            this.$router.replace({ name: "estudiante-registro" });
             console.log(res.data);
           } else {
             console.log(res.data);
 
             fireToast(
               "error",
-              "Error en la matrícula",
-              "Ha ocurrido un error en el matrícula, el documento o correo pertenece a un administrador registrado previamente"
+              "Error en el registro",
+              "Ha ocurrido un error en el registro de los estudiantes, por favor intentelos nuevamente"
             );
-            console.log("matriculaEstudiante", error);
+            console.log("registrarEstudiantesExcel", error);
           }
         })
         .catch((err) => {

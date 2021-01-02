@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <router-link class="btn btn-info" :to="{ name: 'reportes' }"
+      <router-link class="btn btn-info" :to="{ name: 'dreportes' }"
         >Volver</router-link
       >
       <h2>Lista de Estudiantes</h2>

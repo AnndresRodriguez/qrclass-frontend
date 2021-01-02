@@ -1,17 +1,17 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Registrar Estudiante</h2>
+      <h2>Registrar Docente</h2>
       <hr />
       <div>
         <label
-          >Para registrar estudiantes de forma masiva, de clic
+          >Para registrar docentes de forma masiva, de clic
           &nbsp;&nbsp;&nbsp;&nbsp; </label
-        ><router-link :to="{ name: 'dregistrar-estudiantes' }">
+        ><router-link :to="{ name: 'registrar-docentes' }">
           &nbsp;&nbsp;&nbsp;&nbsp; aqui</router-link
         >
       </div>
-      <form @submit.prevent="registrarEstudiante">
+      <form @submit.prevent="registrarDocente">
         <div class="form-group">
           <label class="control-label">Nombre Completo</label>
           <div class="input-group">
@@ -22,10 +22,10 @@
               name="name"
               type="text"
               class="form-control"
-              placeholder="Escriba el nombre completo del estudiante a registrar"
-              required
-              maxlength="100"
+              placeholder="Escriba el nombre completo del docente a registrar"
               v-model="nombre"
+              maxlength="100"
+              required
             />
           </div>
         </div>
@@ -40,14 +40,37 @@
               type="text"
               class="form-control"
               @keypress="validateNumber"
-              placeholder="Escriba el codigo del estudiante"
-              required
+              placeholder="Escriba el numero de codigo del docente"
               maxlength="10"
               minlength="5"
+              required
               v-model="codigo"
             />
           </div>
         </div>
+        <!-- <div class="form-group">
+          <label class="control-label">Selecciona el departamento</label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="icono fas fa-check-square"></i>
+            </div>
+            <select
+              @change="listarDepartamentos(departamento)"
+              v-model="departamento"
+              name="departamento"
+              class="form-control"
+              required
+            >
+              <template v-for="(departamento, index) in departamentos">
+                <option :key="index" :value="departamento">
+                  {{ departamento.codigo }} -
+                  {{ departamento.nombre }}
+                </option>
+              </template>
+            </select>
+          </div>
+        </div> -->
+
         <div class="form-group">
           <label class="control-label">Correo Electronico</label>
           <div class="input-group">
@@ -92,6 +115,7 @@
     </div>
   </div>
 </template>
+
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
@@ -99,46 +123,68 @@ import { onlyNumbers } from "../../../util/tools";
 export default {
   data() {
     return {
-      estudiantes: [],
+      docentes: [],
       nombre: "",
       codigo: "",
       correo: "",
       telefono: "",
+      departamento: {},
+      departamentos: [],
+      iddepartamento: 0,
     };
   },
+  created() {
+    this.getAllDepartamentos();
+  },
   methods: {
-    registrarEstudiante() {
-      const estudiante = {
-        nombre: this.nombre,
+    getAllDepartamentos() {
+      axios
+        .get(`${process.env.VUE_APP_API}/departamentos`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.departamentos = res.data.data;
+          console.log("departamentos -->", this.departamentos);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    listarDepartamentos(departamento) {
+      this.iddepartamento = departamento.codigo;
+      console.log(this.codigo);
+    },
+
+    registrarDocente() {
+      const docente = {
         codigo: this.codigo,
+        nombre: this.nombre,
         correo: this.correo,
         telefono: this.telefono,
+        idDepartamento: this.iddepartamento,
       };
 
-      console.log(estudiante);
-      axios
-        .post(`${process.env.VUE_APP_API}/estudiantes`, estudiante)
-        .then((res) => {
-          if (res.data.operation) {
-            console.log(res.data);
-            fireToast(
-              "success",
-              "Registro Exitoso",
-              "El Nuevo estudiante ha sido creado"
-            );
-            console.log(res.data);
-            this.limpiarinput();
-          } else {
-            console.log(res.data);
+      axios.post(`${process.env.VUE_APP_API}/docentes`, docente).then((res) => {
+        if (res.data.operation) {
+          console.log(res.data);
+          fireToast(
+            "success",
+            "Registro Exitoso",
+            "El Nuevo docente ha sido creado"
+          );
+          console.log(res.data);
+          this.limpiarinput();
+        } else {
+          console.log(res.data);
 
-            fireToast(
-              "error",
-              "Error en el registro",
-              "Ha ocurrido un error en el registro, el codigo o correo pertenece a un estudiante registrado previamente"
-            );
-            console.log("registrarEstudiante", error);
-          }
-        });
+          fireToast(
+            "error",
+            "Error en el registro",
+            "Ha ocurrido un error en el registro, el codigo o correo pertenece a un docente registrado previamente"
+          );
+          console.log("registrarDocente", error);
+        }
+      });
     },
     limpiarinput() {
       (this.nombre = ""),
@@ -152,4 +198,9 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+
+<style scoped>
+.cssRegistro .form-group {
+  margin-bottom: 0rem;
+}
+</style>

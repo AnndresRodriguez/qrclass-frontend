@@ -1,0 +1,2 @@
+codigomateria,nombre,codigodocente,nombre,noestudiantes
+000000,nombredelamateria,000000,nombredeldocente,30

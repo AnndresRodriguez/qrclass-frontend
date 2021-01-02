@@ -1,17 +1,17 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Registrar Estudiantes</h2>
+      <h2>Registrar Materias</h2>
       <hr />
       <div>
         <br />
         <p>
-          Para realizar el registro de estudiantes, por favor descargue el
+          Para realizar el registro de las materias, por favor descargue el
           siguiente formato EXCEL
-          <a href="/files/formato-qrclass-estudiantes.xlsx" download>
+          <a href="/files/formato-qrclass-materias.xlsx" download>
             Formato Excel QR CLASS UFPS</a
           >, o el formato en texto plano (txt)
-          <a href="/files/formato-qrclass-estudiantes.txt" download>
+          <a href="/files/formato-qrclass-materias.txt" download>
             Formato Txt QR CLASS UFPS</a
           >
           llenelo con la informacion indicada y guardelo sin cambiar el formato.
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="mt-4">
-        <h4>Estudiantes a matricular</h4>
+        <h4>Materias a Registrar</h4>
       </div>
       <div class="row mt-4">
         <div class="col-md-12">
@@ -57,9 +57,12 @@
         </div>
       </div>
       <div>
-        <button class="btn btn-info" @click="matricularEstudiantes">
-          Matricular Estudiantes
-        </button>
+        <!-- <button class="btn btn-info" @click="registrarMateriasExcel">
+        Registrar Docentes
+      </button> -->
+        <router-link class="btn btn-info" :to="{ name: 'materia-registro' }"
+          >Volver</router-link
+        >
       </div>
     </div>
   </div>
@@ -67,14 +70,15 @@
 <script>
 /* eslint-disable */
 import { fireToast } from "../../../util/toast";
+
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import XLSX from "xlsx";
 import { fixdata, get_header_row } from "../../../util/xslx";
 
 var state = {
-  tickets: [{ name: "Información acerca de los Estudiantes" }],
-  headers: ["Campos de estudiantes"],
+  tickets: [{ name: "Información acerca de las Materias" }],
+  headers: ["Campos de las Materias"],
   nombreMateria: "",
 };
 
@@ -87,7 +91,7 @@ export default {
   },
 
   methods: {
-    registrarEstudiante() {},
+    registrarMaterias() {},
 
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
@@ -106,40 +110,39 @@ export default {
       return result;
     },
 
-    matricularEstudiantes() {
+    registrarMateriasExcel() {
+      let materiasARegistrar = state.tickets;
 
-      let estudiantesAMatricular = state.tickets;
+      console.log("axios to api", docentesARegistrar);
 
-      console.log('axios to api',estudiantesAMatricular);
-
-      axios.post(`${process.env.VUE_APP_API}/materias/matriculas`, { estudiantes: estudiantesAMatricular, idMateria: this.$store.getters.getInfoMateria.id })
-      .then((res) => {
-
+      axios
+        .post(`${process.env.VUE_APP_API}/materias/matriculas`, {
+          materias: materiasARegistrar,
+        })
+        .then((res) => {
           if (res.data.operation) {
-          console.log(res.data);
-          fireToast(
-             "success",
-             "Matricula exitosa",
-             "Los estudiantes han sido matriculados correctamente"
-          );
-          this.$router.replace({ name: "materia-asistencia" });
-          
-          console.log(res.data);
-        
-        } else {
-          console.log(res.data);
+            console.log(res.data);
+            fireToast(
+              "success",
+              "Registro exitoso",
+              "Los Materias han sido registradas correctamente"
+            );
+            this.$router.replace({ name: "materia-registro" });
+            console.log(res.data);
+          } else {
+            console.log(res.data);
 
-          fireToast(
-            "error",
-            "Error en la matrícula",
-            "Ha ocurrido un error en el matrícula, el documento o correo pertenece a un administrador registrado previamente"
-          );
-          console.log("matriculaEstudiante", error);
-        }
-      })
-      .catch((err) => {
-      console.log(err);
-      });      
+            fireToast(
+              "error",
+              "Error en el registro",
+              "Ha ocurrido un error en el registro de las materias, por favor intentelos nuevamente"
+            );
+            console.log("registrarMateriasExcel", error);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       // swal
       //   .fire({

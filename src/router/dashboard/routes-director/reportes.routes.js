@@ -8,19 +8,19 @@ export default [
 
     children: [
       {
-        path: "/reportes",
+        path: "/dreportes",
         component: () =>
           import("../../../components/modulo-director/reportes/reportes.vue"),
-        name: "reportes",
+        name: "dreportes",
         meta: { requiredAuth: true }
       },
       {
-        path: "/reporte-estudiante",
+        path: "/dreporte-estudiante",
         component: () =>
           import(
             "../../../components/modulo-director/reportes/reporte-estudiantes.vue"
           ),
-        name: "reporte-estudiante",
+        name: "dreporte-estudiante",
         meta: { requiredAuth: true }
       }
     ]
