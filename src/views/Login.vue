@@ -165,8 +165,6 @@ export default {
 
      });
 
-
-
     },
 
     test() {
@@ -191,25 +189,12 @@ export default {
             this.name = res.data.given_name;
             this.lastName = res.data.family_name;
           });
-
-        // let alert = swal.fire({
-        //             title: "Iniciando Sesión, por favor espere....",
-        //             allowEscapeKey: false,
-        //             allowOutsideClick: false,
-        //             showConfirmButton: false,
-        //             onOpen: () => {
-        //                 swal.showLoading();
-        //             }
-        //         });
-
         axios
           .post(
             `${process.env.VUE_APP_API}/${createURL(this.selected)}/email`,
             { email: this.emailToFind, id: this.selected }
           )
           .then((res) => {
-            // console.log(res.data);
-            // alert.close();
             if (res.data.operation) {
               this.$store.dispatch("loadInfoUser", {
                 fullName: this.fullName,
