@@ -57,9 +57,9 @@
         </div>
       </div>
       <div>
-        <!-- <button class="btn btn-info" @click="registrarEstudiantesExcel">
-        Registrar Estudiantes
-      </button> -->
+        <button class="btn btn-info" @click="registrarEstudiantesExcel">
+          Registrar Estudiantes
+        </button>
         <router-link class="btn btn-info" :to="{ name: 'estudiante-registro' }"
           >Volver</router-link
         >
@@ -116,7 +116,7 @@ export default {
       console.log("axios to api", estudiantesARegistrar);
 
       axios
-        .post(`${process.env.VUE_APP_API}/materias/matriculas`, {
+         .post(`${process.env.VUE_APP_API}/directores/registrar-estudiantes`, {
           estudiantes: estudiantesARegistrar,
         })
         .then((res) => {
@@ -143,24 +143,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-
-      // swal
-      //   .fire({
-      //     title: "Martriculando Estudiantes...",
-      //     timer: 3000,
-      //     allowOutsideClick: false,
-      //     showConfirmButton: false,
-      //     willOpen: () => {
-      //       swal.showLoading();
-      //     },
-      //   })
-      //   .then((result) => {
-      //     fireToast(
-      //       "success",
-      //       "Matricula Exitosa",
-      //       "Se ha matriculado los estudiantes satisfactoriamente en la materia"
-      //     );
-      //   });
     },
 
     handleDragover(e) {

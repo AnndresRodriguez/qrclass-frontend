@@ -1,18 +1,18 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-md-10 cssRegistro">
-      <h2>Registrar Estudiantes</h2>
+      <h2>Matricular Estudiantes</h2>
       <hr />
       <div>
         <br />
         <p>
-          Para realizar el registro de estudiantes, por favor descargue el
+          Para realizar la matricula de estudiantes, por favor descargue el
           siguiente formato EXCEL
-          <a href="/files/formato-qrclass-estudiantes.xlsx" download>
-            Formato Excel QR CLASS UFPS</a
+          <a href="/files/formato-qrclass-matricula.xlsx" download>
+            Formato Matricula Excel QR CLASS UFPS</a
           >, o el formato en texto plano (txt)
-          <a href="/files/formato-qrclass-estudiantes.txt" download>
-            Formato Txt QR CLASS UFPS</a
+          <a href="/files/formato-qrclass-matricula.txt" download>
+            Formato Matricula Txt QR CLASS UFPS</a
           >
           llenelo con la informacion indicada y guardelo sin cambiar el formato.
           <br />
@@ -111,7 +111,7 @@ export default {
       let estudiantesAMatricular = state.tickets;
 
       console.log('axios to api',estudiantesAMatricular);
-
+   
       axios.post(`${process.env.VUE_APP_API}/materias/matriculas`, { estudiantes: estudiantesAMatricular, idMateria: this.$store.getters.getInfoMateria.id })
       .then((res) => {
 

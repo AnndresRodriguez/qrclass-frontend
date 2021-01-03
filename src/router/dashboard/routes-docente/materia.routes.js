@@ -36,7 +36,7 @@ export default [
         path: "/registrar-estudiantes",
         component: () =>
           import(
-            "../../../components/modulo-docente/materia/registrar-estudiantes.vue"
+            "../../../components/modulo-docente/materia/matricular-estudiantes.vue"
           ),
         name: "registrar-estudiantes",
         meta: { requiredAuth: true }

@@ -111,7 +111,7 @@
           <div>
             <label class="col-form-label"
               >No hay alumnos registrados en la materia</label
-            >
+            ><br />
             <router-link :to="{ name: 'registrar-estudiantes' }"
               >Registrar Estudiantes</router-link
             >
@@ -141,7 +141,7 @@ export default {
       id: 0,
       nombre: "",
       noestudiantes: "",
-      loading: true
+      loading: true,
     };
   },
 
@@ -197,14 +197,14 @@ export default {
       this.id = materia.id;
       this.codigo = materia.codigo;
       this.nombre = materia.nombre;
-      this.noestudiantes = materia.noestudiantes;
-      console.log("materia del stor", materia);
+      console.log("materia del store", materia);
     },
     getAllDataEstudiantes(id) {
       axios
         .get(`${process.env.VUE_APP_API}/materias/estudiantes/${id}`)
         .then((res) => {
           this.estudiantes = res.data.data[0].estudiantes;
+          this.noestudiantes = this.estudiantes.length;
           console.log("lista de estudiantess", this.estudiantes);
         })
         .catch((err) => {

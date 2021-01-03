@@ -4,7 +4,7 @@
       <h2>Consultar Estudiante</h2>
       <hr />
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Correo Electrico: </label>
+        <label class="col-sm-2 col-form-label">Correo Electrónico: </label>
         <div class="col-sm-10">
           <form class="navbar-form navbar-left">
             <div class="input-group">
@@ -169,6 +169,7 @@ export default {
       telefono: "",
       estadoE: 1,
       ccorreo:"",
+      idPrograma: ''
     };
   },
   created() {
@@ -180,11 +181,24 @@ export default {
       estado == 1 ? (msn = "Activo") : (msn = "Inactivo");
       return msn;
     },
-    getAllEstudiantes() {
+    async getAllEstudiantes() {
+
+      await axios.get(`${process.env.VUE_APP_API}/programa-academicos/directores/${this.$store.getters.getInfoRole.id}
+      `)
+      .then(res => {
+
+         this.idPrograma = res.data.data.id;
+         console.log('this.idPrograma', this.idPrograma);
+
+      })
+
+      console.log('this.idPrograma', this.idPrograma);
+
       axios
-        .get(`${process.env.VUE_APP_API}/estudiantes`)
+        .get(`${process.env.VUE_APP_API}/estudiantes/programa/${this.idPrograma}`)
         .then(res => {
           console.log(res.data.operation);
+          console.log('res.data.data',res.data.data)
           this.estudiantes = res.data.data;
           console.log("estudiantes -->", this.estudiantes);
         })
