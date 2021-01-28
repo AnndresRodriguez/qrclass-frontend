@@ -26,12 +26,12 @@
             </div>
           </div>
           <ul class="nav nav-danger">
-            <item
+            <!-- <item
               title="Horario"
               :items="itemsHorario"
               href="dashboard-horario"
             >
-            </item>
+            </item> -->
 
             <item
               title="Materias"

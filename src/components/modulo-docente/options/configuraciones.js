@@ -1,8 +1,8 @@
 let optionsConfiguraciones = [
-  {
-    text: "Periodo Academico",
-    name: "periodo-academico"
-  },
+  // {
+  //   text: "Periodo Academico",
+  //   name: "periodo-academico"
+  // },
   {
     text: "Notificaciones",
     name: "notificaciones"

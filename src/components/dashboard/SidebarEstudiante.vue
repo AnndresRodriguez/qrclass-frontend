@@ -35,14 +35,14 @@
               href="dashboard-materia"
             >
             </item>
-            <li class="nav-item active">
+            <!-- <li class="nav-item active">
               <a
                 href="https://qrclass-ufps.web.app/scan-estudiante"
                 target="_blank"
               >
                 <p>Marcar Asistencia</p>
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
