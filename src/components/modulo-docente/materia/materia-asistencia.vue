@@ -47,17 +47,24 @@
                 Ver
               </button>
             </td>
+            <!-- materia.horarios[0].dia === null -->
             <td>
-              <a
-                @click="assignIDMateria(index)"
-                href=""
-                type="button"
-                disabled
-                class="btn btn-light"
-                data-toggle="modal"
-                data-target="#codigoQR"
-                >Generar QR</a
-              >
+              <template v-if="materia.horarios[0].dia !== null">
+                <a
+                  @click="assignIDMateria(index)"
+                  href=""
+                  type="button"
+                  class="btn btn-light"
+                  data-toggle="modal"
+                  data-target="#codigoQR"
+                  >Generar QR</a
+                >
+              </template>
+              <template v-else>
+                <a @click="alertaCrearHorario" class="btn btn-light"
+                  >Generar QR</a
+                >
+              </template>
             </td>
           </tr>
         </tbody>
@@ -99,6 +106,7 @@
 <script>
 /* eslint-disable */
 import QrcodeVue from "qrcode.vue";
+import { fireToast } from "../../../util/toast";
 export default {
   components: {
     QrcodeVue,
@@ -141,9 +149,6 @@ export default {
     },
 
     verEstudiantesMateria(materia) {
-
-      
-
       this.$store.dispatch("listarEstudianteMateria", materia);
       this.$router.replace({ name: "asistencia" });
       console.log("materia que envio de materia asistencia", materia);
@@ -181,6 +186,14 @@ export default {
       this.$store.dispatch("loadDataAsistencia", infoAsistencia);
 
       //  console.log(infoAsistencia);
+    },
+
+    alertaCrearHorario() {
+      fireToast(
+        "info",
+        "Materia sin Horario",
+        "Para generar un código QR Debe registrar previamente un horario, (En la sección Consultar Materia puede asignar el horario correspondiente)"
+      );
     },
   },
   computed: {

@@ -32,6 +32,7 @@
           <tr>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Horario</th>
             <!-- <th scope="col">No.Est.</th> -->
             <!-- <th scope="col">Horario</th> -->
             <th scope="col">Lista Estudiantes</th>
@@ -43,6 +44,30 @@
             <td>{{ materia.nombre }}</td>
             <!-- <td>{{ noestudiantes }}</td> -->
             <!-- <td>{{ getNameHoras(materia.horarios) }}</td> -->
+
+            <template v-if="materia.horarios[0].dia == null">
+              <td>
+                <a
+                  href=""
+                  type="button"
+                  class="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#registrarHorario"
+                  :key="materia.id"
+                  @click="asignarHorarioMateria(materia.id, materia.docente.id)"
+                  >Asignar Horario</a
+                >
+              </td>
+            </template>
+            <template v-else>
+              <td>
+                <!--  //  {"idDia": 1, "dia": "Martes" } - { "idDia": 1, "dia": "Martes" }  -->
+                <!-- <template v-for="horario in materia.horarios"> -->
+                {{ getNameHoras(materia.horarios) }}
+                <!-- </template> -->
+              </td>
+            </template>
+
             <td>
               <a
                 data-toggle="modal"
@@ -55,6 +80,57 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="cssRegistro">
+      <div
+        class="modal fade"
+        id="registrarHorario"
+        tabindex="-1"
+        role="dialog"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Asignar Horario</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <VueSchedule
+                v-model="schedule"
+                :dayTable="daysSchedule"
+                :steps="240"
+                disableWeekSelect
+                disableDaySelect
+                bg="#bc0016"
+                bgHover="#818386"
+                bgActive="#ffc8ce"
+                textColor="transparent"
+              />
+            </div>
+
+            <!-- {{ schedule }} -->
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="asignarNuevoHorario"
+              >
+                Asignar Horario
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="cssRegistro">
       <div
@@ -122,13 +198,24 @@
 </template>
 
 <script>
-import { formatNameDay, formatNameHour } from "../../../util/formatHorario";
 /* eslint-disable */
+import { formatNameDay, formatNameHour } from "../../../util/formatHorario";
+import "vue-daily-scheduler/dist/vue-schedule.min.css";
+import VueSchedule from "vue-daily-scheduler";
+import { configLangSchedule, daysOfWeek } from "../../../util/config-schedule";
+import $ from "jquery";
+
+import { fireToast } from "../../../util/toast";
+
 export default {
+  components: {
+    VueSchedule,
+  },
   data() {
     return {
       materiasDocente: [],
       materia: {},
+      materias: [],
       estudiantes: [],
       estudiante: {},
       codigo: "",
@@ -136,6 +223,10 @@ export default {
       nombre: "",
       noestudiantes: "",
       consultac: "",
+      schedule: { 0: [], 1: [], 2: [], 3: [], 4: [] },
+      daysSchedule: daysOfWeek,
+      idMateriaHorario: 0,
+      idDocente: 0
     };
   },
 
@@ -146,6 +237,90 @@ export default {
   },
 
   methods: {
+
+    asignarHorarioMateria(idMateriaHorario, idDocente) {
+      
+      this.idMateriaHorario = idMateriaHorario;
+      this.idDocente = idDocente
+    },
+
+    asignarNuevoHorario() {
+      const dataToEndpoint = {
+        idMateria: this.idMateriaHorario,
+        horario: this.schedule,
+      };
+
+      const dataHorario = [];
+
+      // { idMateria: this.idMateriaHorario, idDocente: this.idDocente, idDia: this.dia, idHora: }
+
+      const daysToStore = [];
+
+      const horarioValues = Object.keys(this.schedule)
+
+
+      const daysFiltered = horarioValues.map(dia => {
+         if(this.schedule[parseInt(dia)].length !== 0){
+          //  daysToStore.push({ dia: dia, horas: this.schedule[parseInt(dia)] }) 
+            this.schedule[parseInt(dia)].map( hora => {
+               daysToStore.push({ idMateria: this.idMateriaHorario, idDocente: this.idDocente, idDia: parseInt(dia), idHora: hora})  
+            })
+          
+         }
+         return {}
+      })
+
+      // console.log('-------------------------------------')
+      // console.log(daysToStore)
+
+      // console.log('dataAxios', { idMateria: this.idMateriaHorario, idDocente: this.idDocente, dataHorario: daysToStore });
+
+      axios
+        .post(`${process.env.VUE_APP_API}/clases`, { idMateria: this.idMateriaHorario, idDocente: this.idDocente, dataHorario: daysToStore })
+        .then((res) => {
+          if (res.data.operation) {
+            console.log(res.data);
+            $("#registrarHorario").modal("hide");
+
+            fireToast(
+              "success",
+              "Registro Exitoso",
+              "El horario se asignó Correctamente"
+            );
+
+            this.getAllDataDocente();
+            this.resetData();
+          } else {
+            console.log(res.data);
+
+            fireToast(
+              "error",
+              "Error en la actualización",
+              "Ha ocurrido un error al asignar el horario, intente nuevamente"
+            );
+          }
+        });
+    },
+
+     getAllMaterias() {
+
+      axios
+        .get(`${process.env.VUE_APP_API}/materias`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.materias = res.data.data;
+          console.log("materias -->", this.materias);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    resetData(){
+
+      this.schedule = { 0: [], 1: [], 2: [], 3: [], 4: [] };
+    },
+
 
     getNameHoras(horas) {
 
@@ -199,6 +374,11 @@ export default {
       );
     },
   },
+
+  updated(){
+    configLangSchedule();
+  }
+
 };
 </script>
 
