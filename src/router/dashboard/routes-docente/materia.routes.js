@@ -8,6 +8,15 @@ export default [
     // name: "materia-principal",
     children: [
       {
+        path: "/registrar-materias",
+        component: () =>
+          import(
+            "../../../components/modulo-docente/materia/materia-registro.vue"
+          ),
+        name: "registrarM",
+        meta: { requiredAuth: true }
+      },
+      {
         path: "/consulta",
         component: () =>
           import(

@@ -33,18 +33,18 @@
             >
             </item>
 
-            <item
+            <!-- <item
               title="Gestor de Docentes"
               :items="itemsDocente"
               href="dashboard-docentes"
             >
-            </item>
-            <item
+            </item> -->
+            <!-- <item
               title="Gestor de Estudiantes"
               :items="itemsEstudiantes"
               href="dashboard-estudiante"
             >
-            </item>
+            </item> -->
             <item
               title="Gestor de Director de Programa"
               :items="itemsDirPrograma"
@@ -57,12 +57,12 @@
               href="dashboard-programaacademico"
             >
             </item>
-            <item
+            <!-- <item
               title="Gestor de Materia"
               :items="itemsMateria"
               href="dashboard-materia"
             >
-            </item>
+            </item> -->
           </ul>
         </div>
       </div>

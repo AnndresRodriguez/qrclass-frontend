@@ -1,5 +1,9 @@
 let optionsMateria = [
   {
+    text: "Registrar Materia",
+    name: "registrarM"
+  },
+  {
     text: "Consultar Materia",
     name: "consulta"
   },

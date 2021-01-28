@@ -58,12 +58,12 @@
               href="dashboard-docentes"
             >
             </item>
-            <item
+            <!-- <item
               title="Gestor de Materias"
               :items="itemsMaterias"
               href="dashboard-materias"
             >
-            </item>
+            </item> -->
             <!-- <item
               title="Reportes"
               :items="itemsReportes"
