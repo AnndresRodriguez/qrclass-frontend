@@ -208,7 +208,7 @@ export default {
         codigo: this.codigo,
         noestudiantes: this.noestudiantes,
         nocreditos: this.nocreditos,
-        idProgramaAcademico: this.idPrograma,
+        idProgramaAcademico: 18,
         idDocente: this.$store.getters.getInfoRole.id,
       };
 
