@@ -186,6 +186,7 @@ export default {
       iddepartamento: "",
       estadoDocente: 1,
       ccorreo: "",
+      dpto: ""
     };
   },
   created() {
@@ -225,18 +226,18 @@ export default {
       this.dpto = docente.departamento.nombre;
       this.iddepartamento = docente.departamento.codigo;
     },
-    // getAllDepartamentos() {
-    //   axios
-    //     .get(`${process.env.VUE_APP_API}/departamentos`)
-    //     .then((res) => {
-    //       console.log(res.data.operation);
-    //       this.departamentos = res.data.data;
-    //       console.log("departamentos -->", this.departamentos);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+    getAllDepartamentos() {
+      axios
+        .get(`${process.env.VUE_APP_API}/departamentos`)
+        .then((res) => {
+          console.log(res.data.operation);
+          this.departamentos = res.data.data;
+          console.log("departamentos -->", this.departamentos);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
     // listarDepartamentos(departamento) {
     //   this.departamento = departamento;

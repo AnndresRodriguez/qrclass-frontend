@@ -195,7 +195,8 @@ export default {
       console.log('this.idPrograma', this.idPrograma);
 
       axios
-        .get(`${process.env.VUE_APP_API}/estudiantes/programa/${this.idPrograma}`)
+        // .get(`${process.env.VUE_APP_API}/estudiantes/programa/${this.idPrograma}`)
+        .get(`${process.env.VUE_APP_API}/estudiantes`)
         .then(res => {
           console.log(res.data.operation);
           console.log('res.data.data',res.data.data)

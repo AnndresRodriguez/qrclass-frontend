@@ -41,14 +41,14 @@
               class="form-control"
               @keypress="validateNumber"
               placeholder="Escriba el numero de codigo del docente"
-              maxlength="10"
-              minlength="5"
+              maxlength="7"
+              minlength="4"
               required
               v-model="codigo"
             />
           </div>
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
           <label class="control-label">Selecciona el departamento</label>
           <div class="input-group">
             <div class="input-group-addon">
@@ -69,7 +69,7 @@
               </template>
             </select>
           </div>
-        </div> -->
+        </div>
 
         <div class="form-group">
           <label class="control-label">Correo Electronico</label>
@@ -145,8 +145,8 @@ export default {
           this.departamentos = res.data.data;
           console.log("departamentos -->", this.departamentos);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
     },
 
@@ -182,7 +182,6 @@ export default {
             "Error en el registro",
             "Ha ocurrido un error en el registro, el codigo o correo pertenece a un docente registrado previamente"
           );
-          console.log("registrarDocente", error);
         }
       });
     },
