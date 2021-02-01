@@ -3,14 +3,14 @@
     <div class="col-md-10 cssRegistro">
       <h2>Registrar Docente</h2>
       <hr />
-      <div>
+      <!-- <div>
         <label
           >Para registrar docentes de forma masiva, de clic
           &nbsp;&nbsp;&nbsp;&nbsp; </label
         ><router-link :to="{ name: 'registrar-docentes' }">
           &nbsp;&nbsp;&nbsp;&nbsp; aqui</router-link
         >
-      </div>
+      </div> -->
       <form @submit.prevent="registrarDocente">
         <div class="form-group">
           <label class="control-label">Nombre Completo</label>

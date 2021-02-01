@@ -58,6 +58,12 @@
               href="dashboard-docentes"
             >
             </item>
+            <item
+              title="Configuraciones"
+              :items="itemsconfig"
+              href="dashboard-config"
+            >
+            </item>
             <!-- <item
               title="Gestor de Materias"
               :items="itemsMaterias"
@@ -83,6 +89,7 @@ import optionsReportes from "../modulo-director/options/reportes";
 import optionsEstudiantes from "../modulo-director/options/estudiantes";
 import optionsDocentes from "../modulo-director/options/docentes";
 import optionsMaterias from "../modulo-director/options/materias";
+import optionsConfiguraciones from "../modulo-director/options/configuraciones";
 
 export default {
   components: { item },
@@ -92,7 +99,8 @@ export default {
       itemsReportes: optionsReportes,
       itemsEstudiantes: optionsEstudiantes,
       itemsDocente: optionsDocentes,
-      itemsMaterias: optionsMaterias
+      itemsMaterias: optionsMaterias,
+      itemsconfig: optionsConfiguraciones
     };
   }
 };

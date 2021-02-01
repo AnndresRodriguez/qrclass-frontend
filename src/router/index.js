@@ -26,6 +26,7 @@ import dirprogramaEstudiantesroutes from "./dashboard/routes-director/estudiante
 import dirprogramaDocentesroutes from "./dashboard/routes-director/docente.routes";
 import dirprogramaMateriasroutes from "./dashboard/routes-director/materia.routes";
 import dirprogramaReportesroutes from "./dashboard/routes-director/reportes.routes";
+import dirprogramaConfigroutes from "./dashboard/routes-director/config.routes";
 
 Vue.use(VueRouter);
 
@@ -58,6 +59,7 @@ const routes = [
       .concat(dirprogramaReportesroutes)
       .concat(dirprogramaDocentesroutes)
       .concat(dirprogramaMateriasroutes)
+      .concat(dirprogramaConfigroutes)
   },
   {
     path: "/asistencia-estudiante",
